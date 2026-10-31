@@ -1,0 +1,95 @@
+SHELL=/bin/sh
+
+.SILENT:
+
+LIBDIR = @top_srcdir@/lib/lib@opt@/@host_os@
+BINDIR = @top_srcdir@/bin/@host_os@
+INCLUDEDIR = @top_srcdir@/include
+
+DEST_LIBDIR = @prefix@/lib
+DEST_BINDIR = @prefix@/bin
+DEST_INCLUDEDIR = @prefix@/include
+
+
+default:  @BUILD_CGM@
+	$(MAKE) -C new_src -s
+	$(MAKE) -C src -s
+	$(MAKE) -C apps -s
+
+all: default docs
+
+build_cgm:
+	cd @CGM_BUILD_DIR@ && $(MAKE) -q || ($(MAKE) -s && $(MAKE) -s install)
+
+docs:
+	cd doxygen && @DOXYGEN@ 
+
+libraries:
+	@MKDIR_P@ $(LIBDIR)
+	@MKDIR_P@ $(BINDIR)
+	$(MAKE) -C new_src -s libraries
+	$(MAKE) -C src -s libraries
+
+depend:
+	$(MAKE) -C src -s depend
+	$(MAKE) -C new_src -s depend
+	$(MAKE) -C testing -s depend
+
+SUBDIRS = include testing doc new_src src apps
+
+recurse:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i $(TARGET) ; \
+	done
+
+init:
+	$(MAKE) TARGET=init recurse
+	cd testing/unit && $(MAKE) -s init
+
+clean:
+	$(MAKE) TARGET=clean recurse
+	$(MAKE) -C examples clean
+
+test check: 
+	echo -n "Testing 2D mesh generation..."
+	((cd examples/2D && (($(MAKE) test) > /dev/null)) && echo "success") || echo "failed"
+	echo -n "Testing 3D mesh generation..."
+	((cd examples/3D/simple && (($(MAKE) test) > /dev/null)) && echo "success") || echo "failed"
+	echo -n "Testing 3D mesh improvement..."
+	((cd examples/3D/improvement && (($(MAKE) test) > /dev/null)) && echo "success") || echo "failed"
+
+post-build: @POST_BUILD@
+
+unit-test: 
+	$(MAKE) -C testing/unit
+
+pre-cover: default 
+	$(MAKE) -C testing/regression/iMesh_unit test
+	(cd testing/scripts && ./jenkins-develop-test.py extended)
+
+cover:
+	-mkdir coverage
+	lcov --capture --directory . --output $(abspath coverage/lcov.raw.info)
+	lcov --remove $(abspath coverage/lcov.raw.info) "/usr*" "*cgm*" -o $(abspath coverage/lcov.info)
+	genhtml --demangle-cpp --output-directory coverage coverage/lcov.info
+	firefox coverage/index.html
+
+distclean:
+	$(MAKE) TARGET=distclean recurse
+	$(MAKE) -C examples distclean
+	-rm -rf bin lib @CGM_BUILD_DIR@
+	-rm -rf doxygen/html doxygen/latex coverage
+	if (test -f doxygen/Doxyfile.in) then rm doxygen/Doxyfile; fi
+	-rm -f *~ Makefile.bak *.rej *.orig \#* config.* Makefile 
+	-rm -f configure-messages *-Defs.inc 
+
+install: default
+	mkdir -p $(DEST_LIBDIR)
+	mkdir -p $(DEST_BINDIR)
+	mkdir -p $(DEST_INCLUDEDIR)
+	cp $(LIBDIR)/* $(DEST_LIBDIR)
+	cp $(BINDIR)/* $(DEST_BINDIR)
+	cp $(INCLUDEDIR)/*.h $(INCLUDEDIR)/*.hh $(DEST_INCLUDEDIR)
+	sed -e 's/(BUILD/(INSTALLED/' iMesh-Defs.inc > $(DEST_LIBDIR)/iMesh-Defs.inc
+	sed -e 's/(BUILD/(INSTALLED/' GRUMMP-Defs.inc > $(DEST_LIBDIR)/GRUMMP-Defs.inc
+

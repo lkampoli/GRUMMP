@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Algorithms Used in the GRUMMP Libraries</TITLE>
+<META NAME="description" CONTENT="Algorithms Used in the GRUMMP Libraries">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Bibliography.html">
+<LINK REL="previous" HREF="Getting_Installing_GRUMMP.html">
+<LINK REL="up" HREF="UserGuide.html">
+<LINK REL="next" HREF="Mesh_Generation.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html669"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html665"
+  HREF="UserGuide.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html659"
+  HREF="Scattered_data_interpolatio.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html667"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html670"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<B> Up:</B> <A NAME="tex2html666"
+  HREF="UserGuide.html">GRUMMP Version 0.7.0 User's</A>
+<B> Previous:</B> <A NAME="tex2html660"
+  HREF="Scattered_data_interpolatio.html">Scattered data interpolation files</A>
+ &nbsp; <B>  <A NAME="tex2html668"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04000000000000000000">
+Algorithms Used in the GRUMMP Libraries</A>
+</H1>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html671"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<UL>
+<LI><A NAME="tex2html672"
+  HREF="Two_dimensional_meshing.html">Two dimensional meshing</A>
+<UL>
+<LI><A NAME="tex2html673"
+  HREF="Two_dimensional_meshing.html#SECTION04111000000000000000">Initial discretization</A>
+<LI><A NAME="tex2html674"
+  HREF="Two_dimensional_meshing.html#SECTION04112000000000000000">Point insertion</A>
+<LI><A NAME="tex2html675"
+  HREF="Two_dimensional_meshing.html#SECTION04113000000000000000">Length scale modifications</A>
+<LI><A NAME="tex2html676"
+  HREF="Two_dimensional_meshing.html#SECTION04114000000000000000">Curved boundaries</A>
+<UL>
+<LI><A NAME="tex2html677"
+  HREF="Two_dimensional_meshing.html#SECTION04114100000000000000">Generic geometry framework</A>
+<LI><A NAME="tex2html678"
+  HREF="Two_dimensional_meshing.html#SECTION04114200000000000000">Measuring how curved the boundary
+is</A>
+<LI><A NAME="tex2html679"
+  HREF="Two_dimensional_meshing.html#SECTION04114300000000000000">Initial discretization with curved
+boundaries</A>
+<LI><A NAME="tex2html680"
+  HREF="Two_dimensional_meshing.html#SECTION04114400000000000000">Edge recovery</A>
+<LI><A NAME="tex2html681"
+  HREF="Two_dimensional_meshing.html#SECTION04114500000000000000">Point insertion</A>
+<LI><A NAME="tex2html682"
+  HREF="Two_dimensional_meshing.html#SECTION04114600000000000000">Length scale modifications</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html683"
+  HREF="Three_dimensional_meshing.html">Three-dimensional meshing</A>
+<UL>
+<LI><A NAME="tex2html684"
+  HREF="Three_dimensional_meshing.html#SECTION04121000000000000000">Initial tetrahedralization</A>
+<LI><A NAME="tex2html685"
+  HREF="Three_dimensional_meshing.html#SECTION04122000000000000000">Point insertion</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html686"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<UL>
+<LI><A NAME="tex2html687"
+  HREF="Swapping.html">Swapping</A>
+<LI><A NAME="tex2html688"
+  HREF="Smoothing.html">Smoothing</A>
+<LI><A NAME="tex2html689"
+  HREF="Default_mesh_optimization.html">Default mesh optimization in GRUMMP</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html690"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<UL>
+<LI><A NAME="tex2html691"
+  HREF="Selecting_Vertices_Retain.html">Selecting Vertices to Retain in the Coarse Mesh</A>
+<UL>
+<LI><A NAME="tex2html692"
+  HREF="Selecting_Vertices_Retain.html#SECTION04311000000000000000">Identification of Apexes and Folds</A>
+<LI><A NAME="tex2html693"
+  HREF="Selecting_Vertices_Retain.html#SECTION04312000000000000000">Selection of Points to Include in the Coarse Mesh</A>
+</UL>
+<LI><A NAME="tex2html694"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+<UL>
+<LI><A NAME="tex2html695"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04321000000000000000">Invoking Vertex Deletion</A>
+<LI><A NAME="tex2html696"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04322000000000000000">Mesh Post-processing</A>
+</UL>
+<LI><A NAME="tex2html697"
+  HREF="Anisotropic_Mesh_Coarsening.html">Anisotropic Mesh Coarsening</A>
+<UL>
+<LI><A NAME="tex2html698"
+  HREF="Anisotropic_Mesh_Coarsening.html#SECTION04331000000000000000">Selection of Points in Pseudo-structured Anisotropic Meshes</A>
+</UL>
+<LI><A NAME="tex2html699"
+  HREF="Outcomes.html">Outcomes</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html700"
+  HREF="Isotropic_Mesh_Adaptation.html">Isotropic Mesh Adaptation</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

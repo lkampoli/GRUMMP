@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Additional options for 2D GRUMMP executables</TITLE>
+<META NAME="description" CONTENT="Additional options for 2D GRUMMP executables">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Additional_options_3D.html">
+<LINK REL="previous" HREF="Common_command_line.html">
+<LINK REL="up" HREF="GRUMMP_Programs.html">
+<LINK REL="next" HREF="Additional_options_3D.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html484"
+  HREF="Additional_options_3D.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html480"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html474"
+  HREF="Common_command_line.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html482"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html485"
+  HREF="Additional_options_3D.html">Additional options for 3D</A>
+<B> Up:</B> <A NAME="tex2html481"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html475"
+  HREF="Common_command_line.html">Common command line options</A>
+ &nbsp; <B>  <A NAME="tex2html483"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03220000000000000000"></A><A NAME="sec:2D-exec"></A>
+<BR>
+Additional options for 2D GRUMMP executables
+</H1>
+
+<P>
+There are two command line options that apply only to the 2D GRUMMP
+executables. 
+
+<UL>
+<LI>[-c&nbsp;<TT>arg</TT>] If the argument is non-zero, protect boundary
+edges from nearby insertion using diametral lenses instead of diametral
+circles. Diametral lenses are smaller than diametral circles, and
+result (both in theory and in practice) in better meshes. Robust values
+are 0 and 1. An experimental extension that gives somewhat better
+meshes in practice but is less robust is available with the value
+2. <SPAN  CLASS="textbf">Default: 1.</SPAN>
+</LI>
+<LI>[<TT>-j&nbsp;arg</TT>] If the argument is non-zero, coarsen anisotropic
+meshes with the goal of reducing cell aspect ratio. <SPAN  CLASS="textbf">Default:
+0.</SPAN>
+</LI>
+</UL>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

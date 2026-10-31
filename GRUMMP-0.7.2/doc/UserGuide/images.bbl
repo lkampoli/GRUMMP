@@ -1,0 +1,113 @@
+\begin{thebibliography}{10}
+
+\bibitem{Boivin2002b}
+Charles Boivin and Carl~F. Ollivier-Gooch.
+\newblock Guaranteed-quality triangular mesh generation for domains with curved
+  boundaries.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  55(10):1185--1213, December 2002.
+
+\bibitem{Freitag1995}
+Lori Freitag, Mark Jones, and Paul Plassmann.
+\newblock An efficient parallel algorithm for mesh smoothing.
+\newblock In {\em Proceedings of the Fourth International Meshing Roundtable},
+  pages 47--58. Sandia National Laboratories, October 1995.
+
+\bibitem{Freitag1997}
+Lori~A. Freitag and Carl~F. Ollivier-Gooch.
+\newblock Tetrahedral mesh improvement using swapping and smoothing.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  40(21):3979--4002, 1997.
+
+\bibitem{Marcum1994}
+David~L. Marcum and Nigel~P. Weatherill.
+\newblock Unstructured grid generation using iterative point insertion and
+  local reconnection.
+\newblock AIAA paper 94-1926, January 1994.
+
+\bibitem{Mavriplis1997}
+Dimitri~J. Mavriplis.
+\newblock Multigrid strategies for viscous flow solvers on anisotropic
+  unstructured meshes.
+\newblock In {\em Proceedings of the Thirteenth AIAA Computational Fluid
+  Dynamics Conference}, pages 659--675. American Institute of Aeronautics and
+  Astronautics, July 1997.
+\newblock AIAA 97-1952-CP.
+
+\bibitem{Meyer2002}
+Mark Meyer, Matthieu Desbrun, Peter Schr\"{o}der, and Alan~H. Barr.
+\newblock Discrete differential-geometry operators for triangulated
+  2-manifolds.
+\newblock Presented at the International Workshop on Visualization and
+  Mathematics 2002, Berlin, Germany, May 2002.
+
+\bibitem{Miller1999}
+Gary~L. Miller, Dafna Talmor, and Shang-Hua Teng.
+\newblock Optimal coarsening of unstructured meshes.
+\newblock {\em Journal of Algorithms}, 31(1):29--65, 1999.
+
+\bibitem{Ollivier-Gooch1995b}
+Carl~F. Ollivier-Gooch.
+\newblock Multigrid acceleration of an upwind {E}uler solver on unstructured
+  meshes.
+\newblock {\em American Institute of Aeronautics and Astronautics Journal},
+  33(10):1822--1827, October 1995.
+
+\bibitem{Ollivier-Gooch1999}
+Carl~F. Ollivier-Gooch.
+\newblock Robust coarsening of unstructured meshes for multigrid methods.
+\newblock In {\em Proceedings of the Fourteenth AIAA Computational Fluid
+  Dynamics Conference}, pages 1--8. American Institute of Aeronautics and
+  Astronautics, July 1999.
+
+\bibitem{Ollivier-Gooch2003a}
+Carl~F. Ollivier-Gooch.
+\newblock Coarsening unstructured meshes by edge contraction.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  57(3):391--414, May 2003.
+
+\bibitem{Ollivier-Gooch2001}
+Carl~F. Ollivier-Gooch and Charles Boivin.
+\newblock Guaranteed-quality simplicial mesh generation with cell size and
+  grading control.
+\newblock {\em Engineering with Computers}, 17(3):269--286, 2001.
+
+\bibitem{Pierce1997}
+Niles Pierce, Michael Giles, Antony Jameson, and Luigi Martinelli.
+\newblock Accelerating three-dimensional {N}avier-{S}tokes calculations.
+\newblock In {\em Proceedings of the Thirteenth AIAA Computational Fluid
+  Dynamics Conference}, pages 676--698. American Institute of Aeronautics and
+  Astronautics, July 1997.
+\newblock AIAA 97-1953-CP.
+
+\bibitem{Rassineux2000}
+A.~Rassineux, P.~Villon, J.-M. Savignat, and O.~Stab.
+\newblock Surface remeshing by local hermite diffuse interpolation.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  49:31--49, 2000.
+
+\bibitem{Ruppert1993}
+J.~Ruppert.
+\newblock A new and simple algorithm for quality 2-dimensional mesh generation.
+\newblock In {\em Proceedings of the Fourth ACM-SIAM Symposium on Discrete
+  Algorithms}, pages 83--92, 1993.
+
+\bibitem{Ruppert1995}
+J.~Ruppert.
+\newblock A {D}elaunay refinement algorithm for quality 2-dimensional mesh
+  generation.
+\newblock {\em Journal of Algorithms}, 18(3):548--585, May 1995.
+
+\bibitem{Shewchuk1997}
+Jonathan~R. Shewchuk.
+\newblock {\em Delaunay Refinement Mesh Generation}.
+\newblock PhD thesis, School of Computer Science, Carnegie Mellon University,
+  May 1997.
+
+\bibitem{Watson1981}
+David~F. Watson.
+\newblock Computing the $n$-dimensional {D}elaunay tessellation with
+  application to {V}oronoi polytopes.
+\newblock {\em Computer Journal}, 24(2):167--172, 1981.
+
+\end{thebibliography}

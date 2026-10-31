@@ -1,0 +1,30 @@
+SHELL=/bin/sh
+
+.SILENT:
+
+SUBDIRS=unit regression/iMesh_unit
+
+default:
+	true
+
+depend:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i depend ; \
+	done
+
+init:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i init ; \
+	done
+
+clean:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i clean ; \
+	done
+
+distclean:
+	-for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i distclean ; \
+	done
+	-rm -f *~ Makefile.bak *.rej *.orig \#* config.* Makefile
+

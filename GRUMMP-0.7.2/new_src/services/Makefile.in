@@ -1,0 +1,117 @@
+LIBBASE = libGR_services
+ID_STRING = GRUMMP services
+
+THIS_SRCDIR = new_src/services
+TOP_SRCDIR = @top_srcdir@
+
+COARSEN_CXXOBJECTS = coarsen/CoarsenManager.o \
+coarsen/Remove2D.o \
+coarsen/Remove3D.o
+
+SWAP_CXXOBJECTS = swap/SwapManager2D.o \
+swap/SwapManager3D.o \
+swap/SwapDecider2D.o \
+swap/SwapDecider3D.o \
+swap/EdgeCanon.o \
+swap/EdgeSwapInfo.o \
+swap/FaceSwapInfo3D.o 
+
+SUPPORT_CXXOBJECTS = support/LengthAniso2D.o \
+support/LengthAniso3D.o \
+support/LengthAniso.o \
+support/Length.o \
+support/Length2D.o \
+support/Length3D.o \
+support/QualMeasures2D.o \
+support/QualMeasures3D.o \
+support/TMOPQual.o
+
+SMOOTH_CXXOBJECTS = smooth/AnisoWrapper.o \
+smooth/SmoothingManager.o \
+smooth/SmoothingManager2D.o \
+smooth/SmoothingManager3D.o
+
+INSERT_CXXOBJECTS = insert/CavityInserter.o \
+insert/InsertionPointCalculator.o \
+insert/RefinementManager2D.o \
+insert/RefinementManager3D.o \
+insert/SwappingInserter2D.o \
+insert/SwappingInserter3D.o \
+insert/SurfaceInsertion.o \
+insert/SurfaceInsertion2D.o \
+insert/SurfaceInsertion3D.o \
+insert/WatsonInserter.o \
+insert/Quadtree.o \
+insert/OctTree.o
+
+COMPOSITE_CXXOBJECTS = composite/TriMeshBuilder.o
+
+SWAP_COBJECTS = 
+
+SMOOTH_COBJECTS = smooth/SMactive.o \
+smooth/SMequil.o \
+smooth/SMfree.o \
+smooth/SMfunction.o \
+smooth/SMinit.o \
+smooth/SMintrinsic.o \
+smooth/SMlaplace.o \
+smooth/SMmatrix.o\
+smooth/SMoptimize.o \
+smooth/SMsearch.o \
+smooth/SMsmooth.o \
+smooth/SMstats.o \
+smooth/SMsurface.o \
+smooth/SMvalid.o \
+smooth/SMwritesmooth.o \
+smooth/SMfunc2d.o \
+smooth/SMfunc3d.o \
+smooth/SMgrad3d.o \
+smooth/SMuserFunc.o \
+smooth/SMerror.o
+
+INSERT_COBJECTS = 
+
+COMPOSITE_COBJECTS = 
+
+COBJECTS = $(COARSEN_COBJECTS) $(INSERT_COBJECTS) $(SMOOTH_COBJECTS) $(SUPPORT_COBJECTS) $(SWAP_COBJECTS) $(COMPOSITE_COBJECTS) 
+
+CXXOBJECTS = $(COARSEN_CXXOBJECTS) $(INSERT_CXXOBJECTS) $(SMOOTH_CXXOBJECTS) $(SUPPORT_CXXOBJECTS) $(SWAP_CXXOBJECTS) $(COMPOSITE_CXXOBJECTS) 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: library
+
+include @top_srcdir@/src/conf/default-rules
+
+SUBDIRS=coarsen insert smooth support swap composite
+
+library: 
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i ; \
+	done
+	$(MAKE) .libs
+
+depend: recursive_depend
+init: recursive_init
+clean: recursive_clean
+distclean: recursive_distclean
+
+recursive_depend:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i depend ; \
+	done
+
+recursive_init:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i init ; \
+	done
+
+recursive_clean:
+	for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i clean ; \
+	done
+
+recursive_distclean:
+	-for i in $(SUBDIRS) ; do \
+	  $(MAKE) -C $$i distclean ; \
+	done

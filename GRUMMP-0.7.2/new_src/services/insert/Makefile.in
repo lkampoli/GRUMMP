@@ -1,0 +1,22 @@
+ID_STRING = GRUMMP insertion
+
+THIS_SRCDIR = new_src/services/insert
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = CavityInserter.o \
+InsertionPointCalculator.o PriorityCalculator.o \
+RefinementManager2D.o RefinementManager3D.o \
+SurfaceInsertion.o \
+SurfaceInsertion2D.o SurfaceInsertion3D.o \
+SurfaceInsertion2D.o SurfaceInsertion3D.o\
+SwappingInserter2D.o SwappingInserter3D.o \
+WatsonInserter.o Quadtree.o OctTree.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: $(OBJECTS)
+
+include @top_srcdir@/src/conf/default-rules
+

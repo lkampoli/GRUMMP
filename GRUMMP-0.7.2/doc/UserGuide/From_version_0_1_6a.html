@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.6a to 0.1.7:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.6a to 0.1.7:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_6.html">
+<LINK REL="previous" HREF="From_version_0_1_7.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_6.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1165"
+  HREF="From_version_0_1_6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1161"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1155"
+  HREF="From_version_0_1_7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1163"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1166"
+  HREF="From_version_0_1_6.html">From version 0.1.6 to</A>
+<B> Up:</B> <A NAME="tex2html1162"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1156"
+  HREF="From_version_0_1_7.html">From version 0.1.7 to</A>
+ &nbsp; <B>  <A NAME="tex2html1164"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051180000000000000000">
+From version 0.1.6a to 0.1.7:</A>
+</H1>
+
+<UL>
+<LI>Support for <SPAN  CLASS="textbf">multi-domain meshing</SPAN>. That is, it is now possible
+to specify a problem domain that must be meshed as two or more (max:
+31) adjacent regions, with the boundaries between them meshed consistently.
+This is the biggest addition to this version of GRUMMP.
+</LI>
+<LI><SPAN  CLASS="textbf">Improved boundary data input format</SPAN>. This was necessary to
+support multi-domain meshing, and the new format was designed to be
+extensible, with an eye towards meshing from non-polygonal/polyhedral
+data.
+</LI>
+<LI><SPAN  CLASS="textbf">Improved geometric calculations</SPAN>. GRUMMP often needs to know
+the orientation of <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img94.png"
+ ALT="$N+1$"></SPAN> points in <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img59.png"
+ ALT="$N$"></SPAN> dimensions or whether a given
+point is inside the ball formed by <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img94.png"
+ ALT="$N+1$"></SPAN> other points. Earlier versions
+used simple floating point arithmetic to determine these things, and
+sometimes ran into trouble as a result. This version incorporates
+adaptive-precision versions of these predicates that were developed
+by Jonathon Shewchuk of U California, Berkeley, while he was a PhD
+student at Carnegie Mellon University.
+</LI>
+<LI><SPAN  CLASS="textbf">File name changes</SPAN>. All GRUMMP include files<A NAME="tex2html42"
+  HREF="footnode.html#foot4180"><SUP>A.<SPAN CLASS="arabic">2</SPAN></SUP></A> are now prefixed with <TT>GR_</TT> to avoid naming conflicts. Also,
+in deference to non-case-sensitive operating systems, all C++ files
+now have a <TT>.cxx</TT> suffix instead of <TT>.C</TT>.
+</LI>
+<LI><SPAN  CLASS="textbf">Minor bug fixes</SPAN>. All but a couple of the problem input files
+sent to me after version 0.1.6 now work.
+</LI>
+<LI><SPAN  CLASS="textbf">Changes to quote handling for I/O generation.</SPAN> The old way
+of handling non-keyword text in I/O template files made it impossible
+to have
+<BR>
+<BR><TT>x 0.5 y 0.7</TT>
+<BR>
+<BR>
+as a vertex coordinate line; the `x' and `y' were not handled
+properly. These changes affect all cases where quotes are used in
+template files, so check any template files you have created to make
+sure they are compatible with the new form of quote handling.
+</LI>
+<LI><SPAN  CLASS="textbf">Unified</SPAN> <TT><SPAN  CLASS="textbf">lex</SPAN></TT> <SPAN  CLASS="textbf">input files for I/O
+generation</SPAN>. All input generation is now done from a single <TT>lex</TT>
+file, and all output generation is done from a (different) single
+<TT>lex</TT> file. This removed inconsistencies between the 2D and
+3D versions of the I/O generation code.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1165"
+  HREF="From_version_0_1_6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1161"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1155"
+  HREF="From_version_0_1_7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1163"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1166"
+  HREF="From_version_0_1_6.html">From version 0.1.6 to</A>
+<B> Up:</B> <A NAME="tex2html1162"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1156"
+  HREF="From_version_0_1_7.html">From version 0.1.7 to</A>
+ &nbsp; <B>  <A NAME="tex2html1164"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,46 @@
+include ../../../src/conf/default-rules
+include /home/cfog/GRUMMP/iMesh-Defs.inc
+
+SRC=vTestMeshInterface.cc \
+    vTestEntityInterface.cc \
+    vTestArrInterface.cc \
+    vTestModifyInterface.cc \
+    vTestEntSetInterface.cc \
+    vTestMeshWithSets.cc \
+    vTestEntityWithSets.cc \
+    vTestArrayWithSets.cc \
+    vTestEntTagInterface.cc \
+    vTestArrTagInterface.cc \
+    vTestSetRelationInterface.cc \
+    vTestBoolOpsInterface.cc \
+    vTestSetTagInterface.cc \
+    vTestLowerDimensionedCoordinates.cc
+
+OBJ=$(SRC:.cc=.o)
+
+# Temporarily maintain backward compat. with older iMesh-Defs.inc varnames
+# Eventually, we should remove reference to IMESH_INCLUDES
+TEST_CPPFLAGS=${IMESH_CPPFLAGS} ${IMESH_INCLUDES}
+
+default: iMesh_unitTest
+
+iMesh_unitTest: iMesh_unitTest.o $(OBJ) $(IMESH_DEPENDENCIES)
+	echo "Linking iMesh_unitTest"
+	mpic++ -fPIC -fPIC  -fopenmp -O2 -fopenmp $(EXTRAFLAGS) -fopenmp -o iMesh_unitTest iMesh_unitTest.o $(OBJ) ${IMESH_LIBS} ${SYS_LIBS}
+
+%.o: %.cc iMesh_unitTest.hh iMesh_unitTest_config.h
+	mpic++ -fPIC  -fPIC  -fopenmp -O2 -fopenmp $(EXTRAFLAGS) ${TEST_CPPFLAGS} -c $<
+
+check: test
+
+test: iMesh_unitTest
+	./iMesh_unitTest --silent annulus.vtk
+	./iMesh_unitTest --silent globe_mats.vtk
+
+distclean: localdistclean
+
+localdistclean:
+	-rm -f Makefile *~ config.* iMesh_unitTest iMesh_unitTest_config.h
+
+# DO NOT DELETE
+

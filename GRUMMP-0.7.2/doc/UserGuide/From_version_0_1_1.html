@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.1 to 0.1.2:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.1 to 0.1.2:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_0.html">
+<LINK REL="previous" HREF="From_version_0_1_2.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_0.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1237"
+  HREF="From_version_0_1_0.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1233"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1227"
+  HREF="From_version_0_1_2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1235"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1238"
+  HREF="From_version_0_1_0.html">From version 0.1.0 to</A>
+<B> Up:</B> <A NAME="tex2html1234"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1228"
+  HREF="From_version_0_1_2.html">From version 0.1.2 to</A>
+ &nbsp; <B>  <A NAME="tex2html1236"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051240000000000000000">
+From version 0.1.1 to 0.1.2:</A>
+</H1>
+
+<UL>
+<LI>Fixed problem with <SPAN  CLASS="textbf">internal</SPAN> <TT><SPAN  CLASS="textbf">snprintf</SPAN></TT> not
+null-terminating strings (caused bad file names).
+</LI>
+<LI>Cleaned up <TT><SPAN  CLASS="textbf">lex</SPAN></TT> <SPAN  CLASS="textbf">input file syntax</SPAN> so that
+stricter versions of <TT>lex</TT> can parse them correctly.
+</LI>
+<LI>Added <SPAN  CLASS="textbf">I/O files</SPAN> that were generated with <TT>lex</TT> to
+source distribution <SPAN  CLASS="textbf">for systems without a working</SPAN> <TT><SPAN  CLASS="textbf">lex</SPAN></TT>.
+</LI>
+<LI>Added (at least partial) <SPAN  CLASS="textbf">support for DEC/OSF1</SPAN> machines using
+native compilers.
+</LI>
+<LI>Added <SPAN  CLASS="textbf">native compiler check for IRIX, OSF1, and AIX</SPAN> machines
+so that the native compilers will be used rather than <TT>gcc</TT>/<TT>g++</TT>
+when the native compilers exist. This check is being added on a machine-by-machine
+basis, because some (including SunOS 4.1.x) have broken native compilers.
+</LI>
+<LI>Added <SPAN  CLASS="textbf">shared library support for OSF and FreeBSD</SPAN> machines.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

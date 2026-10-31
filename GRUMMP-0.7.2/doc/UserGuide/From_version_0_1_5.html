@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.5 to 0.1.6:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.5 to 0.1.6:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_4.html">
+<LINK REL="previous" HREF="From_version_0_1_6.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1189"
+  HREF="From_version_0_1_4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1185"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1179"
+  HREF="From_version_0_1_6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1187"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1190"
+  HREF="From_version_0_1_4.html">From version 0.1.4 to</A>
+<B> Up:</B> <A NAME="tex2html1186"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1180"
+  HREF="From_version_0_1_6.html">From version 0.1.6 to</A>
+ &nbsp; <B>  <A NAME="tex2html1188"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051200000000000000000">
+From version 0.1.5 to 0.1.6:</A>
+</H1>
+
+<UL>
+<LI><SPAN  CLASS="textbf">Three-dimensional coarse mesh generation</SPAN> for multigrid. In
+principle, this could be done by running <TT>meshopt3d -s 2</TT>.
+In practice, there is a useful optimization that allows rapid removal
+of nearly all of the extra vertices from the coarse mesh. <TT>coarsen3d</TT>
+does this, and then behaves just like <TT>meshopt3d</TT>.
+</LI>
+<LI><SPAN  CLASS="textbf">Two-dimensional scattered data interpolation.</SPAN> A new executable,
+<TT>scat2d</TT>, has been added for this.
+</LI>
+<LI><SPAN  CLASS="textbf">Default optimization parameter in 3D</SPAN> is now to swap and smooth,
+rather than using the much more expensive refine-to-length scale.
+</LI>
+<LI><SPAN  CLASS="textbf">Improved quality</SPAN> of initially-generated meshes in 3D.
+</LI>
+<LI><SPAN  CLASS="textbf">Improved speed</SPAN> for refine-to-length in 3D.
+</LI>
+<LI><SPAN  CLASS="textbf">HTML documentation added</SPAN>, both on the GRUMMP web page and
+in the doc/html directory in the distribution.
+</LI>
+<LI><SPAN  CLASS="textbf">Two new quality measures</SPAN> in 2D. These are actually measures
+that were already advertised -- ratio of incircle to circumcircle
+radius, and ratio of area to perimeter squared. However, in version
+0.1.5 and previously, these measures were not implemented properly.
+</LI>
+<LI><SPAN  CLASS="textbf">Surface vertex removal</SPAN> in 3D. There are a number of special
+cases that had to be implemented before this was safe.
+</LI>
+<LI><SPAN  CLASS="textbf">Unified smoothing calls in 3D.</SPAN> In version 0.1.5, surface
+smoothing was enabled only when smoothing all vertices in the mesh.
+With the consolidation of some duplicate code, this problem has been
+fixed.
+</LI>
+<LI><SPAN  CLASS="textbf">Internal code cleanup and optimization.</SPAN> 
+</LI>
+<LI><SPAN  CLASS="textbf">Made logging more systematic.</SPAN>
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1189"
+  HREF="From_version_0_1_4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1185"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1179"
+  HREF="From_version_0_1_6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1187"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1190"
+  HREF="From_version_0_1_4.html">From version 0.1.4 to</A>
+<B> Up:</B> <A NAME="tex2html1186"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1180"
+  HREF="From_version_0_1_6.html">From version 0.1.6 to</A>
+ &nbsp; <B>  <A NAME="tex2html1188"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

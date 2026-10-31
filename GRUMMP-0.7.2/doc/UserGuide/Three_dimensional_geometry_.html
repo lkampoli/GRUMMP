@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Three-dimensional geometry (.bdry) files</TITLE>
+<META NAME="description" CONTENT="Three-dimensional geometry (.bdry) files">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Three_dimensional_surface_m.html">
+<LINK REL="previous" HREF="Input_output_mesh.html">
+<LINK REL="up" HREF="File_Formats.html">
+<LINK REL="next" HREF="Three_dimensional_surface_m.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html587"
+  HREF="Three_dimensional_surface_m.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html583"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html577"
+  HREF="Input_output_mesh.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html585"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html588"
+  HREF="Three_dimensional_surface_m.html">Three-dimensional surface mesh (.smesh)</A>
+<B> Up:</B> <A NAME="tex2html584"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html578"
+  HREF="Input_output_mesh.html">Input and output mesh</A>
+ &nbsp; <B>  <A NAME="tex2html586"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03330000000000000000"></A><A NAME="sec:3d-geom"></A>
+<BR>
+Three-dimensional geometry (<TT>.bdry</TT>) files
+</H1>
+
+<P>
+The preferred way to specify a three-dimensional domain for meshing
+is using a geometry (<TT>.bdry</TT>) file. This file format supports
+simultaneous and consistent meshing of multiple sub-domains and is
+extensible to non-polyhedral boundaries. This file format is conceptually
+the same as the two-dimensional geometry file format, so most of the
+description of the format is the same.
+
+<P>
+The first line of the file contains the number of vertices and number
+of boundary sections in the file. The next <TT>NVerts</TT> lines give
+vertex coordinates. The remainder of the file describes the boundary
+geometry. A sample input file and a picture of the underlying geometry
+are shown in Figure&nbsp;<A HREF="#fig:bdry3d-ex">3.6</A>.
+
+<P>
+Each boundary data entry begins with a tag describing the kind of
+data it contains. At present, the only valid tag is <TT><SPAN  CLASS="textbf">polygon</SPAN></TT>. 
+
+<P>
+Next, the relationship between the boundary entity (BE) and the domain
+is established. For entities lying on the bona fide domain boundary,
+a boundary condition must be specified, along with an integer tag
+(1 <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.png"
+ ALT="$\leq$"></SPAN> tag <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.png"
+ ALT="$\leq$"></SPAN> 126) identifying which interior region is adjacent
+to the BE. Entities lying within the domain necessarily separate two
+regions with different ID tags; both tags must be specified. 
+
+<P>
+Finally, geometric data required to describe the BE must be given.
+This data is not restricted to a single line in the input file.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:bdry3d-ex"></A><A NAME="1800"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.6:</STRONG>
+Sample 3D boundary data file.</CAPTION>
+<TR><TD><IMG
+ WIDTH="486" HEIGHT="778" BORDER="0"
+ SRC="img14.png"
+ ALT="\begin{figure}\par\begin{list}{}{\setlength{\rightmargin}{\leftmargin}\setl...
+...r
+polygon~r~1~r~3~4~0~2~8~6
+\par
+polygon~r~3~r~4~4~0~3~9~6\end{list}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<DL>
+<DT><STRONG><TT>polygon</TT>&nbsp;geometric&nbsp;data</STRONG></DT>
+<DD><P>
+A <TT><SPAN  CLASS="textbf">polygon</SPAN></TT> is specified by giving the number of vertices
+in the polygon, followed by the indices of the vertices, in order.
+These indices begin from 0.
+</DD>
+</DL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html587"
+  HREF="Three_dimensional_surface_m.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html583"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html577"
+  HREF="Input_output_mesh.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html585"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html588"
+  HREF="Three_dimensional_surface_m.html">Three-dimensional surface mesh (.smesh)</A>
+<B> Up:</B> <A NAME="tex2html584"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html578"
+  HREF="Input_output_mesh.html">Input and output mesh</A>
+ &nbsp; <B>  <A NAME="tex2html586"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

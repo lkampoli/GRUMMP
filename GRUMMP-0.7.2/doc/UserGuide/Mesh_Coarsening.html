@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Mesh Coarsening</TITLE>
+<META NAME="description" CONTENT="Mesh Coarsening">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Isotropic_Mesh_Adaptation.html">
+<LINK REL="previous" HREF="Mesh_Improvement.html">
+<LINK REL="up" HREF="Algorithms_Used_in.html">
+<LINK REL="next" HREF="Selecting_Vertices_Retain.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html820"
+  HREF="Selecting_Vertices_Retain.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html816"
+  HREF="Algorithms_Used_in.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html810"
+  HREF="Default_mesh_optimization.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html818"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html821"
+  HREF="Selecting_Vertices_Retain.html">Selecting Vertices to Retain</A>
+<B> Up:</B> <A NAME="tex2html817"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the</A>
+<B> Previous:</B> <A NAME="tex2html811"
+  HREF="Default_mesh_optimization.html">Default mesh optimization in</A>
+ &nbsp; <B>  <A NAME="tex2html819"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04300000000000000000">
+Mesh Coarsening</A>
+</H1>
+
+<P>
+GRUMMP provides mesh coarsening capability to enable automatic generation
+of quality coarse meshes for use with multigrid. The algorithm&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2003a">10</A>]
+selects a set of vertices from the fine mesh to retain in the coarse
+mesh, then removes unwanted vertices one at a time from the fine mesh.
+This incremental deletion scheme has a robustness advantage over generating
+a coarse mesh from scratch: incremental deletion <SPAN  CLASS="textit">always</SPAN> produces
+a coarse mesh even if it can not remove all the unwanted vertices.
+The scheme has been designed to coarsen triangulations by a factor
+of about <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$2^{D}$"></SPAN> in <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.png"
+ ALT="$D$"></SPAN> dimensions for each coarsening while preserving
+important geometric and topological features of the fine mesh and
+producing coarse mesh cells with acceptable shape quality.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html822"
+  HREF="Selecting_Vertices_Retain.html">Selecting Vertices to Retain in the Coarse Mesh</A>
+<UL>
+<LI><A NAME="tex2html823"
+  HREF="Selecting_Vertices_Retain.html#SECTION04311000000000000000">Identification of Apexes and Folds</A>
+<LI><A NAME="tex2html824"
+  HREF="Selecting_Vertices_Retain.html#SECTION04312000000000000000">Selection of Points to Include in the Coarse Mesh</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html825"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+<UL>
+<LI><A NAME="tex2html826"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04321000000000000000">Invoking Vertex Deletion</A>
+<LI><A NAME="tex2html827"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04322000000000000000">Mesh Post-processing</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html828"
+  HREF="Anisotropic_Mesh_Coarsening.html">Anisotropic Mesh Coarsening</A>
+<UL>
+<LI><A NAME="tex2html829"
+  HREF="Anisotropic_Mesh_Coarsening.html#SECTION04331000000000000000">Selection of Points in Pseudo-structured Anisotropic Meshes</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html830"
+  HREF="Outcomes.html">Outcomes</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

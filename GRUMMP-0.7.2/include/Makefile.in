@@ -1,0 +1,26 @@
+include @top_srcdir@/src/conf/default-rules
+
+THIS_SRCDIR = include
+TOP_SRCDIR = @top_srcdir@
+
+distclean: localdistclean
+
+localdistclean:
+	-rm GR_config.h SM_config.h iMesh_protos.h
+
+init: iMesh_protos.h
+
+FPFX=iMesh
+SEDEXPR = 's/^[[:space:]]*void[[:space:]][[:space:]]*$(FPFX)_\([a-z][_a-zA-Z0-9]*\)[[:space:]]*(.*$$/$(FPFX)_\1/p'
+iMesh_protos.h: iMesh.h Makefile
+	echo '#define FC_FUNC_(name, NAME) @_NAME_@' > $@
+	echo '#ifdef FC_FUNC_' >> $@
+	echo >> $@
+	for func in `@SED@ -n $(SEDEXPR) $<`; do \
+	  lower=`echo $$func | tr '[:upper:]' '[:lower:]'`; \
+          upper=`echo $$func | tr '[:lower:]' '[:upper:]'`; \
+	  echo "#define $$func FC_FUNC_( $$lower, $$upper )" >> $@; \
+        done
+	echo >> $@
+	echo "#endif" >> $@
+

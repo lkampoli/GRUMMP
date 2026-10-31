@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.7 to 0.2.0:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.7 to 0.2.0:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_6a.html">
+<LINK REL="previous" HREF="From_version_0_2_0.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_6a.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1153"
+  HREF="From_version_0_1_6a.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1149"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1143"
+  HREF="From_version_0_2_0.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1151"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1154"
+  HREF="From_version_0_1_6a.html">From version 0.1.6a to</A>
+<B> Up:</B> <A NAME="tex2html1150"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1144"
+  HREF="From_version_0_2_0.html">From version 0.2.0. to</A>
+ &nbsp; <B>  <A NAME="tex2html1152"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051170000000000000000">
+From version 0.1.7 to 0.2.0:</A>
+</H1>
+
+<UL>
+<LI><SPAN  CLASS="textbf">Improved robustness in initial tetrahedralization</SPAN>. A few
+cases still fail, but changes to the heuristics used in surface recovery
+break other cases. An area of vast improvement over version 0.1.7,
+but more work is still needed.
+</LI>
+<LI>Support for <SPAN  CLASS="textbf">curved boundaries in two dimensions</SPAN>. Circles,
+circular arcs, and splines are supported, as well as straight line
+segments. See the documentation for <TT>tri</TT> for details about
+file format.
+</LI>
+<LI><SPAN  CLASS="textbf">Guaranteed-quality meshing</SPAN>. In 2D, GRUMMP now generates meshes
+with all angles greater than 30&#176;, except near input angles
+smaller than about 60&#176;. In 3D, the theoretical guarantee
+is on the ratio of edge length to circumradius; in practice, with
+smoothing GRUMMP produces 3D meshes for &ldquo;thick&rdquo; domains with dihedral
+angles in excess of 18&#176;-20&#176; (except, again,
+near small angles in the input). A bonus with these new algorithms
+is that mesh generation is actually <SPAN  CLASS="textit">faster</SPAN> than in version
+0.1.7. (It hardly seems fair that such a massive change in the internals
+of the code lead to only one item in the change list...)
+</LI>
+<LI><SPAN  CLASS="textbf">Improved length scale calculation</SPAN>. GRUMMP now uses, in both
+2D and 3D, a much better approximation to the true local geometric
+feature size. 
+</LI>
+<LI><SPAN  CLASS="textbf">Global control of cell size</SPAN> relative to feature size and
+of the rate of change of cell size (grading). Both of these accompany
+the improved length scale calculation.
+</LI>
+<LI><SPAN  CLASS="textbf">Change in output format for multi-domain meshes</SPAN>. Because
+of internal changes in data representation, output file format has
+been changed for multi-domain meshes. As a result, two default file
+format templates now exist, one each for single- and multi-domain
+cases.
+</LI>
+<LI><SPAN  CLASS="textbf">Internal cleanup continues</SPAN>. Quite a bit of obsolete code
+has been deprecated, and many of these pieces have been removed from
+the distribution.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1153"
+  HREF="From_version_0_1_6a.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1149"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1143"
+  HREF="From_version_0_2_0.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1151"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1154"
+  HREF="From_version_0_1_6a.html">From version 0.1.6a to</A>
+<B> Up:</B> <A NAME="tex2html1150"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1144"
+  HREF="From_version_0_2_0.html">From version 0.2.0. to</A>
+ &nbsp; <B>  <A NAME="tex2html1152"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

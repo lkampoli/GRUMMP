@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Swapping</TITLE>
+<META NAME="description" CONTENT="Swapping">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Smoothing.html">
+<LINK REL="previous" HREF="Mesh_Improvement.html">
+<LINK REL="up" HREF="Mesh_Improvement.html">
+<LINK REL="next" HREF="Smoothing.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html786"
+  HREF="Smoothing.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html782"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html776"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html784"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html787"
+  HREF="Smoothing.html">Smoothing</A>
+<B> Up:</B> <A NAME="tex2html783"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Previous:</B> <A NAME="tex2html777"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+ &nbsp; <B>  <A NAME="tex2html785"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04210000000000000000">
+Swapping</A>
+</H1>
+
+<P>
+In both two and three dimensions, GRUMMP uses the standard well-established
+face swapping techniques. In addition, GRUMMP also implements edge
+swapping in 3D&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>].
+
+<P>
+In two dimensions, face swapping chooses the best diagonal for the
+quadrilateral formed by two neighboring triangles.<A NAME="tex2html31"
+  HREF="footnode.html#foot3419"><SUP><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A> GRUMMP can choose the diagonal to satisfy the Delaunay criterion;
+to minimize the maximum angle; or to maximize the minimum sine of
+angles (in two dimensions, this is formally equivalent to the Delaunay
+criterion).
+
+<P>
+In three dimensions, reconfiguration is more complex. The canonical
+case is exchanging two tetrahedra that share a face with three tetrahedra,
+as shown in the top left part of Figure&nbsp;<A HREF="#fig:face-swap-configs">5.1</A>.
+The converse swap, from three to two tetrahedra, is also possible.
+In addition, GRUMMP allows reconfiguration of two tets to two (T22
+case in the figure); in this case, the two shaded faces must be co-planar,
+and swapping decisions reduce to choosing the best diagonal for the
+coplanar quadrilateral. If two pairs of tetrahedra in the interior
+of the mesh share a pair of coplanar faces, this swap is also permitted;
+in this case, two T22 configurations are back-to-back in the mesh.
+In addition to these swappable configurations, there are a number
+of unswappable cases, some of which are illustrated in the bottom
+of Figure&nbsp;<A HREF="#fig:face-swap-configs">5.1</A>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:face-swap-configs"></A><A NAME="3601"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 5.1:</STRONG>
+Face swapping in three dimensions</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="277" HEIGHT="210" ALIGN="BOTTOM" BORDER="0"
+ SRC="img58.png"
+ ALT="\includegraphics[width=0.5\textwidth]{pics/face-configs}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Edge swapping is a more complicated procedure, replacing <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img59.png"
+ ALT="$N$"></SPAN> tetrahedra
+incident a single edge by a new set of <SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img60.png"
+ ALT="$2N-4$"></SPAN> tetrahedra. In the
+example of Figure&nbsp;<A HREF="#fig:edge-swap-example">5.2</A>, the edge <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img61.png"
+ ALT="$TB$"></SPAN> is
+perpendicular to the page. The five tetrahedra originally incident
+on it (<SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$01TB$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img63.png"
+ ALT="$12TB$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.png"
+ ALT="$23TB$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img65.png"
+ ALT="$34TB$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.png"
+ ALT="$40TB$"></SPAN> are replaced
+by six new tetrahedra, two for each of the triangles of the (non-planar)
+triangulation of polygon <SPAN CLASS="MATH"><IMG
+ WIDTH="43" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img67.png"
+ ALT="$01234$"></SPAN>: <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img68.png"
+ ALT="$012T$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img69.png"
+ ALT="$024T$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$234T$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img71.png"
+ ALT="$021B$"></SPAN>,
+<SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img72.png"
+ ALT="$042B$"></SPAN>, and <SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img73.png"
+ ALT="$324B$"></SPAN>. 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:edge-swap-example"></A><A NAME="3602"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 5.2:</STRONG>
+Edge swapping example</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="361" HEIGHT="116" ALIGN="BOTTOM" BORDER="0"
+ SRC="img74.png"
+ ALT="\includegraphics[width=0.65\textwidth]{pics/5to6}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+The challenge with edge swapping is that the number of possible configurations
+grows rapidly with the number of tetrahedra incident on the edge to
+be removed, as seen in the table below. In practice, the number of
+successful 7-for-10 swaps is very small, so GRUMMP does not explore
+possible swaps for more complex initial configurations.
+
+<P>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER">Tets before</TD>
+<TD ALIGN="CENTER">3</TD>
+<TD ALIGN="CENTER">4</TD>
+<TD ALIGN="CENTER">5</TD>
+<TD ALIGN="CENTER">6</TD>
+<TD ALIGN="CENTER">7
+<BR>
+Tets after</TD>
+</TR>
+</TABLE>
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+Clearly, checking the quality of each tetrahedron in each possible
+configuration is a costly undertaking; instead, GRUMMP computes the
+quality for each unique tetrahedron only once, then determines the
+quality of a given configuration by finding the minimum quality among
+its tetrahedra.
+
+<P>
+To simplify bookkeeping, GRUMMP takes advantage of the symmetries
+of the post-edge-swapping configurations and stores only a small set
+of canonical configurations, as shown in Figure&nbsp;<A HREF="#fig:canon-configs">5.3</A>.
+For each configuration, GRUMMP also stores connectivity information
+for the post-swap configuration.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:canon-configs"></A><A NAME="3603"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 5.3:</STRONG>
+Canonical configurations for edge swapping, including repeat count.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="388" HEIGHT="181" ALIGN="BOTTOM" BORDER="0"
+ SRC="img76.png"
+ ALT="\includegraphics[width=0.7\textwidth]{pics/configs}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+For both face and edge swapping, swapping can be done with the goal
+of maximizing the minimum sine of dihedral angles or of minimizing
+the maximum dihedral angle. Also, face swapping can use the Delaunay
+criterion. The maxmin sine criterion eliminates both small and large
+dihedral angles, and is recommended choice in GRUMMP.
+
+<P>
+Code for swapping can be found in <TT>src/2D/MeshOpt2D.cxx</TT>, <TT>src/2D/Reconnect2D.cxx</TT>,
+<TT>src/3D/MeshOpt3D.cxx</TT>, <TT>src/3D/Reconnect3D.cxx</TT>, and
+<TT>src/3D/InitCanon.cxx</TT>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html786"
+  HREF="Smoothing.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html782"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html776"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html784"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html787"
+  HREF="Smoothing.html">Smoothing</A>
+<B> Up:</B> <A NAME="tex2html783"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Previous:</B> <A NAME="tex2html777"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+ &nbsp; <B>  <A NAME="tex2html785"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

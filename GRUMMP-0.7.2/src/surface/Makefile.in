@@ -1,0 +1,17 @@
+LIBBASE = libGR_surf
+ID_STRING = GRUMMP surface mesh
+
+THIS_SRCDIR = src/surface
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = BdryPolygon.o InsertSurf.o Bdry3D.o
+
+COBJECTS =
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+default: library
+
+include ../conf/default-rules
+
+library: .libs

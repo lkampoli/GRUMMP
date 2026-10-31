@@ -1,0 +1,37 @@
+/* include/SM_config.h.  Generated from SM_config.h.in by configure.  */
+#ifndef _SM_config_h_
+#define _SM_config_h_ 1
+
+/* Define to empty if the keyword does not work.  */
+/* #undef const */
+
+/* Define to `unsigned' if <sys/types.h> doesn't define.  */
+/* #undef size_t */
+
+/* Define if you have the ANSI C header files.  */
+#define STDC_HEADERS 1
+
+/* Define to turn on statistic acculumation and output */
+#define SM_STATS 1 
+
+/* Level of internal debugging output */
+#define SM_DEBUG_LEVEL 0
+
+/* Define to disable assertions */
+#define NDEBUG 1
+
+/* Notify the smoothing code that it is -not- the highest level of
+   logging, so that it will not add its own time to global time. */
+#define SM_NOT_GLOBAL
+
+/* Define to spew out matlab data on optimization */
+#if (SM_DEBUG_LEVEL >= 3)
+#define LOCALTEST 1
+#else
+/* #undef LOCALTEST */
+#endif
+
+/* This is always defined for the auto-differentiation code. */
+#define AD_DERIV_TYPE_ARRAY
+
+#endif

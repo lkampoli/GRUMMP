@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Additional options for 3D GRUMMP executables</TITLE>
+<META NAME="description" CONTENT="Additional options for 3D GRUMMP executables">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Additional_command_line.html">
+<LINK REL="previous" HREF="Additional_options_2D.html">
+<LINK REL="up" HREF="GRUMMP_Programs.html">
+<LINK REL="next" HREF="Additional_command_line.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html496"
+  HREF="Additional_command_line.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html492"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html486"
+  HREF="Additional_options_2D.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html494"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html497"
+  HREF="Additional_command_line.html">Additional command line arguments</A>
+<B> Up:</B> <A NAME="tex2html493"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html487"
+  HREF="Additional_options_2D.html">Additional options for 2D</A>
+ &nbsp; <B>  <A NAME="tex2html495"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03230000000000000000"></A><A NAME="sec:3D-exec"></A>
+<BR>
+Additional options for 3D GRUMMP executables
+</H1>
+
+<P>
+There are several command line options that apply only to the 3D GRUMMP
+executables.
+
+<UL>
+<LI>[-a<TT>&nbsp;arg</TT>] If the argument is non-zero, allow changes in
+the surface mesh shape that do not involve angle of more than <TT>arg</TT>
+degrees. <SPAN  CLASS="textbf">Default: 5.</SPAN>
+</LI>
+<LI>[-e<TT>&nbsp;arg</TT>] If the argument is non-zero, allow local reconnection
+via edge removal. <SPAN  CLASS="textbf">Default: 1.</SPAN>
+</LI>
+<LI>[-O&nbsp;<TT>string</TT>] 
+
+<P>
+Specify a shorthand mesh optimization script. Although the automatic
+mesh improvement scheme creates excellent meshes, it can be quite
+slow. For this reason, the optimization string option has been revived.
+The string encodes a sequence of actions for optimization. For more
+information about the individual optimization procedures, see&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>].
+The full list of supported options is:
+<DL>
+<DT><STRONG>Swapping.</STRONG></DT>
+<DD>There are three swapping suboptions: '<TT>wi</TT>',
+'<TT>wm</TT>', and '<TT>ws</TT>'. 
+
+<P>
+
+<UL>
+<LI>[<TT>wi</TT>] Insphere swapping. Use of this criterion results
+in a mesh which is locally Delaunay with respect to all faces which
+can be swapped either 2 tets for 3 or 3 for 2. The Delaunay tetrahedralization
+has, in principle, a number of excellent properties. Insphere swapping
+essentially tries to make tetrahedra as equilateral as possible, but
+it has blind spots which allow tetrahedra with very small or very
+large dihedral angles to remain and even proliferate in the mesh.
+This is often a good choice for a <SPAN  CLASS="textit">first</SPAN> pass of swapping when
+improving a mesh, but a very poor choice for later passes, in that
+it will undo much of the good done by other operations. <TT>tetra</TT>
+produces a Delaunay mesh at the end of its insertion process anyway,
+so this option is of no use with <TT>tetra</TT>.
+</LI>
+<LI>[<TT>wm</TT>] Minmax dihedral angle. This criterion performs swaps
+if and only if the new configuration has a smaller maximum dihedral
+angle than the old configuration. This criterion does a better job
+of eliminating poor angles from the mesh than the insphere criterion,
+but does not do a spectacular job with small dihedral angles.
+</LI>
+<LI>[<TT>ws</TT>] Maxmin sine of dihedral angle. This criterion performs
+swaps if and only if the new configuration has a larger minimum sine
+of dihedral angle than the old configuration. As such, both very small
+and very large dihedral angles are removed. <SPAN  CLASS="textbf"><SPAN  CLASS="textit">This is
+the recommended swapping criterion.</SPAN></SPAN>
+</LI>
+</UL>
+</DD>
+<DT><STRONG>Smoothing.</STRONG></DT>
+<DD>A smoothing command ('<TT>mf</TT>')<A NAME="tex2html12"
+  HREF="footnode.html#foot1654"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A> is followed by a single digit to specify the local mesh quality function
+to use. The options are:
+
+<P>
+
+<UL>
+<LI>[1] Maxmin dihedral angle.
+</LI>
+<LI>[2] Minmax dihedral angle.
+</LI>
+<LI>[3] Maxmin cosine of dihedral angle.
+</LI>
+<LI>[4] Minmax cosine of dihedral angle.
+</LI>
+<LI>[5] Maxmin sine of dihedral angle. <SPAN  CLASS="textbf"><SPAN  CLASS="textit">Recommended.</SPAN></SPAN>
+</LI>
+</UL>The objective of each option is self-explanatory from the name of
+the quality measure. In each case, the measure is evaluated; a single
+Laplacian smoothing step is made; the quality measure is re-evaluated;
+the Laplacian step is kept if and only if the mesh is improved by
+it; and a non-smooth optimization procedure is invoked if the local
+sub-mesh is not yet sufficiently good.
+</DD>
+<DT><STRONG>Bad&nbsp;tetrahedron&nbsp;repair.</STRONG></DT>
+<DD>Use '<TT>r</TT>' to repair bad tetrahedra
+using a full range of swapping techniques, and '<TT>R</TT>' to additionally
+use strategic point insertion to remove bad tetrahedra; the latter
+should be used with caution.
+</DD>
+</DL>
+The <SPAN  CLASS="textbf">default</SPAN> optimization string for <TT>tetra</TT> is &ldquo;<TT><SPAN  CLASS="textbf">-O&nbsp;wsmf5</SPAN></TT>&rdquo;.
+For <TT>meshopt3d</TT>, the value recommended by Freitag and Ollivier-Gooch&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>]
+is used: &ldquo;<TT><SPAN  CLASS="textbf">-O&nbsp;wsmf5mf5rmf5mf5</SPAN></TT>&rdquo;. The difference
+between the two is that <TT>tetra</TT> is known to create meshes that
+are reasonably good to begin with and need little cleanup, whereas
+<TT>meshopt3d</TT> can't make any assumptions about the quality of
+the input mesh.
+</LI>
+</UL>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html496"
+  HREF="Additional_command_line.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html492"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html486"
+  HREF="Additional_options_2D.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html494"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html497"
+  HREF="Additional_command_line.html">Additional command line arguments</A>
+<B> Up:</B> <A NAME="tex2html493"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html487"
+  HREF="Additional_options_2D.html">Additional options for 2D</A>
+ &nbsp; <B>  <A NAME="tex2html495"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

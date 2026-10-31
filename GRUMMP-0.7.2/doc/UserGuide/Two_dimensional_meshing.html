@@ -1,0 +1,705 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Two dimensional meshing</TITLE>
+<META NAME="description" CONTENT="Two dimensional meshing">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Three_dimensional_meshing.html">
+<LINK REL="previous" HREF="Mesh_Generation.html">
+<LINK REL="up" HREF="Mesh_Generation.html">
+<LINK REL="next" HREF="Three_dimensional_meshing.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html737"
+  HREF="Three_dimensional_meshing.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html733"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html727"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html735"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html738"
+  HREF="Three_dimensional_meshing.html">Three-dimensional meshing</A>
+<B> Up:</B> <A NAME="tex2html734"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<B> Previous:</B> <A NAME="tex2html728"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+ &nbsp; <B>  <A NAME="tex2html736"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html739"
+  HREF="Two_dimensional_meshing.html#SECTION04111000000000000000">Initial discretization</A>
+<LI><A NAME="tex2html740"
+  HREF="Two_dimensional_meshing.html#SECTION04112000000000000000">Point insertion</A>
+<LI><A NAME="tex2html741"
+  HREF="Two_dimensional_meshing.html#SECTION04113000000000000000">Length scale modifications</A>
+<LI><A NAME="tex2html742"
+  HREF="Two_dimensional_meshing.html#SECTION04114000000000000000">Curved boundaries</A>
+<UL>
+<LI><A NAME="tex2html743"
+  HREF="Two_dimensional_meshing.html#SECTION04114100000000000000">Generic geometry framework</A>
+<LI><A NAME="tex2html744"
+  HREF="Two_dimensional_meshing.html#SECTION04114200000000000000">Measuring how curved the boundary
+is</A>
+<LI><A NAME="tex2html745"
+  HREF="Two_dimensional_meshing.html#SECTION04114300000000000000">Initial discretization with curved
+boundaries</A>
+<LI><A NAME="tex2html746"
+  HREF="Two_dimensional_meshing.html#SECTION04114400000000000000">Edge recovery</A>
+<LI><A NAME="tex2html747"
+  HREF="Two_dimensional_meshing.html#SECTION04114500000000000000">Point insertion</A>
+<LI><A NAME="tex2html748"
+  HREF="Two_dimensional_meshing.html#SECTION04114600000000000000">Length scale modifications</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION04110000000000000000">
+Two dimensional meshing</A>
+</H1>
+
+<P>
+In two dimensions, GRUMMP follows Shewchuk's modification to Ruppert's
+scheme fairly closely, except that we exercise more precise control
+over cell size and grading and extend the scheme to produce guaranteed-quality
+meshes from domains with curved boundaries.
+
+<P>
+Ruppert's scheme&nbsp;[<A
+ HREF="Bibliography.html#Ruppert1993">14</A>,<A
+ HREF="Bibliography.html#Ruppert1995">15</A>] begins with a constrained
+Delaunay triangulation.<A NAME="tex2html25"
+  HREF="footnode.html#foot3285"><SUP><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A> The mesh quality is improved through point insertion. Points are
+inserted at the circumcenter of badly-shaped cells, cells that have
+an angle less than <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$\theta_{\min}$"></SPAN>, unless they <SPAN  CLASS="textit">encroach</SPAN> on
+a boundary edge. A vertex <SPAN  CLASS="textit">encroaches</SPAN> on an edge when that vertex
+is located inside the circle with the edge as its diameter; this circle
+is called the <SPAN  CLASS="textit">diametral circle</SPAN>. If a proposed new point encroaches
+on any boundary edge, that vertex is not inserted. Instead, the encroached
+boundary edge(s) is(are) bisected. This process is repeated until
+all cells are well-shaped. Ruppert was able to show that this algorithm
+always terminates, and results in a mesh with minimum angle <!-- MATH
+ $\theta_{\min}\approx20.7^{\circ}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="86" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$\theta_{\min}\approx20.7^{\circ}$"></SPAN>. 
+
+<P>
+Shewchuk<SPAN  CLASS="textit">&nbsp;</SPAN>[<A
+ HREF="Bibliography.html#Shewchuk1997">16</A>] showed that a <!-- MATH
+ $\theta_{\min}=25.7^{\circ}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="86" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img30.png"
+ ALT="$\theta_{\min}=25.7^{\circ}$"></SPAN>
+is possible if <SPAN  CLASS="textit">diametral lenses</SPAN> rather than diametral circles
+are used to determine if there is encroachment. The difference between
+the diametral circle and diametral lens is shown in Figure&nbsp;<A HREF="#fig:_Diametral-Lenses-and-Circle-Comp">4.1</A>.
+In this variant of the algorithm, interior vertices lying inside the
+diametral circle of a boundary edge are deleted when that edge is
+split. The bound on <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$\theta_{\min}$"></SPAN> is not tight; in practice, <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$\theta_{\min}$"></SPAN>
+can be set to <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$30^{\circ}$"></SPAN> and the algorithm will still terminate. 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:_Diametral-Lenses-and-Circle-Comp"></A><A NAME="3585"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.1:</STRONG>
+Comparison between a
+diametral circle (dashed) and diametral lenses. Diametral lenses allow
+points to be inserted closer to boundary edges.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="221" HEIGHT="222" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="\includegraphics[width=0.4\textwidth]{pics/diametral-lenses}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION04111000000000000000"></A><A NAME="sec:_Outline-Ruppert-Proper-Delaunay"></A>
+<BR>
+Initial discretization
+</H2>
+
+<P>
+Ruppert's algorithm can be started either with a Delaunay triangulation
+or a constrained Delaunay triangulation. The latter does not pose
+a problem because Ruppert's original encroachment rule guarantees
+that no vertex will be inserted outside a boundary edge.<A NAME="tex2html27"
+  HREF="footnode.html#foot3308"><SUP><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A> A Delaunay triangulation containing all the boundary points inside
+a larger bounding box is first created. Boundary edges are recovered
+by swapping; this approach always succeeds for two-dimensional polygonal
+boundaries. The triangles lying outside the domain are then removed,
+leaving a constrained Delaunay triangulation. Initial triangulations
+are created by a <TT>Mesh2D</TT> constructor in <TT>src/2D/Mesh2D.cxx</TT>,
+using geometric information stored in a geometry object of type <TT>Bdry2D</TT>.
+
+<P>
+
+<H2><A NAME="SECTION04112000000000000000"></A><A NAME="sec:Outline-Ruppert-Insertion"></A>
+<BR>
+Point insertion
+</H2>
+
+<P>
+GRUMMP uses the Delaunay insertion method of Watson&nbsp;[<A
+ HREF="Bibliography.html#Watson1981">17</A>].
+First, the code lists all cells that contain the new vertex in their
+circumcircle. These cells are then removed from the mesh, and the
+faces of the resulting hull are connected with the newly inserted
+point. This insertion method preserves the Delaunay nature of the
+mesh; no swapping is needed after the insertion. If a boundary edge
+is part of the hull, a check is made to ensure that the new vertex
+will not encroach on it. If it does, the point is not inserted. Vertices
+lying inside the diametral circle of the edge are removed, and the
+boundary edge is split at its geometric midpoint. GRUMMP uses Watson
+insertion for this split as well. The actual insertion code is found
+mostly in <TT>src/2D/InsertWatson2D.cxx</TT>, while the driver for
+Ruppert's scheme is in <TT>src/2D/Ruppert.cxx</TT>.
+
+<P>
+
+<H2><A NAME="SECTION04113000000000000000">
+Length scale modifications</A>
+</H2>
+
+<P>
+
+<P>
+GRUMMP uses a more flexible definition of geometric length scale than
+Ruppert's; for implementation details and proofs of mesh quality and
+size-optimality, see Ollivier-Gooch and Boivin&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2001">11</A>].
+GRUMMP computes a geometric length scale based on the <SPAN  CLASS="textit">local
+feature size</SPAN>. The local feature size was used by Ruppert to prove
+termination of the original algorithm, and is defined as the radius
+of the smallest circle centered at a point that touches two disjoint
+parts of the domain boundary. We defined the length scale <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$LS$"></SPAN> in
+terms of the local feature size <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img34.png"
+ ALT="$l\! f\! s$"></SPAN> as:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT" CLASS="mathdisplay">
+
+<!-- MATH
+ \begin{equation}
+LS\left(p\right)=\min\left(\frac{l\! f\! s\left(p\right)}{R},\min_{\textrm{neighbors }q_{i}}LS\left(q_{i}\right)+\frac{1}{G}\left|\vec{q}_{i}-\vec{p}\right|\right)
+\end{equation}
+ -->
+<A NAME="eq:length-scale"></A>
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:length-scale"></A><IMG
+ WIDTH="341" HEIGHT="45" BORDER="0"
+ SRC="img35.png"
+ ALT="\begin{displaymath}
+LS\left(p\right)=\min\left(\frac{l\! f\! s\left(p\right)}{R}...
+...ht)+\frac{1}{G}\left\vert\vec{q}_{i}-\vec{p}\right\vert\right)
+\end{displaymath}"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where both <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$R$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$G$"></SPAN> are constants <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img36.png"
+ ALT="$\geq1$"></SPAN>, and points <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$q_{i}$"></SPAN>
+are neighbors to point <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img38.png"
+ ALT="$p$"></SPAN>. The first constant, <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$R$"></SPAN>, controls the
+ratio of input feature size to final mesh boundary edge length, with
+finer boundary discretization for larger values of <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$R$"></SPAN>. The other
+constant, <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$G$"></SPAN>, is used to control how rapidly the cell size can change
+with distance. This is an explicit imitation and generalization of
+the grading properties of the local feature size. A larger value of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$G$"></SPAN> results in slower increase in cell size over the same distance.
+The value of <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$LS$"></SPAN> is stored at every vertex location.
+
+<P>
+Ruppert's scheme can be easily modified to split cells that are too
+large according to the definition of length scale in Equation&nbsp;<A HREF="#eq:length-scale">4.1</A>,
+in addition to splitting those that are badly shaped. A cell is considered
+too large whenever the ratio of its circumradius to the average <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$LS$"></SPAN>
+of its vertices is greater than <!-- MATH
+ $\frac{\sqrt{2}}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img39.png"
+ ALT="$\frac{\sqrt{2}}{2}$"></SPAN>.
+
+<P>
+Length scale is computed and manipulated by code in <TT>src/base/Length.cxx</TT>.
+
+<P>
+
+<H2><A NAME="SECTION04114000000000000000">
+Curved boundaries</A>
+</H2>
+
+<P>
+This section is a digest of the description found in Boivin and Ollivier-Gooch&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2001">11</A>].
+The main result of that paper was to demonstrate that it is possible
+to generate a guaranteed-quality triangular mesh in a domain with
+curved boundaries. Modifications to the meshing code itself are relatively
+slight, although geometric modeling is significantly more complex. 
+
+<P>
+Interested readers are encouraged to refer to that paper for full
+details, including implementation issues regarding the curve types
+implemented in GRUMMP.
+
+<P>
+
+<H3><A NAME="SECTION04114100000000000000">
+Generic geometry framework</A>
+</H3>
+
+<P>
+To enable meshing from general curved boundaries, GRUMMP uses a framework
+in which the mesh generation code makes no assumptions about the underlying
+geometry of boundary patches. This implies a generic interface between
+mesher and geometry, in which the mesher only needs the results of
+several geometric queries. This is illustrated in Figure&nbsp;<A HREF="#fig:_Generic-Boundary-Framework">4.2</A>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:_Generic-Boundary-Framework"></A><A NAME="3590"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.2:</STRONG>
+Framework used for the implementation
+of generic boundaries</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="389" HEIGHT="223" ALIGN="BOTTOM" BORDER="0"
+ SRC="img40.png"
+ ALT="\includegraphics[width=0.7\textwidth]{pics/framework}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Whenever GRUMMP needs information about the boundary, a &ldquo;question&rdquo;
+is passed on to the proper type of boundary patch. Each boundary patch
+type knows how to answer all of these questions, and the answer is
+then passed back to the algorithm. This provides a transparent access
+to potentially any type of boundary patch. Using object-oriented programming,
+this generic interface can be implemented by using a common base class
+for all boundary data, with implementation of specific geometric queries
+in derived boundary data classes.
+
+<P>
+The information required for the successful implementation of Ruppert's
+algorithm -- curve midpoint, curvature, and original discretization
+information -- is described in Sections&nbsp;3.2 to 3.6. Several
+other queries are required to determine the appropriate mesh length
+scale <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.png"
+ ALT="$LS$"></SPAN>, but will not be discussed further here.
+
+<P>
+So far, classes for lines, circles, arcs, cubic parametric curves,
+and interpolated splines have been written. New types of boundary
+patches can be added by providing the proper &ldquo;answers&rdquo; for the
+given boundary patch. These patch definitions can be found in <TT>src/2D/Bdry*.cxx</TT>.
+
+<P>
+
+<H3><A NAME="SECTION04114200000000000000"></A><A NAME="sec:Normalized-Arclength"></A>
+<BR>
+Measuring how curved the boundary
+is
+</H3>
+
+<P>
+
+<P>
+GRUMMP must be able to work with curved as well as linear patches,
+so a new way of determining where splits happen along a boundary patch
+is necessary. We first make the observation that patches with little
+orientation change need few, long edges for accurate geometric representation.
+Linear patches have no orientation change; they can be represented
+accurately with just one edge. In contrast, regions of a curve with
+a large change in orientation require a greater number of shorter
+edges. We must also make sure that small amplitude sine-like curves
+are discretized appropriately. This suggests we should use the total
+variation of the tangent angle of a curve to determine where to split
+a boundary patch.
+
+<P>
+The total variation <SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$TV(\theta)$"></SPAN> is defined in the following way:
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT" CLASS="mathdisplay">
+
+<!-- MATH
+ \begin{equation}
+TV(\theta)=\int\mid d\theta\mid
+\end{equation}
+ -->
+<A NAME="eqn:_Curvature-Length-Integral-Generic-Form"></A>
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eqn:_Curvature-Length-Integral-Generic-Form"></A><IMG
+ WIDTH="114" HEIGHT="39" BORDER="0"
+ SRC="img42.png"
+ ALT="\begin{displaymath}
+TV(\theta)=\int\mid d\theta\mid
+\end{displaymath}"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+Note that there is no need to compute the integral; one simply needs
+to compare the orientation of the curve's tangent vector at carefully
+chosen points along the boundary patches to get the exact value of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$TV(\theta)$"></SPAN>. More details are given for each type of boundary patches in
+Boivin and Ollivier-Gooch&nbsp;[<A
+ HREF="Bibliography.html#Boivin2002b">1</A>]. 
+
+<P>
+
+<H3><A NAME="SECTION04114300000000000000"></A><A NAME="sec:Original-Discretization"></A>
+<BR>
+Initial discretization with curved
+boundaries
+</H3>
+
+<P>
+To obtain the initial Delaunay triangulation, each boundary patch
+must be initially discretized in some way. Since the exact shape of
+the boundary is only known by the boundary patches, the initial discretization
+of the corresponding curve must be computed by the patches themselves.
+At this point in the meshing process, we represent curves with as
+few edges as possible in order not to introduce artificial small features
+in the mesh. However, we must make sure that a valid and exact representation
+of the domain will be obtained and that the rules regarding the location
+of points inside the diametral lenses are also followed.
+
+<P>
+An arbitrary discretization of a spline curve is shown in Figure&nbsp;<A HREF="#fig:_Circle-Protected-Areas">4.3</A>.
+We wish to triangulate outside (above) the curve. Ruppert's scheme
+guarantees that no vertex will be inserted inside (below) the boundary
+edges. We also want to make sure that no vertex will be inserted in
+the regions inside the curve but outside of the boundary edges (the
+shaded area in Figure&nbsp;<A HREF="#fig:_Circle-Protected-Areas">4.3</A>). This is
+to prevent an invalid discretization, as the vertex inserted in the
+shaded area would ultimately lie outside the domain once the boundary
+is well-resolved. 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:_Circle-Protected-Areas"></A><A NAME="3594"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.3:</STRONG>
+Arbitrary original discretization
+of a spline. No vertex should be inserted in the shaded areas.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="326" HEIGHT="113" ALIGN="BOTTOM" BORDER="0"
+ SRC="img43.png"
+ ALT="\includegraphics[width=0.6\textwidth]{pics/discspline}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+This area can be protected by making sure that the diametral lenses
+of the boundary edges completely include the curve boundary. Since
+points are never inserted inside the diametral lenses, this will protect
+the shaded region from point insertion. It is easy to show that the
+maximum allowable total variation in orientation between vertices
+is <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.png"
+ ALT="$30^{\circ}$"></SPAN>. GRUMMP boundary patches determine their initial
+discretization by arranging vertices at equal intervals of <SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$TV(\theta)$"></SPAN>
+so that the maximum orientation change condition is met.
+
+<P>
+
+<H3><A NAME="SECTION04114400000000000000"></A><A NAME="sec:_Curved-Ruppert-Edge-Recovery"></A>
+<BR>
+Edge recovery
+</H3>
+
+<P>
+Due to the very coarse representation of the boundary patches during
+edge recovery, some precautions must be taken in order to get a valid
+initial constrained Delaunay triangulation. The edge recovery process
+must be modified since simple recovery through swapping will fail
+in some cases. Judicious use of vertex insertion is required in these
+cases to obtain a valid initial triangulation. The resulting edge
+recovery algorithm is summarized in Figure&nbsp;<A HREF="#fig:diagram-edge-recovery">4.4</A>.
+
+<DIV ALIGN="CENTER"><A NAME="fig:diagram-edge-recovery"></A><A NAME="3596"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 4.4:</STRONG>
+Procedure to follow to recover boundary
+edges</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="332" HEIGHT="347" ALIGN="BOTTOM" BORDER="0"
+ SRC="img44.png"
+ ALT="\includegraphics[width=0.6\textwidth]{pics/diagram-edgerecovery}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H3><A NAME="SECTION04114500000000000000"></A><A NAME="sec:_Generic-Midpoint"></A>
+<BR>
+Point insertion
+</H3>
+
+<P>
+Point insertion in the mesh, as well as on the boundary, is still
+done using Watson's method. However, curved boundaries modify the
+way that boundary edges are split. Instead of splitting at the average
+location of the edge's vertices, the location of the new boundary
+vertex is determined by the boundary patch itself. The &ldquo;midpoint&rdquo;
+between two vertices is now found using the total variation of the
+tangent angle. The general technique is to first find the total variation
+of the tangent angle between the boundary edge's vertices <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$a$"></SPAN> and
+<SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$b$"></SPAN>. The midpoint <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$c$"></SPAN> will be located at the point on the curve
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$TV(\theta)$"></SPAN> between <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$a$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$c$"></SPAN> and between <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$c$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$b$"></SPAN> is equal.
+This ensures that the new point is always located on the boundary
+and that regions of the curve with higher curvature will be discretized
+with more edges.
+
+<P>
+If the curvature over a given boundary edge is (almost) zero, the
+orientation change is negligible. In these cases, the split is made
+according to arclength. This ensures linear patches are split in the
+same fashion as before, and it also handles curves that have particularly
+flat regions.
+
+<P>
+Care must be taken when two curved patches are near each other, because
+the discretization of one patch may intersect the neighboring patch.
+Insertion on the latter can result in points outside the domain unless
+the patches are both split, and in the proper order.
+
+<P>
+
+<H3><A NAME="SECTION04114600000000000000"></A><A NAME="sec:_Curved-Ruppert-Length-Scale"></A>
+<BR>
+Length scale modifications
+</H3>
+
+<P>
+Whenever a boundary edge is split, the length scale <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$LS(p)$"></SPAN> for
+the new boundary vertex needs to be computed using Equation&nbsp;<A HREF="#eq:length-scale">4.1</A>.
+For this, we need the local feature size <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$l\! f\! s(p)$"></SPAN> at the new point
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img38.png"
+ ALT="$p$"></SPAN> to take into account the curvature of the boundary. We define
+the local feature size for curved boundaries, <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$l\! f\! s_{c}$"></SPAN> to be: 
+
+<P>
+<BR>
+<DIV ALIGN="RIGHT" CLASS="mathdisplay">
+
+<!-- MATH
+ \begin{equation}
+l\! f\! s_{c}(p)=\min\left(\rho\left(p\right),\,l\! f\! s\left(p\right)\right)
+\end{equation}
+ -->
+<A NAME="eq:_curved-lfs"></A>
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="eq:_curved-lfs"></A><IMG
+ WIDTH="185" HEIGHT="29" BORDER="0"
+ SRC="img51.png"
+ ALT="\begin{displaymath}
+l\! f\! s_{c}(p)=\min\left(\rho\left(p\right),\,l\! f\! s\left(p\right)\right)
+\end{displaymath}"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+where <!-- MATH
+ $\rho\left(p\right)=\frac{1}{\left|\kappa\left(p\right)\right|}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="90" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$\rho\left(p\right)=\frac{1}{\left\vert\kappa\left(p\right)\right\vert}$"></SPAN>
+is the radius of curvature at point <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img38.png"
+ ALT="$p$"></SPAN>. The radius of curvature
+therefore provides a ceiling on the value of the local feature size
+on the boundary. By using the radius of curvature, there will be an
+equal number of points per radian on the curve as per gap between
+objects. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html737"
+  HREF="Three_dimensional_meshing.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html733"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html727"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html735"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html738"
+  HREF="Three_dimensional_meshing.html">Three-dimensional meshing</A>
+<B> Up:</B> <A NAME="tex2html734"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<B> Previous:</B> <A NAME="tex2html728"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+ &nbsp; <B>  <A NAME="tex2html736"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

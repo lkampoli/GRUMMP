@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Three-dimensional meshing</TITLE>
+<META NAME="description" CONTENT="Three-dimensional meshing">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="Two_dimensional_meshing.html">
+<LINK REL="up" HREF="Mesh_Generation.html">
+<LINK REL="next" HREF="Mesh_Improvement.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html757"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html753"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html749"
+  HREF="Two_dimensional_meshing.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html755"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html758"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Up:</B> <A NAME="tex2html754"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<B> Previous:</B> <A NAME="tex2html750"
+  HREF="Two_dimensional_meshing.html">Two dimensional meshing</A>
+ &nbsp; <B>  <A NAME="tex2html756"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html759"
+  HREF="Three_dimensional_meshing.html#SECTION04121000000000000000">Initial tetrahedralization</A>
+<LI><A NAME="tex2html760"
+  HREF="Three_dimensional_meshing.html#SECTION04122000000000000000">Point insertion</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION04120000000000000000">
+Three-dimensional meshing</A>
+</H1>
+
+<P>
+In three dimensions, GRUMMP follows Shewchuk's scheme&nbsp;[<A
+ HREF="Bibliography.html#Shewchuk1997">16</A>],
+except that again we exercise more precise control over cell size
+and grading.
+
+<P>
+
+<H2><A NAME="SECTION04121000000000000000">
+Initial tetrahedralization</A>
+</H2>
+
+<P>
+In concept, GRUMMP creates an initial tetrahedralization in much the
+same way as an initial triangulation is created in 2D: all vertices
+of the surface discretization are inserted into a mesh inside a large
+box, then the surface is recovered and tetrahedra outside the domain
+are removed. The difficulty lies in the second step, &ldquo;the surface
+is recovered&rdquo;. In two dimensions, swapping alone is adequate. In
+three dimensions, this is not always true. In his thesis, Shewchuk
+shows that a surface mesh for which spheres protecting boundary segments
+and triangles are point-free must have a constrained Delaunay tetrahedralization;
+that is, that the surface can be recovered. In practice, this can
+require insertion of a significant number of points, although heuristics
+can improve significantly on the sometimes dismal requirements of
+theory. This is currently still a weak spot in GRUMMP: surface recovery
+is neither as efficient nor as robust as it should be, with particular
+challenges for surface meshes with small angles.
+
+<P>
+
+<H2><A NAME="SECTION04122000000000000000">
+Point insertion</A>
+</H2>
+
+<P>
+Following Ruppert, Shewchuk defines a <SPAN  CLASS="textit">boundary segment</SPAN> as an
+edge present in the input geometry. If a boundary segment is divided
+into parts by subsequent point insertion, each part is called a <SPAN  CLASS="textit">boundary
+subsegment</SPAN>. Shewchuk also defines a <SPAN  CLASS="textit">boundary facet</SPAN> as a planar
+polygonal surface in the input, bounded by boundary segments. When
+a boundary facet is divided, either by triangulation or addition of
+points in its interior, the parts are referred to as <SPAN  CLASS="textit">boundary
+subfacets</SPAN>. A triangular boundary subfacet is encroached if a point
+lies within the <SPAN  CLASS="textit">equatorial sphere</SPAN> of the triangle: the unique
+sphere having the circumcircle of the triangle at its equator. A boundary
+subsegment is encroached if a point lies within the unique sphere
+that has the subsegment as its diameter.
+
+<P>
+Shewchuk's scheme can be summarized (minus some details) as follows
+(including GRUMMP's addition of size and grading control, as described
+in two dimensions): 
+
+<OL>
+<LI>If a tetrahedron is badly shaped -- if its shortest edge
+is too small in comparison to its circumradius -- or too
+large, then insert a point at its circumcenter UNLESS that point would
+encroach on any boundary subfacet or subsegment, in which case the
+cell circumcenter is not inserted. Instead, encroached boundary entities
+are split; if the original cell still exists after splitting boundary
+entities, then the cell is split.
+</LI>
+<LI>If a vertex encroaches on a boundary subfacet <SPAN  CLASS="textbf">and</SPAN> the normal
+projection of the vertex into the plane of the subfacet lies inside
+the subfacet, split the subfacet. Subfacets are split by inserting
+a point at their circumcenter UNLESS that point would encroach on
+any subsegment, in which case, the subfacet circumcenter is not inserted.
+Instead, all encroached subsegments are split. If the subfacet survives
+subsegment splitting, the subfacet is split afterwards. Before a subfacet
+is split, all points  inside its equatorial sphere (not the equatorial
+lens, which is point-free) are deleted from the mesh.
+</LI>
+<LI>If a boundary subsegment is encroached, it must be split. If the newly-inserted
+vertex encroaches on any other subsegments, those subsegments should
+be split as well. Care must be taken with handling of small input
+angles to prevent infinitely recursive insertion.
+</LI>
+</OL>
+Subsegment splitting takes priority over subfacet splitting, which
+takes priority over bad cell removal. This variant of Shewchuk's algorithm
+can be shown to limit the ratio of circumradius to shortest edge length
+for good grading to 2. Although Shewchuk's scheme has an agreeably
+strong bound on mesh quality, it still allows some sliver tetrahedra,
+which are often problematic for solution of partial differential equations.
+Fortunately, post-processing the mesh by swapping and smoothing eliminates
+nearly all such tets from the mesh.
+
+<P>
+GRUMMP implements Shewchuk's scheme by using a priority queue. Tetrahedra
+are given a priority based on size and shape. For each tetrahedron,
+a size measure <!-- MATH
+ $M_{L}=\frac{2r}{\sqrt{3}\overline{LS}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="75" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$M_{L}=\frac{2r}{\sqrt{3}\overline{LS}}$"></SPAN> and a shape
+measure <!-- MATH
+ $M_{S}=\frac{\sqrt{6}l_{\min}}{4r}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="81" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.png"
+ ALT="$M_{S}=\frac{\sqrt{6}l_{\min}}{4r}$"></SPAN> are computed. The size
+measure is the ratio of the circumdiameter of the tetrahedron to the
+average of the length scale at its vertices, with a constant factor
+so that a cube can be tetrahedralized with no interior points. The
+shape measure expresses the ratio of shortest edge length to circumradius,
+normalized so that all values lie between 0 and 1, and an equilateral
+tetrahedron has quality 1. If the tetrahedron is too large <!-- MATH
+ $\left(M_{L}>1\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="64" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.png"
+ ALT="$\left(M_{L}&gt;1\right)$"></SPAN>,
+then the tetrahedron is assigned a priority of <SPAN CLASS="MATH"><IMG
+ WIDTH="73" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img56.png"
+ ALT="$-M_{L}+M_{S}$"></SPAN>. Otherwise,
+the priority is <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.png"
+ ALT="$M_{S}$"></SPAN>. In practice, tetrahedra much smaller than
+the length scale are not queued for splitting by GRUMMP, regardless
+of quality, to prevent infinite recursion near small dihedral angles
+in the surface mesh, where theory provides no guarantees of termination
+(and practice often fails also).
+
+<P>
+Encroached boundary facets and boundary segments are also included
+in the queue, with priorities set to large negative values so that
+traversing the queue from lowest numerical priority value to highest
+follows the insertion rules described above. 
+
+<P>
+Watson insertion is used in 3D as well as in 2D, and encroached boundary
+entities can be identified easily before the mesh is changed. New
+encroached entities are added the insertion queue (with a priority
+slightly less urgent than other similar encroached entities, to prevent
+infinite recursion). Before insertion actually occurs, a check is
+done to ensure that the entity at the head of the queue (be it a tetrahedron,
+a boundary triangle, or a boundary segment) is the one for which insertion
+was originally requested. If it is, insertion proceeds. If not, GRUMMP
+attempts to split the entity now at the head of the queue.
+
+<P>
+The queue is built and manipulated (including calls for insertion
+and for adding new entities to the queue) by code found in <TT>src/base/InsertionQueue.cxx</TT>
+and <TT>src/base/WatsonInfo.cxx</TT>. Three-dimensional Watson insertion
+code is found in <TT>src/3D/InsertWatson3D.cxx</TT>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html757"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html753"
+  HREF="Mesh_Generation.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html749"
+  HREF="Two_dimensional_meshing.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html755"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html758"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Up:</B> <A NAME="tex2html754"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<B> Previous:</B> <A NAME="tex2html750"
+  HREF="Two_dimensional_meshing.html">Two dimensional meshing</A>
+ &nbsp; <B>  <A NAME="tex2html756"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

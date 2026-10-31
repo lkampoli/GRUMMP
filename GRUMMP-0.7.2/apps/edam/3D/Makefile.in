@@ -1,0 +1,27 @@
+include @top_srcdir@/src/conf/default-rules
+include @top_srcdir@/iMesh-Defs.inc
+
+THIS_SRCDIR = apps/edam/3D
+TOP_SRCDIR = @top_srcdir@
+
+INCLUDES += -I@top_srcdir@/apps/edam/include
+
+EXECS = edam3d edam3d-new
+
+default: edam3d edam3d-new
+
+edam3d: edam3d.o
+	echo Linking edam3d
+	-$(CXX_COMPILE) -o edam3d $^ $(LDFLAGS) $(IMESH_LIBS) $(IMESH_LIBS)
+	echo " "
+
+edam3d-new: edam3d-new.o
+	echo Linking edam3d-new
+	-$(CXX_COMPILE) -o edam3d-new $^ $(LDFLAGS) $(IMESH_LIBS) $(IMESH_LIBS)
+	echo " "
+
+distclean: localdistclean
+
+localdistclean:
+	-rm -f $(EXECS)
+

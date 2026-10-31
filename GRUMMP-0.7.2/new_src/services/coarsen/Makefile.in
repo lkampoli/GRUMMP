@@ -1,0 +1,18 @@
+LIBBASE = libGR_services
+ID_STRING = GRUMMP coarsening
+
+THIS_SRCDIR = new_src/services/coarsen
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = CoarsenManager.o Remove2D.o Remove3D.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: $(OBJECTS)
+
+include @top_srcdir@/src/conf/default-rules
+
+library: 
+	$(MAKE) .libs

@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Incremental Vertex Deletion</TITLE>
+<META NAME="description" CONTENT="Incremental Vertex Deletion">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Anisotropic_Mesh_Coarsening.html">
+<LINK REL="previous" HREF="Selecting_Vertices_Retain.html">
+<LINK REL="up" HREF="Mesh_Coarsening.html">
+<LINK REL="next" HREF="Anisotropic_Mesh_Coarsening.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html855"
+  HREF="Anisotropic_Mesh_Coarsening.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html851"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html845"
+  HREF="Selecting_Vertices_Retain.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html853"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html856"
+  HREF="Anisotropic_Mesh_Coarsening.html">Anisotropic Mesh Coarsening</A>
+<B> Up:</B> <A NAME="tex2html852"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html846"
+  HREF="Selecting_Vertices_Retain.html">Selecting Vertices to Retain</A>
+ &nbsp; <B>  <A NAME="tex2html854"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html857"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04321000000000000000">Invoking Vertex Deletion</A>
+<LI><A NAME="tex2html858"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04322000000000000000">Mesh Post-processing</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION04320000000000000000"></A><A NAME="sec:removal"></A>
+<BR>
+Incremental Vertex Deletion
+</H1>
+
+<P>
+Incremental vertex deletion begins with an existing valid fine mesh
+and removes unwanted vertices one at a time, with a valid mesh after
+each deletion. This approach always results in a valid coarse mesh,
+even though it does not necessarily remove all unwanted vertices.
+In two dimensions, vertex deletion succeeds in removing all vertices
+for cases to date, although there is no proof of this property. In
+three dimensions, vertex deletion often leaves a few unwanted vertices
+in the coarse mesh, but always a small fraction of requested deletions.
+
+<P>
+The kernel of the incremental vertex deletion algorithm is an edge-contraction
+algorithm for deleting a single vertex.<A NAME="tex2html38"
+  HREF="footnode.html#foot3611"><SUP><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A>A vertex is removed by shrinking one of its incident edges to zero
+length, as illustrated in two dimensions in Figure&nbsp;<A HREF="#fig:contract">6.2</A>.
+The left half of the figure shows a vertex&nbsp;0 -- which
+is to be removed from the mesh -- and its immediate neighbors
+in the mesh. Vertex&nbsp;0 will be removed by sliding it along the edge&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img84.png"
+ ALT="$\overline{06}$"></SPAN>
+to vertex&nbsp;6. In the process, cells&nbsp;<!-- MATH
+ $\bigtriangleup061$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img85.png"
+ ALT="$\bigtriangleup061$"></SPAN> and <!-- MATH
+ $\bigtriangleup056$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img86.png"
+ ALT="$\bigtriangleup056$"></SPAN>
+are removed, as are edges&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img87.png"
+ ALT="$\overline{01}$"></SPAN>,&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img88.png"
+ ALT="$\overline{05}$"></SPAN> and&nbsp;<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="37" ALIGN="MIDDLE" BORDER="0"
+ SRC="img84.png"
+ ALT="$\overline{06}$"></SPAN>.
+The resulting mesh fragment is shown in the right half of Figure&nbsp;<A HREF="#fig:contract">6.2</A>.
+The kernel extends directly to three dimensions, with additional bookkeeping
+as the only complication.
+
+<DIV ALIGN="CENTER"><A NAME="fig:contract"></A><A NAME="3612"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 6.2:</STRONG>
+Vertex removal by edge contraction in two dimensions</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="277" HEIGHT="132" ALIGN="BOTTOM" BORDER="0"
+ SRC="img89.png"
+ ALT="\includegraphics[width=0.5\textwidth]{pics/contract}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION04321000000000000000"></A><A NAME="sec:deletion_rules"></A>
+<BR>
+Invoking Vertex Deletion
+</H2>
+
+<P>
+The incremental deletion algorithm makes multiple passes through the
+mesh, continuing until a pass removes no vertices or until all vertices
+selected for deletion have been removed. Between passes, local reconnection
+and smoothing are applied to improve the poorest-quality regions of
+the mesh and facilitate further vertex removal. During each pass,
+for each vertex marked for deletion in the coarse mesh, an edge is
+selected for contraction based on the following criteria:
+
+<OL>
+<LI>Feature hierarchy. A vertex must be removed by contraction onto a
+vertex that is no lower in the feature hierarchy. For example, surface
+vertices must be moved onto other surface vertices (including fold
+and apex vertices). Without this restriction, a surface vertex could
+be removed by contraction onto an interior vertex, changing the surface
+shape significantly. This rule also prevents saw-toothing of folds
+in three-dimensional meshes.
+</LI>
+<LI>Mesh validity. The resulting mesh fragment must not have inverted
+cells. For example, in Figure&nbsp;<A HREF="#fig:contract">6.2</A>, vertex&nbsp;0 can
+not be moved onto vertex&nbsp;1 or vertex&nbsp;5 without creating a cell (<!-- MATH
+ $\bigtriangleup156$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img90.png"
+ ALT="$\bigtriangleup156$"></SPAN>)
+with a negative area. 
+</LI>
+<LI>Mesh quality. The algorithm chooses the edge contraction that gives
+the best quality for the resulting mesh fragment. A good choice of
+quality measure here is the maxmin sine criterion. This criterion
+maximizes the minimum sine of the angles of the cell (dihedral angles
+in 3D), avoiding both large and small angles. For the case in Figure&nbsp;<A HREF="#fig:contract">6.2</A>,
+this rules out moving vertex&nbsp;0 onto vertex&nbsp;3, because this contraction
+produces the poorly-shaped cell&nbsp;<!-- MATH
+ $\bigtriangleup345$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$\bigtriangleup345$"></SPAN>. If edge contraction
+would form too poor a cell in three dimensions, the vertex is not
+removed; often the same vertex <SPAN  CLASS="textit">can</SPAN> be successfully removed
+in a subsequent pass through the mesh. This cutoff is unnecessary
+in two dimensions.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION04322000000000000000"></A><A NAME="sec:post-process"></A>
+<BR>
+Mesh Post-processing
+</H2>
+
+<P>
+After the incremental deletion algorithm has made a complete pass
+through the mesh, local reconnection is used to improve mesh connectivity,
+and therefore the effectiveness of edge contraction in the next pass.
+In this context, we reconnect the mesh using both face and edge swapping
+and perform one pass of optimization-based smoothing with a floating
+threshold&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>]. Both mesh optimization techniques
+have the goal of maximizing the minimum sine of angles.
+
+<P>
+After all vertex removal is complete, we do additional post-processing
+to improve coarse mesh quality. In two dimensions, we use five passes
+of optimization-based smoothing with a floating threshold, using the
+maxmin sine criterion. After the third pass, we use a single pass
+of mesh reconnection. In three dimensions, we again use a combination
+of smoothing and swapping, beginning with two passes of optimization-based
+smoothing with a floating threshold, followed by application of heuristics
+aimed at removing the worst cells in the mesh by using face and edge
+swapping, and finishing with two more passes of smoothing. Our post-processing
+regimen for three-dimensional meshes is consistent with the experimentally-inspired
+recommendations of Freitag and Ollivier-Gooch&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>].
+Post-processing improves the smallest angle in the output mesh significantly
+and cost is quite modest, at less than 10% of CPU time in two dimensions
+and far less than that in three dimensions.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html855"
+  HREF="Anisotropic_Mesh_Coarsening.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html851"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html845"
+  HREF="Selecting_Vertices_Retain.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html853"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html856"
+  HREF="Anisotropic_Mesh_Coarsening.html">Anisotropic Mesh Coarsening</A>
+<B> Up:</B> <A NAME="tex2html852"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html846"
+  HREF="Selecting_Vertices_Retain.html">Selecting Vertices to Retain</A>
+ &nbsp; <B>  <A NAME="tex2html854"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

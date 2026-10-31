@@ -1,0 +1,41 @@
+# This file contains variables that are essential for building
+# applications on iMesh implementations without having to hack
+# application Makefiles horribly each time.  Instead, one can simply
+# re-run configure in the application tree with a new -with-ITAPS-dir
+# argument, and the implementation-specific version of this file gets
+# included automatically.  The application programmer/user can also just
+# edit the pathname in their Makefile if they prefer.
+
+GRUMMP_CPPFLAGS=-I$(GR_ROOT_DIR)/include @CGM_INCLUDES@ @MESQUITE_INCLUDES@
+IMESH_CPPFLAGS=$(GRUMMP_CPPFLAGS)
+GRUMMP_CXXFLAGS=@CXXFLAGS@
+
+GRUMMP_LIBS=@CXXFLAGS@ -L$(GR_LIB_DIR) -Wl,-rpath -Wl,$(GR_LIB_DIR) -lGR_dbase -lGR_io \
+-lGR_base -lGR_3D -lGR_surf -lGR_2D -lGR_util -lGR_services -lGR_geom \
+@MESQUITE_LDFLAGS@ @MESQUITE_LIBS@ -liMesh_@IMPL_NAME@ \
+@CGM_LDFLAGS@ @CGM_LIBS@
+
+IMESH_LIBS=-L$(GR_LIB_DIR) -Wl,-rpath -Wl,$(GR_LIB_DIR) -liMesh_GRUMMP $(GRUMMP_LIBS) $(GRUMMP_LIBS)
+
+# The following isn't a complete list, obviously, but it should be sufficient
+# in 99% of cases.
+GRUMMP_DEPENDENCIES=$(GR_LIB_DIR)/libGR_dbase.a $(GR_LIB_DIR)/libGR_io.a $(GR_LIB_DIR)/libGR_services.a
+IMESH_DEPENDENCIES=$(GR_LIB_DIR)/libiMesh_@IMPL_NAME@.a \
+	$(GR_ROOT_DIR)/include/iMesh.h $(GRUMMP_DEPENDENCIES)
+
+# This variable is included for backwards compatibility.
+
+IMESH_INCLUDES=-I$(GR_ROOT_DIR)/include 
+
+# ----------------------------------------------------------------------
+# Nothing below here should be needed by apps
+# ----------------------------------------------------------------------
+
+GR_BUILD_ROOT=@abs_top_srcdir@
+GR_BUILD_LIB_DIR=@abs_top_srcdir@/lib/lib@opt@/@host_os@
+
+GR_INSTALLED_ROOT=@prefix@
+GR_INSTALLED_LIB_DIR=@prefix@/lib
+
+GR_ROOT_DIR=$(GR_BUILD_ROOT)
+GR_LIB_DIR=$(GR_BUILD_LIB_DIR)

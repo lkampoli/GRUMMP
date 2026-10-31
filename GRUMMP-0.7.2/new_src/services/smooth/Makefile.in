@@ -1,0 +1,20 @@
+LIBBASE = libGR_services
+
+THIS_SRCDIR = new_src/services/smooth
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = SmoothingManager.o SmoothingManager2D.o SmoothingManager3D.o \
+	AnisoWrapper.o
+
+COBJECTS = SMactive.o SMequil.o SMfree.o SMfunction.o SMinit.o \
+	SMintrinsic.o SMlaplace.o SMmatrix.o \
+	SMoptimize.o SMsearch.o SMsmooth.o SMstats.o SMsurface.o \
+	SMvalid.o SMwritesmooth.o SMfunc2d.o SMfunc3d.o SMgrad3d.o \
+	SMuserFunc.o SMerror.o
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: $(OBJECTS)
+
+include @top_srcdir@/src/conf/default-rules
+

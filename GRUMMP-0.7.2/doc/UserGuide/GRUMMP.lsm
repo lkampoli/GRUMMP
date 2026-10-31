@@ -1,0 +1,25 @@
+Begin
+Title:          GRUMMP
+Version:        0.5.0
+Entered-date:   100218
+Description:    GRUMMP is a toolkit for Generation and Refinement of
+                Unstructured Mixed-element Meshes in Parallel.  (At this
+                point, the "Mixed-element" and "Parallel" parts of the
+                name are still statements of intent rather than
+                reality.)  The toolkit includes executables for
+                unstructured mesh generation, improvement, and
+                coarsening in both two and three dimensions, as well as
+                interpolation of scattered data.  The underlying
+                libraries on which the executables are built are
+                included, but the API is not yet documented for public
+                use, and is subject to significant change.
+Keywords:       triangular mesh generation, tetrahedral mesh generation,
+                unstructured meshes, mesh improvement, mesh quality,
+                mesh coarsening for multigrid
+Author:         cfog@mech.ubc.ca (Dr. Carl Ollivier-Gooch)
+Maintained-by:  cfog@mech.ubc.ca (Dr. Carl Ollivier-Gooch)
+Primary-site:   tetra.mech.ubc.ca /pub/GRUMMP
+                ~1800kB GRUMMP.tar.gz
+Alternate-site: http://tetra.mech.ubc.ca/GRUMMP
+Copying-policy: Freely available for non-profit use.  See enclosed license.
+End

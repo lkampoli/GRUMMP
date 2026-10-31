@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Shortcut</TITLE>
+<META NAME="description" CONTENT="Shortcut">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Overview.html">
+<LINK REL="previous" HREF="Getting_Started.html">
+<LINK REL="up" HREF="Introduction.html">
+<LINK REL="next" HREF="Overview.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html393"
+  HREF="Overview.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html389"
+  HREF="Introduction.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html383"
+  HREF="Getting_Started.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html391"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html394"
+  HREF="Overview.html">Overview</A>
+<B> Up:</B> <A NAME="tex2html390"
+  HREF="Introduction.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html384"
+  HREF="Getting_Started.html">Getting Started</A>
+ &nbsp; <B>  <A NAME="tex2html392"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03150000000000000000">
+Shortcut</A>
+</H1>
+
+<P>
+The simplest way to build GRUMMP is this:
+
+<OL>
+<LI>Download the latest tarball from ftp://tetra.mech.ubc.ca/pub/GRUMMP/GRUMMP.tar.gz.
+Anonymous ftp, wget, and your web browser should all work here.
+</LI>
+<LI>Unpack the tar ball:
+
+<P>
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD>tar&nbsp;-zxvf&nbsp;GRUMMP.tar.gz
+</DD>
+</DL>
+</LI>
+<LI>Go to the directory that tar just created (this includes a version
+number; the tar output will show you what to use).
+</LI>
+<LI>Run <TT>configure</TT>. 
+
+<P>
+
+<OL>
+<LI>If you have CGM installed, tell configure where it is using <TT>-with-CGM-path=/path/to/CGM</TT>.
+If you don't have CGM installed, GRUMMP will do its best to download
+and configure it at this point<A NAME="tex2html3"
+  HREF="footnode.html#foot359"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A>, then build it when you run <TT>make</TT> later. This auto-build
+may fail for some systems where downloads require special magic; if
+you hit this, then download and build CGM yourself first.
+</LI>
+<LI>To enable support for the ITAPS mesh interface, specify <TT>-enable-itaps</TT>
+</LI>
+<LI>Other standard configure options apply, as well as some GRUMMP-specific
+ones. Use <TT>configure -help </TT>or read the rest of this document
+for more information.
+</LI>
+</OL>
+</LI>
+<LI>Run <TT>make</TT>, then <TT>make test</TT> to confirm success.
+</LI>
+<LI>To install the libraries and executables, run <TT>make install</TT>.
+</LI>
+</OL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

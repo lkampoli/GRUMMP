@@ -1,0 +1,49 @@
+SHELL=/bin/sh
+
+THIS_SRCDIR = src
+TOP_SRCDIR = @top_srcdir@
+
+.SILENT:
+
+LIBSRCDIRS=base 2D surface 3D
+SUBDIRS=$(LIBSRCDIRS) programs conf
+
+default all: libraries
+	$(MAKE) -C programs -k
+
+libraries:
+	echo "Checking whether libraries are up to date..."
+	echo " "
+	for i in $(LIBSRCDIRS) ; do \
+          echo " " ; \
+	  echo "Building libraries in directory $$i..." ; \
+          echo " " ; \
+	  (cd $$i && $(MAKE)) ; \
+	done
+	echo " "
+	echo "Done building libraries"
+	echo " "
+
+depend:
+	for i in $(LIBSRCDIRS) programs ; do \
+	  (cd $$i && $(MAKE) depend) ; \
+	done
+
+init:
+	for i in $(LIBSRCDIRS) programs ; do \
+	  (cd $$i && $(MAKE) init) ; \
+	done
+
+clean:
+	for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) clean) ; \
+	done
+
+distclean:
+	-for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) distclean) ; \
+	done
+	-rm -f *~ Makefile.bak *.rej *.orig \#* config.* Makefile
+
+Makefile: Makefile.in
+	CONFIG_FILES=$(THIS_SRCDIR)/Makefile /bin/sh -c "cd $(TOP_SRCDIR) && ./config.status"

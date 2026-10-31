@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Selecting Vertices to Retain in the Coarse Mesh</TITLE>
+<META NAME="description" CONTENT="Selecting Vertices to Retain in the Coarse Mesh">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Incremental_Vertex_Deletion.html">
+<LINK REL="previous" HREF="Mesh_Coarsening.html">
+<LINK REL="up" HREF="Mesh_Coarsening.html">
+<LINK REL="next" HREF="Incremental_Vertex_Deletion.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html841"
+  HREF="Incremental_Vertex_Deletion.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html837"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html831"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html839"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html842"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+<B> Up:</B> <A NAME="tex2html838"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html832"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+ &nbsp; <B>  <A NAME="tex2html840"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html843"
+  HREF="Selecting_Vertices_Retain.html#SECTION04311000000000000000">Identification of Apexes and Folds</A>
+<LI><A NAME="tex2html844"
+  HREF="Selecting_Vertices_Retain.html#SECTION04312000000000000000">Selection of Points to Include in the Coarse Mesh</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION04310000000000000000"></A><A NAME="sec:strategy"></A>
+<BR>
+Selecting Vertices to Retain in the Coarse Mesh
+</H1>
+
+<P>
+An experienced analyst can look at an unstructured mesh and identify
+important features that should be retained in a coarse mesh. For example,
+a person would choose to retain the vertex at the sharp trailing edge
+of an airfoil in two dimensions and corners in three-dimensional geometry.
+Elsewhere in the mesh, a person would choose a sampling of points,
+not too close together but also not leaving any large blank areas.
+This section describes a vertex selection algorithm that makes the
+same choices. Critical to the success of the algorithm is the notion
+of a hierarchy of features in the mesh, from sharp corners on the
+boundary to plain interior vertices. The algorithm is summarized below
+in terms of this hierarchy, from most to least specialized; the remainder
+of this section discusses the details of the algorithm.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:apex-fold"></A><A NAME="3606"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 6.1:</STRONG>
+Examples of apexes and folds.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="331" HEIGHT="167" ALIGN="BOTTOM" BORDER="0"
+ SRC="img80.png"
+ ALT="\includegraphics[width=0.6\textwidth]{pics/te-schematic}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<OL>
+<LI><A NAME="step:apex"></A>An <SPAN  CLASS="textit">apex</SPAN> is a boundary vertex at which a sharp
+corner is formed; examples are identified in Figure&nbsp;<A HREF="#fig:apex-fold">6.1</A>
+by solid circles. Apexes are always included in the coarse mesh. 
+</LI>
+<LI><A NAME="step:fold"></A>A <SPAN  CLASS="textit">fold</SPAN> is a line on the surface of a three-dimensional
+object where the surface normal is discontinuous.<A NAME="tex2html37"
+  HREF="footnode.html#foot3493"><SUP><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>A typical example for aerospace applications is the trailing edge
+of a wing, as shown schematically in Figure&nbsp;<A HREF="#fig:apex-fold">6.1</A>
+(bold lines). For isotropic surface meshes, alternate fold vertices
+are retained.
+
+<P>
+Identification of apexes and folds is discussed in Section&nbsp;<A HREF="#sec:feature-id">6.1.1</A>.
+</LI>
+<LI><A NAME="step:surf"></A>A <SPAN  CLASS="textit">maximal independent set</SPAN> (MIS) of the remaining
+boundary vertices is included in the coarse mesh. That is, a set of
+fine mesh vertices are chosen such that the included vertices are
+not too geometrically close to each other <SPAN  CLASS="textit">and</SPAN> that every excluded
+vertex <SPAN  CLASS="textit">is</SPAN> too close to at least one included vertex. See Section&nbsp;<A HREF="#sec:MIS">6.1.2</A>
+for details.
+</LI>
+<LI><A NAME="step:interior"></A>Finally, an MIS of the remaining interior vertices
+is selected for inclusion in the coarse mesh.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION04311000000000000000"></A><A NAME="sec:feature-id"></A>
+<BR>
+Identification of Apexes and Folds
+</H2>
+
+<P>
+Apexes and folds are lower-dimensional mesh features: an apex is a
+zero-dimensional entity, while a fold is a one-dimensional entity
+in a three-dimensional mesh. To determine whether a boundary vertex
+is an apex or lies on a fold, the algorithm computes the unit normals
+of all faces (edges in 2D, triangles in 3D) that are incident on the
+vertex. 
+
+<P>
+In two dimensions, only two faces are incident on a vertex. If these
+faces have normals that differ in direction by more than <!-- MATH
+ $20^{\textrm{o}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img81.png"
+ ALT="$20^{\textrm{o}}$"></SPAN>,
+the vertex is classified as an apex.
+
+<P>
+In three dimensions, the presence of two distinct face normals (separated
+by some user-defined angle <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img82.png"
+ ALT="$\beta$"></SPAN>) generally means that the vertex
+lies on a fold, whereas three distinct normals are present if and
+only if the vertex is an apex. Three cautionary notes are in order
+here. 
+
+<OL>
+<LI>The angle difference at which two normals are considered &ldquo;distinct&rdquo;
+must be chosen with attention to surface curvature. If this angle
+is chosen too small, then many edges in the mesh of a curved surface
+will be improperly labeled as folds. Advanced techniques in surface
+reconstruction and curvature estimation (see, for example, [<A
+ HREF="Bibliography.html#Meyer2002">6</A>,<A
+ HREF="Bibliography.html#Rassineux2000">13</A>])
+may be of substantial benefit in distinguishing between a coarse surface
+mesh and an abrupt change in the underlying smooth surface; adding
+such capability to GRUMMP is planned.
+</LI>
+<LI>In identifying apexes, it is not enough to compare only the normals
+of adjacent surface faces. A sharp-tipped cone can easily be constructed
+with enough surface faces incident on its apex that their normals
+differ in direction by an arbitrarily small amount. Instead, we must
+group faces so that members of each group have normals that differ
+by less than <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img82.png"
+ ALT="$\beta$"></SPAN>. The number of such <SPAN  CLASS="textit">groups</SPAN> is the deciding
+factor in whether a vertex is an apex. 
+</LI>
+<LI>A vertex can have only two groups of normals and still be an apex.
+As an example, suppose that the two visible faces in the lower-left
+corner of Figure&nbsp;<A HREF="#fig:apex-fold">6.1</A> were nearly coplanar. To detect
+this case, the algorithm checks for near-collinearity of the edges
+that separate the two groups. If the edges are nearly collinear, the
+vertex lies on a fold; otherwise, it is an apex.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION04312000000000000000"></A><A NAME="sec:MIS"></A>
+<BR>
+Selection of Points to Include in the Coarse Mesh
+</H2>
+
+<P>
+Apexes are always retained in the coarse mesh. This choice has positive
+and negative side effects. On the positive side, not object can ever
+be eliminated from the mesh if apexes are retained. On the negative
+side, small features on large objects are likely to be retained, even
+when typical cell sizes are much larger than the feature in question.
+
+<P>
+Elsewhere, the mesh is coarsened with the goal of reducing mesh size
+while maintaining a good distribution of vertices and therefore good
+mesh quality. One intuitive approach to this problem is to keep as
+many vertices as possible without keeping two that are too close together:
+a maximal independent set (MIS) of the conflict graph of the mesh&nbsp;[<A
+ HREF="Bibliography.html#Miller1999">7</A>].
+In the conflict graph, an edge connects any pair of vertices that
+are physically too close together compared with the length scale defined
+for those two vertices. This graph is similar but not identical to
+the connectivity graph, as occasionally first neighbor vertices in
+the mesh are far enough apart to co-exist in the coarse mesh, whereas
+some second neighbor vertices are too close together. 
+
+<P>
+For efficiency reasons, GRUMMP constructs the conflict graph as needed.
+Before using the MIS to coarsen boundary curves, the conflict graph
+for boundary curve vertices is constructed. Later, when the MIS for
+boundary vertices is needed, that conflict graph is constructed, and
+likewise for isotropic interior vertices. Because only currently active
+vertices have their conflict graph computed at each step, no vertex
+ever has its conflict graph re-generated.
+
+<P>
+GRUMMP uses MIS vertex selection in three places: folds, surface meshes,
+and interior meshes. Applying the same MIS code for these three cases
+requires only appropriate restrictions on which vertices are <SPAN  CLASS="textit">active</SPAN>,
+as these are the only vertices that the algorithm can legally mark
+for inclusion or exclusion from the coarse mesh. For selection of
+surface vertices, for example, only plain surface vertices are active;
+any specialized surface vertices (apexes or folds) and all interior
+vertices are inactive. In each case, the maximal independent vertex
+set is constructed in two phases: initial creation and size improvement.
+In the initial creation phase, the algorithm traverses the mesh using
+an advancing front, marking any unmarked, active vertex <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$v_{A}$"></SPAN> for
+inclusion in the coarse mesh and all active vertices which conflict
+with <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$v_{A}$"></SPAN> for exclusion. Next, several passes are made to increase
+the size of the MIS, with the expectation that this will make edge
+lengths match the intended mesh length scale more closely in the coarse
+mesh. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html841"
+  HREF="Incremental_Vertex_Deletion.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html837"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html831"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html839"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html842"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+<B> Up:</B> <A NAME="tex2html838"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html832"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+ &nbsp; <B>  <A NAME="tex2html840"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

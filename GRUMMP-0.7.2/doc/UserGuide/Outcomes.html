@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Outcomes</TITLE>
+<META NAME="description" CONTENT="Outcomes">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="Anisotropic_Mesh_Coarsening.html">
+<LINK REL="up" HREF="Mesh_Coarsening.html">
+<LINK REL="next" HREF="Isotropic_Mesh_Adaptation.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html880"
+  HREF="Isotropic_Mesh_Adaptation.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html876"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html872"
+  HREF="Anisotropic_Mesh_Coarsening.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html878"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html881"
+  HREF="Isotropic_Mesh_Adaptation.html">Isotropic Mesh Adaptation</A>
+<B> Up:</B> <A NAME="tex2html877"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html873"
+  HREF="Anisotropic_Mesh_Coarsening.html">Anisotropic Mesh Coarsening</A>
+ &nbsp; <B>  <A NAME="tex2html879"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04340000000000000000">
+Outcomes</A>
+</H1>
+
+<P>
+GRUMMP is quite successful in coarsening isotropic unstructured meshes
+-- nearly all vertices are removed in each case, and mesh
+quality is quite good. Two-dimensional anisotropic meshes are also
+handled well. The weakest area, by far, is anisotropic three-dimensional
+meshes, where the number of vertices that can not be removed climbs
+sharply, and mesh quality is poor (even allowing for anisotropy).
+
+<P>
+Two strategies that have some chance at success have not yet been
+investigated:
+
+<UL>
+<LI>Local transformation of anisotropic mesh fragments into a space where
+the mesh is approximately isotropic. In this scenario, edge contraction
+could be applied in the transformed space. The isotropic edge contraction
+criteria should strongly inhibit tangling of connectivity among vertices
+that should be in different levels of the anisotropic mesh.
+</LI>
+<LI>Creation of the coarse anisotropic mesh by construction. This approach
+would likely involve determining the coarse surface mesh topology
+and then projecting that topology out through the appropriate number
+of layers of anisotropic cells. A major challenge with this approach
+would be transition from anisotropic to isotropic meshing. Also, this
+approach is tantamount to generating the coarse mesh from scratch;
+the latter might give more flexibility and therefore be preferable
+for anisotropic meshes.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

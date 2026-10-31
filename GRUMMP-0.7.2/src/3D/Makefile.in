@@ -1,0 +1,23 @@
+LIBBASE = libGR_3D
+ID_STRING = GRUMMP 3D mesh
+
+THIS_SRCDIR = src/3D
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = ConstrainSupport.o CurveDiscretizer.o \
+	FacetSurfIntersect.o InitTetra.o \
+	MeshOpt3D.o Reconnect3D.o Repair3D.o \
+	SamplingEntryFactory.o SamplingQueue.o	\
+	SmallAngleTool.o Subseg.o SubsegManager.o SurfaceSampler.o 	\
+	SurfIntersect.o SurfMeshBuilder.o TetMeshInitializer.o \
+	TetMeshBuilder.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+default: library
+
+include ../conf/default-rules
+
+library: .libs

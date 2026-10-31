@@ -1,0 +1,25 @@
+include @top_srcdir@/src/conf/default-rules
+include @top_srcdir@/iMesh-Defs.inc
+
+THIS_SRCDIR = apps/edam2d
+TOP_SRCDIR = @top_srcdir@
+
+EXECS = edam2d edamSurface
+
+default: edam2d edamSurface
+
+edam2d: edam2d.o
+	echo Linking edam2d
+	-$(CXX_COMPILE) -o edam2d $^ $(LDFLAGS) $(IMESH_LIBS) $(IMESH_LIBS)
+	echo " "
+
+edamSurface: edamSurface.o
+	echo Linking edamSurface
+	-$(CXX_COMPILE) -o edamSurface $^ $(LDFLAGS) $(IMESH_LIBS) $(IMESH_LIBS)
+	echo " "
+
+distclean: localdistclean
+
+localdistclean:
+	-rm -f $(EXECS)
+

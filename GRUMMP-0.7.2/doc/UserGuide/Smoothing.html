@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Smoothing</TITLE>
+<META NAME="description" CONTENT="Smoothing">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Default_mesh_optimization.html">
+<LINK REL="previous" HREF="Swapping.html">
+<LINK REL="up" HREF="Mesh_Improvement.html">
+<LINK REL="next" HREF="Default_mesh_optimization.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html798"
+  HREF="Default_mesh_optimization.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html794"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html788"
+  HREF="Swapping.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html796"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html799"
+  HREF="Default_mesh_optimization.html">Default mesh optimization in</A>
+<B> Up:</B> <A NAME="tex2html795"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Previous:</B> <A NAME="tex2html789"
+  HREF="Swapping.html">Swapping</A>
+ &nbsp; <B>  <A NAME="tex2html797"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04220000000000000000">
+Smoothing</A>
+</H1>
+
+<P>
+GRUMMP uses the OptMS smoothing package from Argonne National Laboratory,
+which is based in large part on optimization-based smoothing techniques
+developed by Freitag, Jones, and Plassmann&nbsp;[<A
+ HREF="Bibliography.html#Freitag1995">2</A>] and
+summarized in&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>]. The central idea is to smooth
+a vertex location by seeking to optimize some local cell shape measure,
+such as minimum angle. This implies that each cell may contribute
+more than one quality value (for example, a tetrahedron has six dihedral
+angles). The objective function to be optimized is therefore a composite,
+piecewise-smooth function, as shown in Figure&nbsp;<A HREF="#fig:smooth-section">5.4</A>,
+with corners where the extremal quality values change. However, for
+most common cell quality measures, the composite objective function
+is convex. OptMS uses an analog of the steepest descent method, employing
+an <SPAN  CLASS="textit">active set</SPAN> of quality values -- those values
+that are currently the worst. Step size in the steepest descent iteration
+is determined by predicting where the next change in active quality
+values will take place. This approach can be shown to be equivalent
+to a generalized linear programming problem and therefore the optimum
+can be found in linear time.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:smooth-section"></A><A NAME="3604"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 5.4:</STRONG>
+Cross-section of the objective function in an optimization-based mesh-smoothing
+problem</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="327" HEIGHT="201" ALIGN="BOTTOM" BORDER="0"
+ SRC="img77.png"
+ ALT="\includegraphics[width=0.6\textwidth]{pics/smooth-section}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+As an important practical matter, optimization-based smoothing is
+significantly more expensive per vertex than Laplacian smoothing.
+Accordingly, GRUMMP takes advantage of the floating threshold capability
+of OptMS. In this procedure, a Laplacian smoothing step is performed
+for each vertex; the updated position is used only if local mesh quality
+improves. If local mesh quality is not good enough, optimization is
+invoked. &ldquo;Good enough&rdquo;, in this context, means that cells incident
+on the vertex have a worst angle no more than <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img78.png"
+ ALT="$5^{\circ}$"></SPAN> better
+than the worst angle in the mesh from the previous smoothing pass.
+This floating threshold procedure results in mesh improvement statistics
+comparable to full optimization, but at a cost nearly as low as Laplacian
+smoothing. 
+
+<P>
+Smoothing drivers are found in <TT>src/2D/MeshOpt2D.cxx</TT> and <TT>src/3D/MeshOpt3D.cxx</TT>.
+The OptMS library is in <TT>src/smoothing</TT>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html798"
+  HREF="Default_mesh_optimization.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html794"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html788"
+  HREF="Swapping.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html796"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html799"
+  HREF="Default_mesh_optimization.html">Default mesh optimization in</A>
+<B> Up:</B> <A NAME="tex2html795"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Previous:</B> <A NAME="tex2html789"
+  HREF="Swapping.html">Swapping</A>
+ &nbsp; <B>  <A NAME="tex2html797"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+#!/bin/sh
+	
+BASE_DIR=`pwd`
+
+PID=$$
+
+TMP_DIR=/tmp/GRUMMP-${PID}
+mkdir ${TMP_DIR}
+
+echo "Machine ID:" > ${TMP_DIR}/uname
+uname -a >> ${TMP_DIR}/uname
+
+touch ${TMP_DIR}/config-opt
+touch ${TMP_DIR}/build-opt
+touch ${TMP_DIR}/config-debug
+touch ${TMP_DIR}/build-debug
+
+echo "Configuring to build GRUMMP with optimization..."
+OPT=opt
+./configure > ${TMP_DIR}/config-opt
+if (test $? -eq 0) ; then 
+    # Configure succeeded! Now build
+    echo "Building GRUMMP with optimization..."
+    make -k 2> ${TMP_DIR}/build-opt
+    if (test $? -eq 0) ; then
+	# Optimized build succeeded!
+	OPT=opt
+	SUCCESS="succeeded!"
+    else
+	# Try the whole thing again without optimization    
+	echo "Optimized build failed!"
+	echo "Configuring to build GRUMMP without optimization..."
+	OPT=debug
+	./configure --with-debug > ${TMP_DIR}/config-debug
+	if (test $? -eq 0) ; then 
+	    # Configure succeeded! Now build
+            echo "Building GRUMMP without optimization..."
+	    make -k 2> ${TMP_DIR}/build-debug
+	    if (test $? -eq 0) ; then
+		# Non-optimized build succeeded!
+		SUCCESS="succeeded!"
+	    else
+		echo "Non-optimized build failed, too!  Bummer..."
+		SUCCESS="failed!"
+	    fi # Else for build --with-debug
+	else
+	    SUCCESS="config failed!"
+	fi # Else for configure --with-debug
+    fi # Else for build --without-debug
+else
+    SUCCESS="config failed!"
+fi # Else for configure --without-debug
+
+MACH_ID=`hostname`
+
+OS=`uname -r -s`
+grep "g++" ${BASE_DIR}/config.status > /dev/null
+if (test $? -ne 0) ; then
+    # No matches found!  Native compiler.
+    COMPILER=native
+else
+    COMPILER=gnu
+fi
+
+SUBJECT="${MACH_ID}: ${OS} ${COMPILER} ${OPT} ${SUCCESS}"
+
+sh -c ./configure-messages
+
+echo " "
+echo "Summary of build results:"
+echo ${SUBJECT}
+
+echo " "
+echo "Building a tar file with diagnostic output.  File to be included are:"
+echo "  ${TMP_DIR}/uname"
+echo "  ${TMP_DIR}/config-opt"
+echo "  ${TMP_DIR}/build-opt"
+echo "  ${TMP_DIR}/config-debug"
+echo "  ${TMP_DIR}/build-debug"
+echo "  ${BASE_DIR}/include/GR_config.h"
+echo "  ${BASE_DIR}/config.log"
+echo "  ${BASE_DIR}/config.status"
+echo " "
+
+cp ${BASE_DIR}/include/GR_config.h ${BASE_DIR}/config.log ${BASE_DIR}/config.status ${TMP_DIR}
+cd ${TMP_DIR}
+echo "Tarring..."
+tar -cvzf ${MACH_ID}.tar.gz uname config-opt build-opt config-debug build-debug GR_config.h config.log config.status
+
+rm -rf ${TMPDIR}
+
+echo " "
+echo "Please send the file /tmp/${MACH_ID}.tar.gz to cfog@mech.ubc.ca."
+echo "The diagnostic output in this file will help us improve portability and"
+echo "code quality, as well as providing information about which systems we"
+echo "should target for optimization in the future."
+echo " "
+echo "The GRUMMP development team thanks you, and we hope you find the code useful."
+echo " "

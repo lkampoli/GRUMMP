@@ -1,0 +1,469 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Input and output mesh file formats</TITLE>
+<META NAME="description" CONTENT="Input and output mesh file formats">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Three_dimensional_geometry_.html">
+<LINK REL="previous" HREF="Two_dimensional_geometry_bd.html">
+<LINK REL="up" HREF="File_Formats.html">
+<LINK REL="next" HREF="Three_dimensional_geometry_.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html575"
+  HREF="Three_dimensional_geometry_.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html571"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html565"
+  HREF="Two_dimensional_geometry_bd.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html573"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html576"
+  HREF="Three_dimensional_geometry_.html">Three-dimensional geometry (.bdry) files</A>
+<B> Up:</B> <A NAME="tex2html572"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html566"
+  HREF="Two_dimensional_geometry_bd.html">Two-dimensional geometry (.bdry) files</A>
+ &nbsp; <B>  <A NAME="tex2html574"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03320000000000000000"></A><A NAME="sec:IO-templates"></A>
+<BR>
+Input and output mesh file formats
+</H1>
+
+<P>
+GRUMMP has the capability to input and output two-dimensional meshes
+in user-defined formats. To take advantage of this feature, the user
+must create a file called <TT>user2d.template</TT> in the directory
+<TT>GRUMMP/src/IO_generator</TT>. This file is processed by the programs
+<TT>in2d_gen</TT> and <TT>out2d_gen</TT> to produce C++ functions
+which, respectively, read and write two-dimensional meshes with the
+format described in <TT>user2d.template</TT>. These functions are
+added to the GRUMMP two-dimensional mesh manipulation library, <TT>libGR_2D</TT>,
+the next time this library is remade. A default template file, <TT>default2d.template</TT>,
+is used if <TT>user2d.template</TT> does not exist. Step-by-step,
+then, the process for setting up user-defined file formats for two-dimensional
+meshes is:
+
+<OL>
+<LI>Edit <TT>GRUMMP/src/IO_generator/user2d.template</TT>.
+</LI>
+<LI>Return to the <TT>GRUMMP</TT> directory.
+</LI>
+<LI>Type <TT>make</TT>.
+</LI>
+</OL>
+When data is read by the GRUMMP executables, conversion of the input
+connectivity data to an internal format is performed automatically.
+There are two valid ways to specify connectivity. First, the data
+file can provide both face-cell and face-vertex connectivity. Second,
+cell-vertex connectivity can be provided for the interior of the mesh
+along with boundary condition and vertex data for each boundary face.
+In either case, any redundant data is verified to ensure consistency.
+
+<P>
+The remainder of this section describes the format of <TT>user2d.template</TT>.
+On systems that have <TT>flex</TT>, <TT>in2d_gen</TT> and <TT>out2d_gen</TT>
+are not case sensitive; upper and lower case may be mixed indiscriminately.
+Systems using <TT>lex</TT> require lower case, because some <TT>lex</TT>
+implementations can not produce case insensitive parsers. <TT>configure</TT>
+will warn you if your system seems to be using <TT>lex</TT>. 
+
+<P>
+The following description includes tokens in mixed case for readability.
+A &ldquo;&#94;&rdquo; preceding a token indicates that it must
+begin a new line in the template file. &ldquo;Whitespace&rdquo; refers to
+any number of consecutive spaces or tabs within a line.
+
+<UL>
+<LI>[Token] Description
+</LI>
+<LI>[&#94;<TT>newfile</TT>] Specifies the name of in input/output
+file to open. This token must be followed by whitespace and a string
+giving the extension to append to the <TT><SPAN  CLASS="textit">basefilename</SPAN></TT>
+(given on the command line). The file name extension is terminated
+by whitespace or the end of the line; if the extension is terminated
+by whitespace, anything following that whitespace is ignored.
+
+<P>
+Note that the first line of the template file must <SPAN  CLASS="textbf"><SPAN  CLASS="textit">always</SPAN></SPAN>
+be a <TT>newfile</TT> line.
+</LI>
+<LI>[&#94;<TT>Fortran</TT>] This directive indicates that
+numbering of mesh entities should begin with 1 instead of 0. If <TT>Fortran</TT>
+appears alone on a line of the file, vertices, cells, faces, and boundary
+faces are all treated this way. If <TT>Fortran</TT> is followed by
+one or more of <TT>verts</TT>, <TT>cells</TT>, <TT>faces</TT>, or
+<TT>bfaces</TT>, then only the entities specified are numbered in
+this way. A file may contain more than one <TT>Fortran</TT> line;
+the effects of multiple lines are cumulative. <SPAN  CLASS="textbf">Note that only
+data read</SPAN> <SPAN  CLASS="textbf"><SPAN  CLASS="textit">after</SPAN></SPAN> <SPAN  CLASS="textbf">a</SPAN> <TT><SPAN  CLASS="textbf">Fortran</SPAN></TT>
+<SPAN  CLASS="textbf">directive is affected by that directive.</SPAN> For this reason,
+it is recommended that all <TT>Fortran</TT> declarations be placed
+at the beginning of the template file (just after the initial file
+name).
+</LI>
+<LI>[<TT>NVerts</TT>]&nbsp;
+</LI>
+<LI>[<TT>NFaces</TT>]&nbsp;
+</LI>
+<LI>[<TT>NCells</TT>]&nbsp;
+</LI>
+<LI>[<TT>NBFaces</TT>]&nbsp;
+</LI>
+<LI>[<TT>NIntBFaces</TT>] 
+
+<P>
+These indicate that the number of vertices, faces, cells, or boundary
+faces in the mesh should be read or written. In each case, the token
+can be followed by whitespace and an integer to specify the width
+of the field used to read/write the number of entities. Use of field
+widths for input is not recommended, as this introduces the possibility
+of misreading data.
+</LI>
+<LI>[<TT>&#94;verts:</TT>] Read/write data for each vertex
+in the mesh. There are four data specifications for vertex data.
+
+<P>
+
+<UL>
+<LI>[<TT>index</TT>] Read/write the number of the vertex within the
+mesh, starting with 0 and running to <TT>NVerts-1</TT>. An integer
+field width can be specified.
+</LI>
+<LI>[<TT>x</TT>]&nbsp;
+</LI>
+<LI>[<TT>y</TT>]&nbsp;
+</LI>
+<LI>[<TT>z</TT>] Coordinates of the vertex. Input/output field width
+<TT>W</TT> and number of significant figures <TT>S</TT> can be specified
+by following the token with whitespace and <TT>W.S</TT>.
+</LI>
+<LI>[<TT>coords</TT>] Read/write <TT>x</TT>, <TT>y</TT> and (in 3D)
+<TT>z</TT> (in that order). Field width and significant figures can
+not be specified
+</LI>
+</UL>
+</LI>
+<LI>[<TT>&#94;faces</TT>:] Read/write data for each face
+in the mesh. There are seven data specifications for face data.
+
+<P>
+
+<UL>
+<LI>[<TT>index</TT>] Read/write the number of the face within the mesh,
+starting with 0 and running to <TT>NFaces-1</TT>. An integer field
+width can be specified.
+</LI>
+<LI>[<TT>cellA</TT>]&nbsp;
+</LI>
+<LI>[<TT>cellB</TT>] The cells incident on the face. See Figure&nbsp;<A HREF="#fig:orient2d">3.2</A>
+for orientation of cells and vertices with respect to an edge. Note
+that faces on the boundary will read/write the boundary condition
+(negating the integer BC type) in place of the missing cell. An integer
+field width can be specified.
+</LI>
+<LI>[<TT>cells</TT>] Read/write <TT>cellA</TT> and <TT>cellB</TT>,
+in that order. Field width can not be specified.
+</LI>
+<LI>[<TT>vertA</TT>]&nbsp;
+</LI>
+<LI>[<TT>vertB</TT>] The vertices at the ends of the face. Again, see
+Figure&nbsp;<A HREF="#fig:orient2d">3.2</A> for orientation of cells and vertices
+with respect to an edge. An integer field width can be specified.
+</LI>
+<LI>[<TT>verts</TT>] Read/write <TT>vertA</TT> and <TT>vertB</TT>,
+in that order. Field width can not be specified.
+</LI>
+</UL>
+<DIV ALIGN="CENTER"><A NAME="fig:orient2d"></A><A NAME="1759"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.2:</STRONG>
+Orientation of vertices and cells as assumed by GRUMMP I/O routines.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="414" HEIGHT="290" ALIGN="BOTTOM" BORDER="0"
+ SRC="img9.png"
+ ALT="\includegraphics[width=0.75\textwidth]{pics/face2d}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+</LI>
+<LI>[<TT>&#94;cells:</TT>] Read/write data for each cell
+in the mesh. There are nine data specifications for cell data.
+
+<P>
+
+<UL>
+<LI>[<TT>index</TT>] Read/write the number of the cell within the mesh,
+starting with 0 and running to <TT>NCells-1</TT>. An integer field
+width can be specified.
+</LI>
+<LI>[<TT>faceA</TT>]&nbsp;
+</LI>
+<LI>[<TT>faceB</TT>]&nbsp;
+</LI>
+<LI>[<TT>faceC</TT>] The faces bounding the cell. The order of faces
+is arbitrary (that is, the faces should not be assumed to be ordered
+cyclically). An integer field width can be specified. 
+</LI>
+<LI>[<TT>faces</TT>] Read/write <TT>faceA, faceB</TT> and <TT>faceC</TT>,
+in that order. Field width can not be specified.
+</LI>
+<LI>[<TT>vertA</TT>]&nbsp;
+</LI>
+<LI>[<TT>vertB</TT>]&nbsp;
+</LI>
+<LI>[<TT>vertC</TT>] The vertices of the cell. These are labeled cyclically.
+Cell A in Figure&nbsp;<A HREF="#fig:orient2d">3.2</A> gives an example. Field width
+can be specified.
+</LI>
+<LI>[<TT>verts</TT>] Read/write <TT>vertA,</TT> <TT>vertB,</TT> and
+<TT>vertC</TT>, in that order. Field width can not be specified.
+</LI>
+<LI>[<TT>region</TT>] Read/write the region tag for a cell.
+</LI>
+</UL>
+</LI>
+<LI>[<TT>&#94;bdryfaces:</TT>] 
+
+<P>
+Read/write data for each boundary face in the mesh. There are six
+boundary specifications for boundary face data.
+
+<UL>
+<LI>[<TT>index</TT>] Read/write the number of the boundary face within
+the mesh, starting with 0 and running to <TT>NBFaces-1</TT>. An integer
+field width can be specified.
+</LI>
+<LI>[<TT>BC</TT>] Integer indicating boundary condition. Must be greater
+than 0. Field width can be specified.
+</LI>
+<LI>[<TT>face</TT>] Face index for the face corresponding to the boundary
+face. Field width can be specified.
+</LI>
+<LI>[<TT>vertA</TT>]&nbsp;
+</LI>
+<LI>[<TT>vertB</TT>] Vertex indices for the boundary face. Orientation
+is shown in Figure&nbsp;<A HREF="#fig:orient-2d-bdry">3.3</A>. Field width can be
+specified.
+</LI>
+<LI>[<TT>verts</TT>] Read/write <TT>vertA</TT> and <TT>vertB</TT>,
+in that order. Field width can not be specified.
+</LI>
+</UL>
+</LI>
+<LI>[<TT>&#94;intbdryfaces:</TT>] 
+
+<P>
+Read/write data for each boundary face in the mesh. There are six
+boundary specifications for boundary face data.
+
+<UL>
+<LI>[<TT>index</TT>] Read/write the number of the boundary face within
+the mesh, starting with 0 and running to <TT>NBFaces-1</TT>. An integer
+field width can be specified.
+</LI>
+<LI>[<TT>BC</TT>] Integer indicating boundary condition. Must be greater
+than 0. Field width can be specified.
+</LI>
+<LI>[<TT>faceA</TT>]&nbsp;
+</LI>
+<LI>[<TT>faceB</TT>]&nbsp;
+</LI>
+<LI>[<TT>faces</TT>] Face indices for the faces corresponding to the
+internal boundary face; the same restrictions and privileges apply
+as for cells.
+</LI>
+<LI>[<TT>vertA</TT>]&nbsp;
+</LI>
+<LI>[<TT>vertB</TT>] Vertex indices for the boundary face. Orientation
+is as shown in Figure&nbsp;<A HREF="#fig:orient2d">3.2</A>. Field width can be specified.
+</LI>
+<LI>[<TT>verts</TT>] Read/write <TT>vertA</TT> and <TT>vertB</TT>,
+in that order. Field width can not be specified.
+</LI>
+</UL>
+</LI>
+<LI>[<TT>&#94;#</TT>] At the beginning of the line, denotes
+a comment. Ignored when generating input routines. Comments in the
+template are echoed to the output file unless they begin with <TT>##</TT>,
+in which case they are ignored.
+</LI>
+</UL>
+<DIV ALIGN="CENTER"><A NAME="fig:orient-2d-bdry"></A><A NAME="1788"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.3:</STRONG>
+Orientation of boundary data in two dimensions.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="277" HEIGHT="178" ALIGN="BOTTOM" BORDER="0"
+ SRC="img10.png"
+ ALT="\includegraphics[width=0.5\textwidth]{pics/bface2d}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<UL>
+<LI>[text&nbsp;in&nbsp;quotes] Echoed literally into the output file, with
+one exception: a <TT>&#92;</TT> in the template
+file becomes a  in the output file. In the
+input file, the text that is put into the output file is <SPAN  CLASS="textit">required</SPAN>
+to appear. For example, the template line 
+
+<P>
+<BLOCKQUOTE>
+<TT>verts: x x y
+y &#92;x and y&#92; </TT>
+
+</BLOCKQUOTE>
+produces the following output for a vertex at (0.5, 0.7): 
+<BLOCKQUOTE>
+<TT>x 0.5 y 0.7 x and y</TT> 
+
+</BLOCKQUOTE>
+Also, any input line compatible with this template will have the same
+non-numeric text as the output example just given.
+</LI>
+<LI>[other&nbsp;text] This text is also echoed literally to the output
+file. For example, TecPlot requires descriptive information for each
+mesh zone, which for triangular meshes can be provided by including
+
+<P>
+<BLOCKQUOTE>
+<TT>ZONE N=nverts, E=ncells, F=FEPOINT, ET=TRIANGLE</TT> 
+
+</BLOCKQUOTE>
+at the appropriate place in the template file (see <TT>IO_generator/TECPLOT2D.template</TT>).
+<BR><SPAN  CLASS="textbf">Caveats:</SPAN> 
+
+<UL>
+<LI>Text containing quotes must be treated as shown above. 
+</LI>
+<LI>A # at the beginning of a line must be quoted or it will be treated
+as a comment.
+</LI>
+<LI>Numbers following keywords should be quoted if they are not meant
+to specify a field width.
+</LI>
+</UL>
+</LI>
+</UL>An example template file (in fact, the default two-dimensional template,
+<TT>default2d.template</TT>) is shown in Figure&nbsp;<A HREF="#fig:2d-template">3.4</A>.
+
+<DIV ALIGN="CENTER"><A NAME="fig:2d-template"></A><A NAME="1793"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.4:</STRONG>
+Example template file for 2D I/O.</CAPTION>
+<TR><TD><IMG
+ WIDTH="265" HEIGHT="109" BORDER="0"
+ SRC="img11.png"
+ ALT="\begin{figure}\par\begin{list}{}{\setlength{\rightmargin}{\leftmargin}\setl...
+...lls~verts
+\par
+bdryfaces:~face~bc~verts
+\par
+cells:~region\end{list}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Three-dimensional I/O templates are quite similar to two-dimensional
+templates, conceptually. Obviously, in this case there are three spatial
+coordinates, x, y and z. Also, faces, boundary faces, and internal
+boundary faces can now specify a <TT>vertC</TT>; cells can specify
+a <TT>vertD</TT>, a <TT>faceC</TT> and a <TT>faceD</TT>.
+
+<P>
+The orientation of cells and vertices around a face is such that,
+if the right hand rule is used to trace vertices A, B, and C, then
+one's thumb points towards cell B, as shown in Figure&nbsp;<A HREF="#fig:orient-3d">3.5</A>.
+For a boundary face, the orientation of the vertices is such that
+the interior of the domain is where cell B is in Figure&nbsp;<A HREF="#fig:orient-3d">3.5</A>.
+
+<DIV ALIGN="CENTER"><A NAME="fig:orient-3d"></A><A NAME="1794"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.5:</STRONG>
+Orientation of cells and vertices for a three-dimensional face.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="411" HEIGHT="377" ALIGN="BOTTOM" BORDER="0"
+ SRC="img12.png"
+ ALT="\includegraphics[width=0.75\textwidth]{pics/face3d}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+The default three-dimensional template (<TT>default3d.template</TT>)
+differs from its two-dimensional counterpart only in that the file
+suffix given is <TT>vmesh</TT> instead of <TT>mesh</TT>. 
+
+<P>
+In both two and three dimensions, an alternative template file (<TT>mr[23]d.template</TT>)
+is also provided for output of meshes with internal boundaries; note
+that <TT>coarsen[23]d</TT> and <TT>meshopt[23]d</TT> can not
+currently read multi-domain files.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html575"
+  HREF="Three_dimensional_geometry_.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html571"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html565"
+  HREF="Two_dimensional_geometry_bd.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html573"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html576"
+  HREF="Three_dimensional_geometry_.html">Three-dimensional geometry (.bdry) files</A>
+<B> Up:</B> <A NAME="tex2html572"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html566"
+  HREF="Two_dimensional_geometry_bd.html">Two-dimensional geometry (.bdry) files</A>
+ &nbsp; <B>  <A NAME="tex2html574"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,15 @@
+ID_STRING = GRUMMP composite services
+
+THIS_SRCDIR = new_src/services/composite
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = TriMeshBuilder.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: $(OBJECTS)
+
+include @top_srcdir@/src/conf/default-rules
+

@@ -1,0 +1,126 @@
+
+
+
+
+GRUMMP 0.7 License Agreement
+
+
+
+
+
+The Software included in the GRUMMP 0.7 distribution is not in 
+the public domain. It is Copyright 1997-2001 by The University of 
+British Columbia and The University of Chicago. As of 2001, 
+copyright was transfered to the principle author, Carl 
+Ollivier-Gooch. However, GRUMMP is available for license, without 
+fee, for educational and non-profit research purposes. Contact 
+information for the developer:
+
+ 
+
+Carl Ollivier-Gooch 
+
+Dept of Mechanical Engineering 
+
+The University of British Columbia 
+
+2324 Main Mall 
+
+Vancouver, BC V6T 1Z4 
+
+Canada
+
+ 
+
+Phone: 1-604-822-1854
+
+Fax: 1-604-822-2403 
+
+Email: cfog@mech.ubc.ca
+
+1. Definitions. The “Software” refers to all parts of the GRUMMP 
+  0.7 distribution, in source code, object code, or executable 
+  code form. The “Library” refers to linkable object-code 
+  libraries created from the source code. The “Executables” 
+  refers to the included programs for 2D/3D mesh generation (tri, 
+  tetra), for 2D/3D mesh quality assessment and improvement 
+  (meshopt2d, meshopt3d), 2D/3D mesh coarsening 
+  (coarsen3d,coarsen3d), 2D/3D surface insertion into a mesh 
+  (surfins2d, surfins3d) and 2D/3D scattered data interpolation 
+  (scat2d, scat3d). A “work using the Library” means a work that 
+  links to the Library but does not include any of the source 
+  code of the Library (except header files) or modify the Library 
+  in any way. A “work based on the Software” means a work 
+  containing all or a portion of the source code, either verbatim 
+  or with modifications, or any other derivative of the Software 
+  under copyright law. Each licensee is addressed as “you” or “
+  Licensee”. 
+
+2. Copyright holders. The Software is copyrighted, and copyright 
+  is owned by Carl Ollivier-Gooch (the “Copyright Owner”). The 
+  Copyright Owner reserves all rights except those expressly 
+  granted to the Licensee herein and U.S. Government license 
+  rights.
+
+3. Use of the Software. Licensee shall use the Software solely 
+  for education and non-profit research purposes within 
+  Licensee's organization. Permission to copy the Software for 
+  use within Licensee's organization is hereby granted to 
+  Licensee, provided that the copyright notice and this license 
+  accompany all such copies. Licensee shall not permit the 
+  Software to be used by persons outside Licensee's organization. 
+  Licensee shall not have the right to relicense or sell the 
+  Software or to transfer or assign the Software.
+
+4. Works using the Library. The development and not-for-profit 
+  distribution of works using the Library by educational or 
+  non-profit research organizations is encouraged. Such 
+  distribution requires a separate no-fee license; please contact 
+  the Copyright Owner for further information. Development of 
+  commercial products using the Library is also encouraged; 
+  contact the Copyright Owner to discuss licensing requirements.
+
+5. Works based on the Software. The Software can be modified and 
+  redistributed within the Licensee's organization provided all 
+  copyright notices are left intact and changes in the source 
+  code are prominently marked. Redistribution outside the 
+  Licensee's organization is prohibited. 
+
+6. Commercial use of the Software. Commercial concerns interested 
+  in using the Software, creating works using the Library, or 
+  creating works based on the Software should contact the 
+  Copyright Owner for licensing information. 
+
+7. Acknowledgement of use. Licensee agrees to acknowledge use of 
+  the Software in any document referencing work using the 
+  Software, including but not limited to published research. 
+  Also, licensee agrees to notify The University of British 
+  Columbia of any such document and supply a copy of the document 
+  to the developer for the University, with appropriate 
+  accommodation made for the protection of confidential or 
+  proprietary data.
+
+8. Neither the Copyright Owner, The University of British 
+  Columbia, The University of Chicago, the United States 
+  Government nor any of their employees make any warranty, 
+  express or implied, or assumes any legal liability or 
+  responsibility for the accuracy, completeness, or usefulness of 
+  any information, apparatus, product, or process disclosed and 
+  covered by a license granted under this license agreement, or 
+  represents that its use would not infringe privately owned 
+  rights.
+
+
+  In no event will the Copyright Owner, The University of British 
+  Columbia, The University of Chicago, or the U.S. Government be 
+  liable for any damages, including direct, incidental, special, 
+  or consequential damages resulting from exercise of this 
+  license agreement or the use of the licensed software.
+
+9. Portions of the Software resulted from work under a U.S. 
+  Government contract and are subject to the following license: 
+  the Government is granted for itself and others acting on its 
+  behalf a paid-up nonexclusive, irrevocable worldwide license in 
+  this computer software to reproduce, prepare derivative works, 
+  and perform publicly and display publicly.
+

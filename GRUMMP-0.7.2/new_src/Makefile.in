@@ -1,0 +1,48 @@
+SHELL=/bin/sh
+
+THIS_SRCDIR = new_src
+TOP_SRCDIR = @top_srcdir@
+
+.SILENT:
+
+LIBSRCDIRS=dbase io util services geom @IMESH_DIR@
+SUBDIRS=$(LIBSRCDIRS) 
+
+default all: libraries
+
+libraries:
+	echo "Checking whether libraries are up to date..."
+	echo " "
+	for i in $(LIBSRCDIRS) ; do \
+          echo " " ; \
+	  echo "Building objects in directory $$i..." ; \
+          echo " " ; \
+	  (cd $$i && $(MAKE)) ; \
+	done
+	echo " "
+	echo "Done building libraries"
+	echo " "
+
+depend:
+	for i in $(LIBSRCDIRS) ; do \
+	  (cd $$i && $(MAKE) depend) ; \
+	done
+
+init:
+	for i in $(LIBSRCDIRS) ; do \
+	  (cd $$i && $(MAKE) init) ; \
+	done
+
+clean:
+	for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) clean) ; \
+	done
+
+distclean:
+	-for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) distclean) ; \
+	done
+	-rm -f *~ Makefile.bak *.rej *.orig \#* config.* Makefile
+
+Makefile: Makefile.in
+	CONFIG_FILES=$(THIS_SRCDIR)/Makefile /bin/sh -c "cd $(TOP_SRCDIR) && ./config.status"

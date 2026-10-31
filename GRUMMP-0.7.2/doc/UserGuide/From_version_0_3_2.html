@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.3.2 to 0.3.3:</TITLE>
+<META NAME="description" CONTENT="From version 0.3.2 to 0.3.3:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_3_1.html">
+<LINK REL="previous" HREF="From_version_0_3_3.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_3_1.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1093"
+  HREF="From_version_0_3_1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1089"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1083"
+  HREF="From_version_0_3_3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1091"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1094"
+  HREF="From_version_0_3_1.html">From version 0.3.1 to</A>
+<B> Up:</B> <A NAME="tex2html1090"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1084"
+  HREF="From_version_0_3_3.html">From version 0.3.3 to</A>
+ &nbsp; <B>  <A NAME="tex2html1092"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051120000000000000000">
+From version 0.3.2 to 0.3.3:</A>
+</H1>
+
+<P>
+Version 0.3.3 is a bugfix release, including fixes for:
+
+<UL>
+<LI>Fixed a number of minor bugs, including
+
+<P>
+
+<UL>
+<LI>3D patch optimization (thanks to Nigel Nunn for finding the bug and
+providing a patch).
+</LI>
+<LI>Pointer arithmetic in the variable-sized array pseudo-template. This
+bug caused problems only with gcc4, because other compilers generate
+incorrect code that still miraculously ran correctly; gcc4 removed
+this serendipitous fix.
+</LI>
+<LI>A string problem in termination of GRUMMP executables.
+</LI>
+<LI>A crash in <TT>scat3d</TT> when extrapolating data.
+</LI>
+<LI>Can now use <TT>index</TT> in boundary face and internal boundary
+face descriptors in the I/O generator.
+</LI>
+<LI>Orientation fix for certain multiregion input files in 3D.
+</LI>
+<LI>Supply a default BC properly in 2D when reading a mesh without BC's.
+</LI>
+</UL>
+</LI>
+<LI>Replaced MAX and MIN macros with std::max and std::min, because gcc4
+complains that the macros are deprecated, even though the GRUMMP headers
+defined them explicitly.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,21 @@
+LIBBASE = libiMesh_GRUMMP
+ID_STRING = GRUMMP iMesh library 
+
+THIS_SRCDIR = new_src/iMesh
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = iMesh_GRUMMP_C.o iMesh_GRUMMP.o iMesh_GRUMMP_EntIter.o \
+iMesh_GRUMMP_EntityList.o iMesh_GRUMMP_EntitySetBase.o \
+iMesh_GRUMMP_EntitySet.o iMesh_GRUMMP_Workset.o iMesh_GRUMMP_SetBoolOps.o \
+iMesh_GRUMMP_Plane.o iMesh_GRUMMP_Surface.o iMesh_GRUMMP_Volume.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: library
+
+include @top_srcdir@/src/conf/default-rules
+
+library: 
+	$(MAKE) .libs

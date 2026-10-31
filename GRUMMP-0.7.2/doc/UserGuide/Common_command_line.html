@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Common command line options for mesh manipulation executables</TITLE>
+<META NAME="description" CONTENT="Common command line options for mesh manipulation executables">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Additional_options_2D.html">
+<LINK REL="previous" HREF="GRUMMP_Programs.html">
+<LINK REL="up" HREF="GRUMMP_Programs.html">
+<LINK REL="next" HREF="Additional_options_2D.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html472"
+  HREF="Additional_options_2D.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html468"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html462"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html470"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html473"
+  HREF="Additional_options_2D.html">Additional options for 2D</A>
+<B> Up:</B> <A NAME="tex2html469"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html463"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+ &nbsp; <B>  <A NAME="tex2html471"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03210000000000000000"></A><A NAME="sec:common-options"></A>
+<BR>
+Common command line options for mesh manipulation executables
+</H1>
+
+<P>
+All of the GRUMMP mesh generation, improvement, and coarsening executables
+share a number of command-line options in common.
+
+<UL>
+<LI>[-i&nbsp;<TT><SPAN  CLASS="textit">basefilename</SPAN></TT>] This argument is mandatory and
+specifies the stem of the mesh file name; both relative and absolute
+path names are acceptable. Extensions will be added to this stem as
+appropriate for mesh input and output, quality file output (<TT>.qual</TT>),
+and message output (<TT>.msg</TT>).  For example, the message output
+file will be <TT><SPAN  CLASS="textit">basefilename</SPAN>.msg</TT>. Because <TT><SPAN  CLASS="textit">basefilename</SPAN></TT>
+is used in its entirety, all output files will be in the same directory
+as the input file.
+<BR>
+<BR>
+For <TT>tri</TT> and <TT>tetra</TT>, the default input file extension
+is <TT>.bdry</TT>; these files specify the boundary of the domain
+to be meshed in terms of its underlying geometry. See Sections&nbsp;<A HREF="Two_dimensional_geometry_bd.html#sec:2d-geom">3.1</A>
+and&nbsp;<A HREF="Three_dimensional_geometry_.html#sec:3d-geom">3.3</A> for information on the format of these files.&nbsp;
+<BR>
+The output file format and extensions for all the GRUMMP meshing executables
+are user-definable. In particular, it is possible to write node locations
+in one file and connectivity in another, or any other combination
+of dividing information between files. This capability allows the
+programs to exchange data with any other preprocessor or analysis
+software that uses ASCII files for mesh data. A full description of
+how to use this feature of GRUMMP can be found in Section&nbsp;<A HREF="Input_output_mesh.html#sec:IO-templates">3.2</A>.
+
+<BR>
+The mesh modification executables (<TT>meshopt[23]d</TT> and <TT>coarsen[23]d</TT>)
+append <TT>.out</TT> to the output file names they would otherwise
+use to prevent possible file name collisions with input files.
+<BR>
+In addition to writing output in a wide range of file formats, <TT>meshopt2d</TT>
+and <TT>coarsen2d</TT> can read any file format that they can write.<A NAME="tex2html11"
+  HREF="footnode.html#foot833"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+</LI>
+<LI>[-A&nbsp;<TT>arg</TT>] If the argument is non-zero, use Jonathan Shewchuk's
+adaptive geometric predicates to evaluate orientation and in-ball
+primitives. These predicates are carefully designed to be extremely
+efficient, so there is not a large performance penalty for using them.
+On the other hand, my experience is that there is little benefit in
+terms of robustness to using these predicates. There may, however,
+be cases where this helps, so feel free to try this option in difficult
+cases. <SPAN  CLASS="textbf">Default: 0.</SPAN>
+</LI>
+<LI>[-b<TT>&nbsp;arg</TT>] If the argument is non-zero, the boundary of
+the mesh is treated as precious: no points are inserted on the boundary,
+boundary points are not moved by smoothing, and local reconnection
+in three dimensions does not change boundary connectivity. Notwithstanding,
+<TT>tetra</TT> will insert points on the boundary if necessary to
+create a constrained tetrahedralization. <SPAN  CLASS="textit">Use of this argument
+is not recommended, because it can severely degrade mesh quality!</SPAN>
+<SPAN  CLASS="textbf">Default: boundary is changeable.</SPAN>
+</LI>
+<LI>[-q&nbsp;<TT>arg</TT>] Specify a cell quality measure to be evaluated;
+the quality data is binned for use in producing histograms; the maximum
+and minimum quality measures are also retained for each evaluation.
+Five quality measures are supported in two dimensions, and ten in
+three dimensions. Note that this option affects output only: no effort
+is made to optimize using the selected measure. 
+<BR>
+For each measure, the accompanying table shows the minimum and maximum
+attainable values, along with the number of bins and range which those
+bins cover; the latter is more than the attainable range for angle
+measures. <SPAN  CLASS="textbf">Default: 2 (all angles [dihedrals in 3D])</SPAN>.
+
+<P>
+<DL>
+<DT><STRONG>Maximum/minimum/all&nbsp;angles</STRONG></DT>
+<DD>in the cell (both solid
+and dihedral angles are available in three dimensions). 
+</DD>
+<DT><STRONG>Marcum's&nbsp;sliver&nbsp;measure&nbsp;[3D].</STRONG></DT>
+<DD>This measure takes the ratio
+of tetrahedron volume to the cube of the mean edge length, with normalization
+so that an equilateral tetrahedron has quality 1. The measure is designed
+to have low values for <SPAN  CLASS="textit">slivers</SPAN>, tetrahedra which have both
+very large and very small dihedral angles.
+</DD>
+<DT><STRONG>Marcum's&nbsp;skewness&nbsp;measure.&nbsp;[3D]</STRONG></DT>
+<DD>This measure takes the
+ratio of volume to the cube of the circumradius of a tetrahedron;
+again, normalization makes quality equal to 1 for an equilateral tetrahedron.
+This measure is designed to detect skewed tetrahedra. For more information
+on these last two quality measures, see&nbsp;[<A
+ HREF="Bibliography.html#Marcum1994">4</A>].
+</DD>
+<DT><STRONG>Aspect&nbsp;ratio&nbsp;I,</STRONG></DT>
+<DD>the ratio of inscribed circle (sphere) radius
+to circumcircle (sphere) radius, with a constant multiplier included
+so that an equilateral cell has quality 1. A degenerate cell has quality
+0 according to this measure.
+</DD>
+<DT><STRONG>Aspect&nbsp;ratio&nbsp;II,</STRONG></DT>
+<DD>the ratio of area of the triangle (volume
+of tetrahedron) to perimeter squared (surface area to the <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$3/2$"></SPAN>).
+Again a constant multiplier is used so that an equilateral cell has
+quality 1 and a degenerate cell has quality 0.
+</DD>
+<DT><STRONG>Shortest&nbsp;edge&nbsp;to&nbsp;circumradius,</STRONG></DT>
+<DD>the ratio of the shortest edge
+length to the circumradius of the cell. This is the quality measure
+that Jonathan Shewchuk's scheme guarantees to produce excellent values
+for, and is used during 3D insertion. A shortcoming of this measure
+is that 3D slivers, which are bad cells, can have high values of short-edge
+to circumradius ratio. This measure is normalized so that a perfect
+cell has quality of 1 and most degenerate cells have quality 0.
+</DD>
+</DL>
+</LI>
+</UL>
+<BR>
+<BR>
+<DIV ALIGN="CENTER">
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><SMALL CLASS="SMALL">Measure</SMALL></TD>
+<TD ALIGN="CENTER"><TT><SMALL CLASS="SMALL">arg</SMALL></TT></TD>
+<TD ALIGN="CENTER"><SMALL CLASS="SMALL">Min value</SMALL></TD>
+<TD ALIGN="CENTER"><SMALL CLASS="SMALL">Max value</SMALL></TD>
+<TD ALIGN="CENTER"><SMALL CLASS="SMALL">Bins</SMALL></TD>
+<TD ALIGN="CENTER"><SMALL CLASS="SMALL">Min bin</SMALL></TD>
+<TD ALIGN="CENTER"><SMALL CLASS="SMALL">Max bin</SMALL>
+<BR> 
+ 
+<SMALL CLASS="SMALL">Max angle (2D)</SMALL></TD>
+</TR>
+</TABLE>
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+<BR>
+<BR>
+
+<UL>
+<LI>[-g&nbsp;<SPAN  CLASS="textit">G</SPAN>] Change the rate at which cell size can change as
+you move across the mesh. Length scale in the mesh can change by no
+more than <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.png"
+ ALT="$d/G$"></SPAN> as you move a distance <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$d$"></SPAN>. Accordingly, larger
+values of <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="29" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="$G$"></SPAN> lead to mesh that are more uniform. <SPAN  CLASS="textbf">Default:
+1.</SPAN>
+</LI>
+<LI>[-r&nbsp;<SPAN  CLASS="textit">R</SPAN>] Resolve geometric features with about <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$R$"></SPAN> cells.
+Increasing <SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="$R$"></SPAN> therefore increases both resolution and mesh size.
+This option replaces the old -s option.
+</LI>
+<LI>[-l&nbsp;<SPAN  CLASS="textit">filename</SPAN>] (That's the letter ell, not the number 1.)
+This option can be used to specify length scale for mesh refinement:
+that is, adaptive refinement (<TT>meshopt2d/3d</TT>). Specifically,
+each line in the file should contain a vertex index and a length scale
+for that vertex; some or all vertices can have length scale specified,
+in any order. This length scale is assigned to the given vertex, and
+mesh grading updates the length scale for nearby vertices. 
+</LI>
+</UL>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html472"
+  HREF="Additional_options_2D.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html468"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html462"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html470"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html473"
+  HREF="Additional_options_2D.html">Additional options for 2D</A>
+<B> Up:</B> <A NAME="tex2html469"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html463"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+ &nbsp; <B>  <A NAME="tex2html471"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

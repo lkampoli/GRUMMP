@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Isotropic Mesh Adaptation</TITLE>
+<META NAME="description" CONTENT="Isotropic Mesh Adaptation">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="Mesh_Coarsening.html">
+<LINK REL="up" HREF="Algorithms_Used_in.html">
+<LINK REL="next" HREF="Bibliography.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html890"
+  HREF="Bibliography.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html886"
+  HREF="Algorithms_Used_in.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html882"
+  HREF="Outcomes.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html888"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html891"
+  HREF="Bibliography.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html887"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the</A>
+<B> Previous:</B> <A NAME="tex2html883"
+  HREF="Outcomes.html">Outcomes</A>
+ &nbsp; <B>  <A NAME="tex2html889"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04400000000000000000">
+Isotropic Mesh Adaptation</A>
+</H1>
+
+<P>
+GRUMMP's approach to isotropic mesh adaptation is to apply a concatenation
+of existing functionality to produce a high-quality mesh that meets
+the specified length scale requirement. (See Section&nbsp;<A HREF="Common_command_line.html#sec:common-options">2.1</A>
+for information on how to specify a length scale.) This is done as
+the first step in mesh optimization (executables <TT>meshopt2d</TT>
+and <TT>meshopt3d</TT>). The steps taken are:
+
+<OL>
+<LI>Coarsen the mesh where necessary to make sure vertices are not too
+close together (where &ldquo;too close&rdquo; means that the distance between
+them is less than the average of their length scales).
+</LI>
+<LI>Swap the mesh to make it Delaunay; this step is a necessary prerequisite
+to mesh refinement.
+</LI>
+<LI>Refine the mesh to ensure that no cells are larger than the local
+length scale and that no badly-shaped cells remain. This step is identical
+to what GRUMMP does in generating a mesh after the initial triangulation
+/ tetrahedralization is complete.
+</LI>
+<LI>Postprocessing by smoothing and swapping. In 2D, two passes of smoothing
+are sufficient to ensure excellent meshes in both theory and practice.
+In 3D, some swapping is typically required to eliminate slivers, which
+the insertion process alone cannot remove.
+</LI>
+</OL>
+If this sounds simple, that's because it is: the driver for this process
+has eight lines of code, not counting diagnostic output, comments,
+and blank lines.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html890"
+  HREF="Bibliography.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html886"
+  HREF="Algorithms_Used_in.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html882"
+  HREF="Outcomes.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html888"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html891"
+  HREF="Bibliography.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html887"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the</A>
+<B> Previous:</B> <A NAME="tex2html883"
+  HREF="Outcomes.html">Outcomes</A>
+ &nbsp; <B>  <A NAME="tex2html889"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Mesh quality (.qual) files</TITLE>
+<META NAME="description" CONTENT="Mesh quality (.qual) files">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Status_message_msg.html">
+<LINK REL="previous" HREF="Three_dimensional_volume_me.html">
+<LINK REL="up" HREF="File_Formats.html">
+<LINK REL="next" HREF="Status_message_msg.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html635"
+  HREF="Status_message_msg.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html631"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html625"
+  HREF="Three_dimensional_volume_me.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html633"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html636"
+  HREF="Status_message_msg.html">Status message (.msg) files</A>
+<B> Up:</B> <A NAME="tex2html632"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html626"
+  HREF="Three_dimensional_volume_me.html">Three-dimensional volume mesh input</A>
+ &nbsp; <B>  <A NAME="tex2html634"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03370000000000000000"></A><A NAME="sec:qual-files"></A>
+<BR>
+Mesh quality (<TT>.qual</TT>) files
+</H1>
+
+<P>
+Mesh quality is assessed at several points during mesh generation
+and improvement. Each time the quality is evaluated, each cell is
+queried to determine its quality.<A NAME="tex2html22"
+  HREF="footnode.html#foot1497"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A> The results are sorted into bins and a count kept for each bin. In
+addition, the overall maximum and minimum quality values are computed.
+After all quality values have been computed and binned, the count
+for each bin is divided by the total number of quality values; therefore,
+each bin has a value that represents the fraction of all quality values
+that fall within that bin. 
+
+<P>
+When mesh quality statistics are written to a file, the quality measure
+used and the maximum and minimum quality for each evaluation are included
+at the top of the file in a format which is commonly ignored as a
+comment by plotting software. Each line after that contains the quality
+value at the center of a bin and the fraction of quality values that
+fell within that bin for each evaluation. An example of a mesh quality
+file is shown in Figure&nbsp;<A HREF="#fig:qual-file">3.7</A>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:qual-file"></A><A NAME="1807"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.7:</STRONG>
+Example quality output file</CAPTION>
+<TR><TD><IMG
+ WIDTH="608" HEIGHT="700" BORDER="0"
+ SRC="img27.png"
+ ALT="\begin{figure}\par\begin{list}{}{\setlength{\rightmargin}{\leftmargin}\setl...
+...\setlength{\parsep}{0pt}
+\normalfont\ttfamily }\item[]~\end{list}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html635"
+  HREF="Status_message_msg.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html631"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html625"
+  HREF="Three_dimensional_volume_me.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html633"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html636"
+  HREF="Status_message_msg.html">Status message (.msg) files</A>
+<B> Up:</B> <A NAME="tex2html632"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html626"
+  HREF="Three_dimensional_volume_me.html">Three-dimensional volume mesh input</A>
+ &nbsp; <B>  <A NAME="tex2html634"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

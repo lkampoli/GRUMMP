@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Additional command line arguments for surfins2d and surfins3d</TITLE>
+<META NAME="description" CONTENT="Additional command line arguments for surfins2d and surfins3d">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="scat2d_scat3d.html">
+<LINK REL="previous" HREF="Additional_options_3D.html">
+<LINK REL="up" HREF="GRUMMP_Programs.html">
+<LINK REL="next" HREF="scat2d_scat3d.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html508"
+  HREF="scat2d_scat3d.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html504"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html498"
+  HREF="Additional_options_3D.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html506"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html509"
+  HREF="scat2d_scat3d.html">scat2d and scat3d</A>
+<B> Up:</B> <A NAME="tex2html505"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html499"
+  HREF="Additional_options_3D.html">Additional options for 3D</A>
+ &nbsp; <B>  <A NAME="tex2html507"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html510"
+  HREF="Additional_command_line.html#SECTION03241000000000000000">Two dimensions</A>
+<LI><A NAME="tex2html511"
+  HREF="Additional_command_line.html#SECTION03242000000000000000">Three dimensions</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION03240000000000000000">
+Additional command line arguments for <TT>surfins2d</TT> and <TT>surfins3d</TT></A>
+</H1>
+
+<P>
+<TT>The surfins2d</TT> and <TT>surfins3d</TT> executables take additional
+arguments to specify the surface to insert and how to insert it. There
+are more possible variations in 2D here than in 3D.
+
+<P>
+
+<H2><A NAME="SECTION03241000000000000000">
+Two dimensions</A>
+</H2>
+
+<UL>
+<LI>[-z&nbsp;<TT>filename</TT>] Specify a file from which to read curve
+data. This file is a .<TT>bdry</TT> file, like those read by <TT>tri</TT>.
+</LI>
+<LI>[-s&nbsp;<TT>string</TT>] Specify options for surface insertion. Similar
+to the -O optimization string, this string is parsed internally.
+
+<P>
+<DL>
+<DT><STRONG>Anisotropic&nbsp;insertion.</STRONG></DT>
+<DD>To use GRUMMP's anisotropic insertion
+capabilities, include 'a' in the string.
+</DD>
+<DT><STRONG>Quasi-structured&nbsp;mesh.</STRONG></DT>
+<DD>If the 'q' flag is given, curve sampling
+will take the quasi-structured nature of the initial background mesh
+into account.
+</DD>
+<DT><STRONG>Surface&nbsp;offsetting.</STRONG></DT>
+<DD>Offset surfaces can be specified by a single
+curve and offset distances, or by a sequence of curves. In either
+variant, mesh points on the originally inserted curve are projected
+onto nearby curves. Attempting projection with incompatible curves
+will cause failure, so take care!
+
+<P>
+<DL>
+<DT><STRONG>Auto-offset.</STRONG></DT>
+<DD>This option uses a single curve and computes the
+location of offset curves based on a given offset vector and number
+of offset curves to produce. Use &ldquo;o <SPAN  CLASS="textit">curveIndex</SPAN> x <SPAN  CLASS="textit">dx</SPAN>
+y <SPAN  CLASS="textit">dy</SPAN> n <SPAN  CLASS="textit">num</SPAN>&rdquo;. Here, <SPAN  CLASS="textit">curveIndex</SPAN> tells which curve
+in the file to use,<SPAN  CLASS="textit"> </SPAN>(<SPAN  CLASS="textit">dx, dy</SPAN>) is an offset vector between
+curves, and <SPAN  CLASS="textit">num</SPAN> gives the number of offset curves to add. Spaces
+are optional, provided the string is enclosed in quotes on the command
+line.
+</DD>
+<DT><STRONG>Given&nbsp;curves.</STRONG></DT>
+<DD>This option selects among multiple curves within
+the single .bdry file read. For example, p3c0c1c1c2c2c3 specifies
+that the curves 0, 1, 2, and 3 in the input will be inserted using
+projection of mesh points from curve 0 onto 1, 2, and 3.
+</DD>
+</DL>
+</DD>
+</DL>
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION03242000000000000000">
+Three dimensions</A>
+</H2>
+
+<UL>
+<LI>[-z&nbsp;<TT>filename</TT>] Specify a file from which to read surface
+data. This file can be either an STL file or a file containing a list
+of STL files (preceded by the number of files; see <TT>examples/3D/surfaceInsertion/offset_file.txt</TT>
+for an example of the latter).
+</LI>
+<LI>[-s&nbsp;<TT>string</TT>] Specify options for surface insertion. The
+only currently active possible contents for this string is: &ldquo;p#1s#2s#3...&rdquo;,
+where the letters are literals, and #1 etc represent integers. #1
+tells how many surface pairs there are for which mesh topology from
+one surface is projected to the next. Subsequent numbers give the
+indices of pairs of surfaces in the list of STL files in the file
+given by the -z option. Note that surfaces can be chained together:
+the topology of surface 1 can be projected to surface 2 and then on
+to surface 3 by specifying: -s &ldquo;p2s1s2s2s3&rdquo; on the command line. 
+</LI>
+</UL>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html508"
+  HREF="scat2d_scat3d.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html504"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html498"
+  HREF="Additional_options_3D.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html506"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html509"
+  HREF="scat2d_scat3d.html">scat2d and scat3d</A>
+<B> Up:</B> <A NAME="tex2html505"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html499"
+  HREF="Additional_options_3D.html">Additional options for 3D</A>
+ &nbsp; <B>  <A NAME="tex2html507"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

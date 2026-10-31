@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.2 to 0.1.3:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.2 to 0.1.3:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_1.html">
+<LINK REL="previous" HREF="From_version_0_1_3.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_1.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1225"
+  HREF="From_version_0_1_1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1221"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1215"
+  HREF="From_version_0_1_3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1223"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1226"
+  HREF="From_version_0_1_1.html">From version 0.1.1 to</A>
+<B> Up:</B> <A NAME="tex2html1222"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1216"
+  HREF="From_version_0_1_3.html">From version 0.1.3 to</A>
+ &nbsp; <B>  <A NAME="tex2html1224"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051230000000000000000">
+From version 0.1.2 to 0.1.3:</A>
+</H1>
+
+<UL>
+<LI>Fixed bug in which input <SPAN  CLASS="textbf">boundary conditions were not transmitted</SPAN>
+to the output volume mesh in three dimensions.
+</LI>
+<LI>Fixed bug in which some <SPAN  CLASS="textbf">input polygons were triangulated incorrectly</SPAN>
+due to a sorting ambiguity on some machines (including IRIX and Solaris). 
+</LI>
+<LI><SPAN  CLASS="textbf">Corrected several erroneous input test files</SPAN>.
+</LI>
+<LI><SPAN  CLASS="textbf">Modified interface for</SPAN> <TT><SPAN  CLASS="textbf">scat3d</SPAN></TT>. Also, <TT>scat3d</TT>
+will now optionally output the mesh generated from data point locations
+as a tetrahedral volume mesh.
+</LI>
+<LI><SPAN  CLASS="textbf">Modified the</SPAN> <TT><SPAN  CLASS="textbf">Makefile</SPAN></TT> <SPAN  CLASS="textbf">in</SPAN> <TT><SPAN  CLASS="textbf">src/IO_generator</SPAN></TT>.
+Previously, (undocumented) user intervention was required to rebuild
+the mesh generation libraries with custom I/O formats. Now this is
+done when one would expect; specifically, running <TT>make</TT> in
+the directory <TT>src</TT> or in the GRUMMP root directory is sufficient
+to rebuild the I/O routines and add them to the GRUMMP libraries,
+then rebuild the executables. 
+</LI>
+<LI><SPAN  CLASS="textbf">Minor code cleanup</SPAN>, fixing some (but not all) small complaints
+that HP-UX 10.20 <TT>CC</TT> and <TT>cc</TT> compilers had.
+</LI>
+<LI><TT>configure</TT> is now even <SPAN  CLASS="textbf">smarter about finding the</SPAN>
+<TT><SPAN  CLASS="textbf">flex</SPAN></TT><SPAN  CLASS="textbf">/</SPAN><TT><SPAN  CLASS="textbf">lex</SPAN></TT> <SPAN  CLASS="textbf">library</SPAN>.
+Since some versions of <TT>flex</TT>/<TT>lex</TT> define <TT>main()</TT>
+as a macro and some define <TT>yywrap()</TT> as a macro, neither is
+certain to be in the library. No known cases exist where <SPAN  CLASS="textit">both</SPAN>
+<TT>main()</TT> and <TT>yywrap()</TT> are macros, so checking for
+both ensures that the library will be correctly identified if it exists.
+</LI>
+<LI><TT>configure</TT> now accepts the options <TT>-with-c-compiler=NAME</TT>
+and <TT>-with-cxx-compiler=NAME</TT> to <SPAN  CLASS="textbf">allow specification
+of a native C or C++ compiler</SPAN> to be used if present in preference
+over <TT>gcc</TT>/<TT>g++</TT>. On most machines this means checking
+for <TT>cc</TT> and <TT>CC</TT>; for AIX and OSF systems, the correct
+local names are used. Also, <TT>configure</TT> is smarter about paths
+when checking for native compilers by full path name.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1225"
+  HREF="From_version_0_1_1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1221"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1215"
+  HREF="From_version_0_1_3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1223"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1226"
+  HREF="From_version_0_1_1.html">From version 0.1.1 to</A>
+<B> Up:</B> <A NAME="tex2html1222"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1216"
+  HREF="From_version_0_1_3.html">From version 0.1.3 to</A>
+ &nbsp; <B>  <A NAME="tex2html1224"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

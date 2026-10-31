@@ -1,0 +1,137 @@
+.SILENT:
+
+.SUFFIXES:      .cxx .cc
+
+SHELL=/bin/sh
+
+BASEDIR = @abs_top_srcdir@
+LIBDIR = @abs_top_srcdir@/lib/lib@opt@/@host_os@
+BINDIR = @abs_top_srcdir@/bin/@host_os@
+LIBNAME = $(LIBDIR)/$(LIBBASE)
+INCLUDES = -I@abs_top_srcdir@/include @CGM_INCLUDES@ @MESQUITE_INCLUDES@ @MPI_INCLUDES@
+EXTERNLIBS = @CGM_LDFLAGS@ @CGM_LIBS@ @MESQUITE_LDFLAGS@ @MESQUITE_LIBS@
+LDFLAGS = @LDFLAGS@ @CFLAGS@
+
+default: 
+
+depend:
+	@makedepend@ $(INCLUDES) -Y *.c *.cxx *.cc 2> /dev/null
+
+init: 
+	if (test -f .lastbuild.@host_os@) then true ; else \
+	  rm -f .lastbuild.* ; \
+	  touch .lastbuild.@host_os@ ; \
+	fi
+	$(MAKE) -s depend
+
+clean:
+	-rm -f .lastbuild.@host_os@.* *.o .libs *.gcda *.gcno
+
+distclean: clean
+	-rm -f *~ *.bak \#* *.old *.orig *.rej .\#*
+	-rm -f .lastbuild.@host_os@
+	if (test -f Makefile.in) then rm Makefile; fi
+
+maybeclean:
+	if (test -f .lastbuild.@host_os@) then true ; else \
+	  echo "Host operating system has changed since last configuration.";\
+	  echo "Re-run configure in directory @top_srcdir@ and try again.";\
+	  exit 10; \
+	fi
+	if (test -f .lastbuild.@host_os@.@opt@) then true ; else \
+          echo "Removing all object files because the optimization level";\
+	  echo "has changed since the last time the library was built.";\
+	  $(MAKE) -s clean; \
+	fi
+
+CC_COMPILE=@CC@ $(INCLUDES) @CFLAGS@ $(EXTRAFLAGS) @CWARNFLAGS@ @CPPFLAGS@ $(CPPFLAGS)
+CXX_COMPILE=@CXX@ $(INCLUDES) @CXXFLAGS@ $(EXTRAFLAGS) @CXXWARNFLAGS@ @CPPFLAGS@ $(CPPFLAGS) 
+HPCLINK=@HPCLINK@
+
+.c.o:
+	echo Compiling $*.c
+	$(CC_COMPILE) -c $*.c || \
+	(echo Compile of $*.c failed!	Command was: ; \
+	 echo $(CC_COMPILE) -c $*.c)
+
+.cxx.o:
+	echo Compiling $*.cxx
+	-rm -f $*.o
+	-$(CXX_COMPILE) -c $*.cxx || \
+	(echo Compile of $*.cxx failed!	Command was: ; \
+	 echo $(CXX_COMPILE) -c $*.cxx)
+
+.cc.o:
+	echo Compiling $*.cc
+	-rm -f $*.o
+	-$(CXX_COMPILE) -c $*.cc || \
+	(echo Compile of $*.cc failed!	Command was: ; \
+	 echo $(CXX_COMPILE) -c $*.cc)
+
+library: $(LIBDIR) maybeclean
+
+.libs: $(OBJECTS)
+	echo 'Building $(ID_STRING) libraries'
+	echo " "
+	touch .lastbuild.@host_os@.@opt@
+	make static @SHARED@
+	touch .libs
+	echo 'Done building $(ID_STRING) libraries'
+
+
+static:
+	echo "Creating static library using @AR_STATIC@"
+	@AR_STATIC@ $(LIBNAME).a $(OBJECTS)
+	echo "Creating TOC for static library using @RANLIB@"
+	@RANLIB@ $(LIBNAME).a
+	echo " "
+
+shared:
+	if (test "@AR_SHARED@" != "false") then \
+	  echo "Creating shared library using @AR_SHARED@" ; \
+	  rm -f $(LIBNAME).so* ; \
+	  @AR_SHARED@ $(LIBNAME).so.@GR_VERSION@ $(EXTRAFLAGS) $(OBJECTS) ; \
+	  echo "Creating links to dynamic library using @LN_S@" ; \
+	  (cd $(LIBDIR) ; @LN_S@ $(LIBBASE).so.@GR_VERSION@ $(LIBBASE).so.@GR_MAJOR@) ; \
+	  (cd $(LIBDIR) ; @LN_S@ $(LIBBASE).so.@GR_VERSION@ $(LIBBASE).so.@GR_RELEASE@) ; \
+	  (cd $(LIBDIR) ; @LN_S@ $(LIBBASE).so.@GR_VERSION@ $(LIBBASE).so) ; \
+	  echo " " ; \
+	fi
+
+exec: $(TARGET).o $(DEP)
+	touch .lastbuild.@host_os@
+	touch .lastbuild.@host_os@.@opt@
+	echo Linking $(TARGET)...
+	-rm -f $(BINDIR)/$(TARGET)
+	-$(CXX_COMPILE) -o $(BINDIR)/$(TARGET) $(TARGET).o $(LDFLAGS) $(IMESH_LIBS)
+	-$(HPCLINK) $(CXX_COMPILE) -o $(BINDIR)/$(TARGET).hpc -static $(TARGET).o $(LDFLAGS) $(IMESH_LIBS)
+	if (test -x $(BINDIR)/$(TARGET)) then \
+	  rm -f $(TARGET) ; \
+	  @LN_S@ $(BINDIR)/$(TARGET) $(TARGET) ; \
+	  echo Done building $(TARGET) for host @host_os@ at optimization level @opt@. ; \
+	else  \
+	  echo "Failed while linking $(TARGET); command was:" ; \
+	  echo "$(CXX_COMPILE) -o $(BINDIR)/$(TARGET) $(TARGET).o $(LDFLAGS) $(IMESH_LIBS)" ; \
+	fi
+	echo " "
+
+$(LIBDIR): @abs_top_srcdir@/lib/lib@opt@
+	mkdir -p $(LIBDIR)
+	touch $(LIBDIR)
+
+@abs_top_srcdir@/lib/lib@opt@: @abs_top_srcdir@/lib
+	mkdir -p @abs_top_srcdir@/lib/lib@opt@
+	touch @abs_top_srcdir@/lib/lib@opt@
+
+@abs_top_srcdir@/lib:
+	mkdir -p @abs_top_srcdir@/lib
+
+$(BINDIR): @abs_top_srcdir@/bin
+	mkdir -p $(BINDIR)
+	touch $(BINDIR)
+
+@abs_top_srcdir@/bin:
+	mkdir -p @abs_top_srcdir@/bin
+
+Makefile: Makefile.in
+	CONFIG_FILES=$(THIS_SRCDIR)/Makefile /bin/sh -c "cd @abs_top_srcdir@ && ./config.status"

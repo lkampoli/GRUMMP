@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Scattered data interpolation files</TITLE>
+<META NAME="description" CONTENT="Scattered data interpolation files">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="Status_message_msg.html">
+<LINK REL="up" HREF="File_Formats.html">
+<LINK REL="next" HREF="Algorithms_Used_in.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html657"
+  HREF="Algorithms_Used_in.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html653"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html649"
+  HREF="Status_message_msg.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html655"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html658"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the</A>
+<B> Up:</B> <A NAME="tex2html654"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html650"
+  HREF="Status_message_msg.html">Status message (.msg) files</A>
+ &nbsp; <B>  <A NAME="tex2html656"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03390000000000000000"></A><A NAME="sec:scat3d-files"></A>
+<BR>
+Scattered data interpolation files
+</H1>
+
+<P>
+For scattered data interpolation, there are two input files and one
+output file.
+
+<P>
+The point input file also contains the data for each vertex. This
+file has the following format (written as a pseudo-template file).
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD>nverts&nbsp;ndata_per_vert
+
+<P>
+verts:&nbsp;coords&nbsp;data1&nbsp;data2&nbsp;...
+</DD>
+</DL>The input file of target points is even simpler:
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD>nverts&nbsp;
+
+<P>
+verts:&nbsp;coords&nbsp;
+</DD>
+</DL>The output file is also quite simple:
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD>verts:&nbsp;coords&nbsp;new_data1&nbsp;new_data2&nbsp;...
+</DD>
+</DL>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

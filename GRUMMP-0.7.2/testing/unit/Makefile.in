@@ -1,0 +1,98 @@
+include ../../src/conf/default-rules
+
+THIS_SRCDIR = testing/unit
+TOP_SRCDIR = @top_srcdir@
+
+EXECS = unitTestEntCont unitTest2D unitTestBase unitTestGeom unitTest3D unitTestQuality
+
+PARALLEL_EXECS = unitTestParallel
+
+CPPFLAGS = -DBOOST_TEST_DYN_LINK
+
+default: 
+	echo "Making sure unit tests ($(EXECS) $(PARALLEL_EXECS)) are up to date..."
+	echo " "
+	$(MAKE) maybeclean
+	$(MAKE) $(EXECS) $(PARALLEL_EXECS)
+	echo " "
+	echo "Done updating all unit tests"
+	echo " "
+	echo "Running base unit tests"
+	./unitTestBase
+	echo "Running entity container tests"
+	./unitTestEntCont
+	echo "Running 2D tests"
+	./unitTest2D
+	echo "Running 3D tests"
+	./unitTest3D
+	echo "Running geometry tests"
+	./unitTestGeom
+	echo "Running quality measure tests"
+	./unitTestQuality
+	echo "Running parallel"
+	mpirun -np 4 ./unitTestParallel
+
+DEP = $(LIBDIR)/libGR_dbase.@libsuf@ \
+	$(LIBDIR)/libGR_io.@libsuf@ \
+	$(LIBDIR)/libGR_services.@libsuf@ \
+	$(LIBDIR)/libGR_3D.@libsuf@ \
+	$(LIBDIR)/libGR_surf.@libsuf@ \
+	$(LIBDIR)/libGR_2D.@libsuf@ \
+	$(LIBDIR)/libGR_base.@libsuf@ \
+	$(LIBDIR)/libGR_geom.@libsuf@
+
+LIB = -L$(LIBDIR) -lGR_geom -lGR_services -lGR_base -lGR_3D -lGR_surf -lGR_2D -lGR_base -lGR_dbase -lGR_io -lGR_util @CGM_LIBS@ -lm @BOOST_UNIT_TEST_FRAMEWORK_LIB@ -Wl,-rpath=$(LIBDIR) @MESQUITE_LIBS@ -liMesh_GRUMMP
+
+# To add more tests for a library, add an object file to one of the
+# lists below.  (Note that, at present, testGeom.o does *not* use Boost
+# unit test, but all others do.)
+
+TEST_BASE_OBJS=FaceList_test.o Length_test.o
+TEST_2D_OBJS=unitTest2D.o Insert2D_test.o
+TEST_GEOM_OBJS=testGeom.o
+TEST_3D_OBJS=Insert3D_test.o unitTest3D.o
+TEST_ENT_CONT_OBJS=testEntContainer.o
+TEST_PARALLEL_OBJS=unitTestParallel.o
+TEST_QUALITY_OBJS=unitTestQuality.o
+
+.PHONY: test-exec
+
+unitTestBase: $(TEST_BASE_OBJS)
+	$(MAKE) "TARGET=unitTestBase" "OBJECTS=$(TEST_BASE_OBJS)" test-exec
+
+unitTest2D: $(TEST_2D_OBJS)
+	$(MAKE) "TARGET=unitTest2D" "OBJECTS=$(TEST_2D_OBJS)" test-exec
+
+unitTest3D: $(TEST_3D_OBJS)
+	$(MAKE) "TARGET=unitTest3D" "OBJECTS=$(TEST_3D_OBJS)" test-exec
+
+unitTestGeom: $(TEST_GEOM_OBJS)
+	$(MAKE) "TARGET=unitTestGeom" "OBJECTS=$(TEST_GEOM_OBJS)" test-exec
+
+unitTestEntCont: $(TEST_ENT_CONT_OBJS)
+	$(MAKE) "TARGET=unitTestEntCont" "OBJECTS=$(TEST_ENT_CONT_OBJS)" test-exec
+
+unitTestQuality: $(TEST_QUALITY_OBJS)
+	$(MAKE) "TARGET=unitTestQuality" "OBJECTS=$(TEST_QUALITY_OBJS)" test-exec
+
+unitTestParallel: $(TEST_PARALLEL_OBJS)
+	$(MAKE) "TARGET=unitTestParallel" "OBJECTS=$(TEST_PARALLEL_OBJS)" test-exec
+
+test-exec: $(DEP)
+	touch .lastbuild.@host_os@
+	touch .lastbuild.@host_os@.@opt@
+	echo Linking $(TARGET)...
+	-$(CXX_COMPILE) $(EXTRAFLAGS) -o $(TARGET) $(LDFLAGS) $(OBJECTS) $(LIB) $(LIB) $(LIB) $(EXTERNLIBS)
+	echo Done building $(TARGET) for host @host_os@ at optimization level @opt@.
+	echo " "
+
+ALL_LIBS = GR_base GR_geom GR_2D GR_surf GR_3D SUMAAlog_lite 
+
+distclean: localdistclean
+
+localdistclean:
+	-rm -f $(EXECS)
+
+$(LIBDIR)/libGR_3D.@libsuf@ $(LIBDIR)/libGR_surf.@libsuf@ $(LIBDIR)/libGR_2D.@libsuf@ $(LIBDIR)/libGR_base.@libsuf@ $(LIBDIR)/libGR_geom.@libsuf@ $(LIBDIR)/libSUMAAlog_lite.@libsuf@:
+	echo 'Need to make library $@'
+

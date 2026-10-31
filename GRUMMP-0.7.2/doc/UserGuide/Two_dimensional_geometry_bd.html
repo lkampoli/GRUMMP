@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Two-dimensional geometry (.bdry) files</TITLE>
+<META NAME="description" CONTENT="Two-dimensional geometry (.bdry) files">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Input_output_mesh.html">
+<LINK REL="previous" HREF="File_Formats.html">
+<LINK REL="up" HREF="File_Formats.html">
+<LINK REL="next" HREF="Input_output_mesh.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html563"
+  HREF="Input_output_mesh.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html559"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html553"
+  HREF="File_Formats.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html561"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html564"
+  HREF="Input_output_mesh.html">Input and output mesh</A>
+<B> Up:</B> <A NAME="tex2html560"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html554"
+  HREF="File_Formats.html">File Formats</A>
+ &nbsp; <B>  <A NAME="tex2html562"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03310000000000000000"></A><A NAME="sec:2d-geom"></A>
+<BR>
+Two-dimensional geometry (<TT>.bdry</TT>) files
+</H1>
+
+<P>
+Two-dimensional domains are specified using a geometry (<TT>.bdry</TT>)
+file. This file format supports simultaneous and consistent meshing
+of multiple sub-domains and is extensible to non-polygonal boundaries,
+using the boundary patches described below.
+
+<P>
+The first line of the file contains the following:
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD><SPAN  CLASS="textbf">NPoints&nbsp;NPatches</SPAN>
+</DD>
+</DL>i.e. the number of points and the number of boundary patches in the
+file; the number of pairs of periodic patches is optional. The next
+<TT><SPAN  CLASS="textbf">NPoints</SPAN></TT> lines give point coordinates. Note that
+points will not necessarily be present in the mesh obtained; they
+are only used to define the boundary patches. 
+
+<P>
+The <TT><SPAN  CLASS="textbf">NPatches</SPAN></TT> boundary patch descriptions follow
+the vertex coordinates. The descriptions use the following format:
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD><SPAN  CLASS="textbf">patchname&nbsp;leftsidetype&nbsp;leftnumber&nbsp;rightsidetype&nbsp;rightnumber&nbsp;[extra_info]</SPAN>
+</DD>
+</DL>where <TT><SPAN  CLASS="textbf">patchname</SPAN></TT> can take the following values (case
+insensitive):
+
+<UL>
+<LI><TT><SPAN  CLASS="textbf">polyline</SPAN></TT>, for polygonal boundaries
+</LI>
+<LI><TT><SPAN  CLASS="textbf">circle</SPAN></TT>, for circles
+</LI>
+<LI><TT><SPAN  CLASS="textbf">arc</SPAN></TT>, for circular arcs of less than 180 degrees
+</LI>
+<LI><TT><SPAN  CLASS="textbf">longarc</SPAN></TT>, for circular arcs of more than degrees
+</LI>
+<LI><TT><SPAN  CLASS="textbf">bezier</SPAN></TT>, for Bézier curves 
+</LI>
+<LI><TT><SPAN  CLASS="textbf">spline</SPAN></TT>, for cubic interpolated splines
+</LI>
+</UL>
+Because GRUMMP supports meshing of multiple subdomains, both boundary
+condition and subdomain identification must be included in the input,
+including the relationship of the various subdomains to the boundary
+patches. If the patch has a subdomain to be meshed on its left side,
+then <TT><SPAN  CLASS="textbf">leftsidetype</SPAN></TT> should be <TT><SPAN  CLASS="textbf">r</SPAN></TT>,
+and <TT><SPAN  CLASS="textbf">leftnumber</SPAN></TT> should be a subdomain index between
+1 and 126 inclusive. If the patch has a boundary on its left side,
+then <TT><SPAN  CLASS="textbf">leftsidetype</SPAN></TT> should be <TT><SPAN  CLASS="textbf">b</SPAN></TT>,
+and <TT><SPAN  CLASS="textbf">leftnumber</SPAN></TT> should be an integer boundary condition
+tag strictly greater than zero. The same holds for the right side
+information for each patch.
+
+<P>
+Note that a patch can have a subdomain on both sides, but not a boundary
+on both sides. We are aware that the ability to specify boundary conditions
+on internal boundaries is sometimes necessary (our current favorite
+example involves radiative heat transfer onto a surface). While there
+are plans to add this capability in future versions of GRUMMP, there
+is no simple way to do this at present.
+
+<P>
+The <TT><SPAN  CLASS="textbf">[extra_info]</SPAN></TT> varies depending on the boundary
+patch type. It usually consists of a list of point indices. Note that
+the point numbering starts at zero. Here is the required format for
+all possible boundary patches.
+<DL>
+<DT><STRONG>Polyline&nbsp;boundary&nbsp;patch</STRONG></DT>
+<DD><P>
+The format for <TT><SPAN  CLASS="textbf">[extra_info]</SPAN></TT> is:
+
+<P>
+<TT><SPAN  CLASS="textbf">numberpoints</SPAN></TT> <TT><SPAN  CLASS="textbf">points</SPAN></TT>
+
+<P>
+where <TT><SPAN  CLASS="textbf">numberpoints</SPAN></TT> is the number of points used
+to describe the polygonal boundary. Then follow <TT><SPAN  CLASS="textbf">numberpoints</SPAN></TT>
+indices to the points described at the beginning of the file. Note
+that at least two points must be given. This will result in <TT><SPAN  CLASS="textbf">numberpoints-1</SPAN></TT>
+polygonal segments.
+
+<P>
+Example:
+
+<P>
+<TT><SPAN  CLASS="textbf">polyline r 1 b 2 5 0 1 2 3 0</SPAN></TT>
+
+<P>
+This will create a <SPAN  CLASS="textit">closed</SPAN> polygon of 4 segments, with the segments
+defined by vertices 0-1, 1-2, 2-3, and 3-0. Region 1 is located to
+the left of the segments, and the boundary condition on the right
+has a value of 2. 
+</DD>
+<DT><STRONG>Circle&nbsp;boundary&nbsp;patch</STRONG></DT>
+<DD><P>
+The format for <TT><SPAN  CLASS="textbf">[extra_info]</SPAN></TT> is:
+
+<P>
+<TT><SPAN  CLASS="textbf">radius</SPAN></TT> <TT><SPAN  CLASS="textbf">centerpoint</SPAN></TT>
+
+<P>
+where the <TT><SPAN  CLASS="textbf">radius</SPAN></TT> is a real number and the <TT><SPAN  CLASS="textbf">centerpoint</SPAN></TT>
+is an integer index to a point defined at the beginning of the file.
+
+<P>
+Example:
+
+<P>
+<TT><SPAN  CLASS="textbf">circle b 1 r 2 3.40 7</SPAN></TT>
+
+<P>
+This will create a circle of radius 3.40, centered at the location
+defined by point 7. The sides of the circle are defined by walking
+counter-clockwise on the circle, so the left side is the interior,
+and the right side the exterior. Here, region 2 is to be meshed and
+is located outside the circle. The inside will not be meshed, and
+has a boundary condition number of 1. 
+</DD>
+<DT><STRONG>Arc&nbsp;boundary&nbsp;patch</STRONG></DT>
+<DD><P>
+The format for <TT><SPAN  CLASS="textbf">[extra_info]</SPAN></TT> is:
+
+<P>
+<TT><SPAN  CLASS="textbf">radius</SPAN></TT> <TT><SPAN  CLASS="textbf">startpoint endpoint</SPAN></TT>
+
+<P>
+where <TT><SPAN  CLASS="textbf">radius</SPAN></TT> is a real number and both <TT>startpoint</TT>
+and <TT>endpoint</TT> are indices to points defined earlier in the
+file. The coordinates for the center of the arc are determined automatically.
+The arc is always drawn counter-clockwise, from startpoint to endpoint.
+Furthermore, the arc drawn will always span 180&#176; or less.
+For arcs of more than 180&#176;, use <TT>longarc</TT> instead.
+
+<P>
+Example:
+
+<P>
+<TT><SPAN  CLASS="textbf">arc r 3 r 2 1.0 0 1</SPAN></TT>
+
+<P>
+This will draw a circular arc of radius 1.0, from the point with index
+0 to the point with index 1. The arc is drawn counter-clockwise and
+spans less than 180 degrees. The arc will be an internal boundary
+since it has both regions 3 and 2 as neighbors. 
+</DD>
+<DT><STRONG>Long&nbsp;arc&nbsp;boundary&nbsp;patch</STRONG></DT>
+<DD><P>
+The format here is the same as for arcs; the difference is in interpretation.
+A <TT>longarc</TT> is drawn counterclockwise from <TT>startpoint</TT>
+to <TT>endpoint</TT>, but it always spans 180&#176; or more.
+For arcs of less than 180&#176;, use <TT>arc</TT> instead.
+</DD>
+<DT><STRONG>Bézier&nbsp;boundary&nbsp;patch</STRONG></DT>
+<DD><P>
+The format for <TT><SPAN  CLASS="textbf">[extra_info]</SPAN></TT> is:
+
+<P>
+<TT><SPAN  CLASS="textbf">startpoint</SPAN></TT> <TT><SPAN  CLASS="textbf">endpoint controlpoint1
+controlpoint2</SPAN></TT>
+
+<P>
+where all the parameters are indices to points defined at the beginning
+of the file. The Bézier curve will be a smooth curve with a tangent
+in the direction of the vector defined by <TT><SPAN  CLASS="textbf">controlpoint1-startpoint</SPAN></TT>
+at its start, and a tangent in the direction of the vector <TT><SPAN  CLASS="textbf">endpoint-controlpoint2</SPAN></TT>
+at its end. 
+
+<P>
+Example:
+
+<P>
+<TT><SPAN  CLASS="textbf">bezier r 1 b 2 4 6 8 10</SPAN></TT>
+
+<P>
+This will create a Bézier curve defined by points with indices 4,
+6, 8, and 10, and will have region 1 to its left, and the domain boundary
+on its right, with a boundary condition of 2.
+</DD>
+<DT><STRONG>Spline&nbsp;boundary&nbsp;patch</STRONG></DT>
+<DD><P>
+The format for <TT><SPAN  CLASS="textbf">[extra_info]</SPAN></TT> is the same as
+for <TT><SPAN  CLASS="textbf">polyline</SPAN></TT>, that is:
+
+<P>
+<TT><SPAN  CLASS="textbf">numberpoints</SPAN></TT> <TT><SPAN  CLASS="textbf">points</SPAN></TT>
+
+<P>
+where <TT><SPAN  CLASS="textbf">numberpoints</SPAN></TT> is the number of points used
+to describe cubic interpolated spline. Then follow <TT><SPAN  CLASS="textbf">numberpoints</SPAN></TT>
+indices to the points described at the beginning of the file. Note
+that at least three points must be given (otherwise the spline simply
+is a line). The spline is created with &ldquo;no-moment&rdquo; boundary conditions,
+i.e. the second derivative of the curve is zero at both ends. The
+curve will pass through all the points given. 
+
+<P>
+Example:
+
+<P>
+<TT><SPAN  CLASS="textbf">spline b 2 r 4 10 0 1 2 3 4 5 6 7 8 9</SPAN></TT>
+
+<P>
+This will create an open cubic spline, starting at point 0 and ending
+at point 9. The curve will also pass through points 1..8. Region 4
+is located to the right of the spline, and the boundary condition
+on the left has a value of 2. 
+</DD>
+</DL>
+
+<P>
+A sample input file, a picture of the underlying geometry, and the
+mesh generated from this input using <TT>tri -r 2 -g 2</TT> are shown
+in Figure&nbsp;<A HREF="#fig:bdry2d-ex">3.1</A>. The input contains eight points and
+six patches, four in a single polyline, one circle, and one Bézier
+curve. This input file is <TT>square-circhole-bezier.bdry</TT> in
+<TT>examples/2D</TT>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:bdry2d-ex"></A><A NAME="1732"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.1:</STRONG>
+Sample 2D boundary data file and geometry.</CAPTION>
+<TR><TD><P>
+
+<DL COMPACT>
+<DT>
+<DD>#&nbsp;Lines&nbsp;beginning&nbsp;with&nbsp;#&nbsp;are&nbsp;comments.
+
+<P>
+8&nbsp;6
+
+<P>
+-0.2&nbsp;0.0
+
+<P>
+0.5&nbsp;0.0
+
+<P>
+1.0&nbsp;0.5
+
+<P>
+1.0&nbsp;1.0
+
+<P>
+-0.2&nbsp;1.0
+
+<P>
+0.5&nbsp;0.5
+
+<P>
+0.72&nbsp;0.0
+
+<P>
+1.0&nbsp;0.28
+
+<P>
+polyline&nbsp;r&nbsp;1&nbsp;b&nbsp;1&nbsp;5&nbsp;2&nbsp;3&nbsp;4&nbsp;0&nbsp;1
+
+<P>
+circle&nbsp;b&nbsp;2&nbsp;r&nbsp;1&nbsp;0.45&nbsp;5
+
+<P>
+bezier&nbsp;r&nbsp;1&nbsp;b&nbsp;1&nbsp;1&nbsp;2&nbsp;6&nbsp;7
+</DD>
+</DL>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="246" HEIGHT="206" ALIGN="BOTTOM" BORDER="0"
+ SRC="img7.png"
+ ALT="\includegraphics[width=0.45\columnwidth]{pics/square-circhole-bezier-bdry}"><IMG
+ WIDTH="246" HEIGHT="206" ALIGN="BOTTOM" BORDER="0"
+ SRC="img8.png"
+ ALT="\includegraphics[width=0.45\columnwidth]{pics/square-circhole-bezier-R2G2}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD>
+</DD>
+</DL></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html563"
+  HREF="Input_output_mesh.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html559"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html553"
+  HREF="File_Formats.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html561"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html564"
+  HREF="Input_output_mesh.html">Input and output mesh</A>
+<B> Up:</B> <A NAME="tex2html560"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html554"
+  HREF="File_Formats.html">File Formats</A>
+ &nbsp; <B>  <A NAME="tex2html562"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

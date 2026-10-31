@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Default mesh optimization in GRUMMP</TITLE>
+<META NAME="description" CONTENT="Default mesh optimization in GRUMMP">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="Smoothing.html">
+<LINK REL="up" HREF="Mesh_Improvement.html">
+<LINK REL="next" HREF="Mesh_Coarsening.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html808"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html804"
+  HREF="Mesh_Improvement.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html800"
+  HREF="Smoothing.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html806"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html809"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Up:</B> <A NAME="tex2html805"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<B> Previous:</B> <A NAME="tex2html801"
+  HREF="Smoothing.html">Smoothing</A>
+ &nbsp; <B>  <A NAME="tex2html807"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04230000000000000000">
+Default mesh optimization in GRUMMP</A>
+</H1>
+
+<P>
+In two dimensions, the meshes GRUMMP generates in the <TT>tri</TT>
+executable are already excellent. The <TT>meshopt2d</TT> executable
+actually operates by computing an appropriate length scale for the
+input mesh, then using Ruppert's scheme to refine the mesh until quality
+is high; the guarantees on cell size provided with size and grading
+control in&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2001">11</A>] ensure that the output mesh
+is still of reasonable size. In both cases, post-processing by using
+a pass or two smoothing to maximize the minimum sine of angles in
+the mesh generally increases the minimum angle by a few degrees at
+low cost.
+
+<P>
+In three dimensions, GRUMMP again produces good meshes in the <TT>tetra</TT>
+executable. Because slivers are still generated, <TT>tetra</TT> post-processes
+its meshes by swapping to increase the minimum sine of the dihedral
+angles in the mesh, and performs one pass of smoothing with the same
+goal. <TT>meshopt3d</TT> differs from its 2D counterpart in that insertion
+is not part of its operation; instead, a user-definable sequence of
+swapping, smoothing, and bad tetrahedron repair steps are performed.
+The default optimization sequence follows the experimentally-inspired
+recommendations of Freitag and Ollivier-Gooch&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>],
+which typically performs well for meshes that are approximately isotropic.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

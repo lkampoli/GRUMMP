@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.6.6 to 0.7:</TITLE>
+<META NAME="description" CONTENT="From version 0.6.6 to 0.7:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_6_5.html">
+<LINK REL="previous" HREF="From_version_0_7.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_6_5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html999"
+  HREF="From_version_0_6_5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html995"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html989"
+  HREF="From_version_0_7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html997"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1000"
+  HREF="From_version_0_6_5.html">From version 0.6.5 to</A>
+<B> Up:</B> <A NAME="tex2html996"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html990"
+  HREF="From_version_0_7.html">From version 0.7 to</A>
+ &nbsp; <B>  <A NAME="tex2html998"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION05130000000000000000">
+From version 0.6.6 to 0.7:</A>
+</H1>
+
+<UL>
+<LI>Factored insert-and-swap out of the mesh classes. All calls to insert-and-swap
+functions in those classes are now obsolete and have been removed.
+</LI>
+<LI>Can now specify a curve (2D) or surface (3D) to insert into an existing
+mesh. The mesh is changed only near the curve / surface, and mesh
+quality (including length scale) is maintained.
+</LI>
+<LI>Multithreaded parallel implementations of swapping and isotropic refinement.
+</LI>
+<LI>Better mesh alignment for 2D anisotropic adaptation.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

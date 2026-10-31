@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if (test "@LEX@" = "lex") ; then
+  echo " "
+  echo "Warning: lex does not support -i.  I/O file generator requires all"
+  echo "lower-case input."
+  echo " "
+fi
+
+if (test "@AR_SHARED@" = "false") ; then
+  echo " " 
+  echo "Shared libraries are not being used on your system.  Please email" 
+  echo "the output of 'uname -a' and 'man ld' to cfog@mech.ubc.ca." 
+  echo "This information will help us add shared library support for your" 
+  echo "machine." 
+  echo " " 
+fi
+
+if (test "@host_os_short@" = "IRIX6"); then
+  echo "You may also need to set the environment variable _RLD_ARGS"
+  echo "to -ignore_unresolved to prevent irrelevant run-time errors."
+fi
+
+echo "Software will be installed with a root directory of @prefix@;"
+echo "to change this, use the --prefix argument."

@@ -1,0 +1,113 @@
+GRUMMP stands for Generation and Refinement of Unstructured 
+Mixed-Element Meshes in Parallel, although it does not yet live 
+up to its acronym. GRUMMP is a set of libraries, written in C++, 
+supporting unstructured mesh creation and modification, and a set 
+of executables built on those libraries.
+
+0.1 Goals of the GRUMMP Project<sec:manifesto>
+
+The goal of the GRUMMP project is to develop automatic mesh 
+generation software for unstructured meshes with mixed element 
+types. The software should produce high-quality meshes that meet 
+user-defined mesh density requirements, using elements 
+appropriate for the geometry and physics of a particular problem. 
+
+Automatic mesh generation for complex two and three dimensional 
+domains is a topic of intensive research. It is imperative that 
+automatic mesh generation tools be capable of generating quality 
+finite element and finite volume meshes. There must be a balance 
+between resolution of the boundary and surface features and 
+complexity of the problem. In addition, for problems with 
+isotropic physics, element aspect ratio must be small to minimize 
+linear system condition number and interpolation error. On the 
+other hand, problems with anisotropic physics (for example, a 
+shear layer in viscous fluid flow) require highly anisotropic 
+elements for efficient solution. A further level of complication 
+is that for some physical problems and applications, 
+quadrilateral (2D) or hexahedral (3D) elements are preferred, 
+even though filling space with high quality elements is easier 
+using triangular (2D) or tetrahedral (3D) elements. 
+
+A general-purpose automatic mesh generator should address all of 
+these issues without excessive user intervention. We envision a 
+system in which common types of physical problems have predefined 
+mesh sizing and element aspect ratio functions, allowing easy 
+generation of meshes for these applications areas. For 
+flexibility and generality, the user will also be able to 
+prescribe these functions (for totally different applications) or 
+modify the predefined behaviors (to provide a quality mesh in the 
+wake of an airplane wing, for example). 
+
+GRUMMP addresses these issues by implementing mesh manipulation 
+primitives to generate of modify existing meshes so that criteria 
+for element size and quality are met. In addition, automatic 
+computation of local length scale is performed to provide a 
+default in cases where solution-based adaptive length scales are 
+not available. 
+
+0.2 Current Status of GRUMMP<sec:status>
+
+The current release of GRUMMP is version 0.7.2.[footnote:
+Versions 0.7.x are intended to be a fully-stable and 
+well-supported set of executables. Because GRUMMP is distributed 
+in source form, the libraries that these executables call are in 
+principle accessible for programming use. While this is permitted 
+by the terms of the GRUMMP license (see Section [sec:license]), 
+the library interface is neither documented nor supported at this 
+time. Until the GRUMMP API is officially publicly released, 
+interested users can also work with the GRUMMP libraries through 
+the ITAPS mesh interface (http://itaps-scidac.org), which 
+currently supports mesh query and low-level mesh modification 
+operations.
+] This version consists of eight executable programs. 
+
+• tri generates two-dimensional triangular isotropic unstructured 
+  meshes, using a seriously enhanced version of Ruppert's 
+  algorithm. Recent work at UBC has extended Ruppert's scheme to 
+  allow better user control over cell size and grading [Ollivier-Gooch2001]
+   and to allow meshing with curved boundaries [Boivin2002b].
+
+• meshopt2d improves existing two-dimensional triangular 
+  isotropic unstructured meshes, including performing adaptive 
+  refinement based on a user-provided length scale.
+
+• coarsen2d produces a triangular unstructured mesh with 
+  approximately twice the local length scale of the input mesh, 
+  including directional anisotropic coarsening of 
+  quasi-structured parts of the fine mesh.
+
+• tetra generates three-dimensional tetrahedral isotropic 
+  unstructured meshes, using Shewchuk's algorithm [Shewchuk1997] 
+  modified for cell size and grading control [Ollivier-Gooch2001]
+  .
+
+• meshopt3d improves existing three-dimensional tetrahedral 
+  isotropic unstructured meshes, using techniques developed by 
+  Freitag and Ollivier-Gooch [Freitag1997]. Just as in 2D, this 
+  executable also performs adaptive refinement.
+
+• coarsen3d produces a tetrahedral unstructured mesh with 
+  approximately twice the local length scale of the input mesh, 
+  including directional anisotropic coarsening of 
+  quasi-structured parts of the fine mesh.
+
+• scat2d performs linear interpolation of two-dimensional 
+  scattered data.
+
+• scat3d performs linear interpolation of three-dimensional 
+  scattered data.
+
+For further information on invoking these programs, including a 
+description of command line arguments, see Chapter [chap:exec]. 
+For a description of the file formats which GRUMMP executables 
+read and write, see Chapter [chap:files].
+
+As of this writing, GRUMMP supports anisotropic adaptation in 2D, 
+including good alignment of points in the direction of smaller 
+lengthscale. Optionally, triangles can be merged into quads. (The 
+3D variant is far less advanced.)
+
+Also, starting with version 0.7.0, GRUMMP now supports 
+multithreaded isotropic mesh refinement and swapping. Work is 
+ongoing on distributed memory parallelism.
+

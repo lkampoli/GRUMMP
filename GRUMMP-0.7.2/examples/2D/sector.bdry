@@ -1,0 +1,7 @@
+3 3
+0 1
+0 0
+1 0
+arc r 1 b 1 1 2 0
+polyline r 1 b 2 2 1 2
+polyline r 1 b 3 2 0 1

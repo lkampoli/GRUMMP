@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>GRUMMP Version 0.7.0 User's Guide</TITLE>
+<META NAME="description" CONTENT="GRUMMP Version 0.7.0 User's Guide">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Contents.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html45"
+  HREF="Contents.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev_g.png"> 
+<A NAME="tex2html43"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html46"
+  HREF="Contents.html">Contents</A>
+ &nbsp; <B>  <A NAME="tex2html44"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<P>
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">GRUMMP Version 0.7.0 User's Guide</H1>
+<DIV CLASS="author_info">
+
+<P ALIGN="CENTER"><STRONG>Carl Ollivier-Gooch</STRONG></P>
+<P ALIGN="CENTER"><I>Department of Mechanical Engineering</I></P>
+<P ALIGN="CENTER"><STRONG>&nbsp;</STRONG></P>
+<P ALIGN="LEFT"><SMALL>University of British Columbia</SMALL></P>
+</DIV>
+&nbsp;
+
+<P>
+
+<P>
+<DIV ALIGN="CENTER">
+Copyright &#169; 2016
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+<DIV ALIGN="CENTER">
+Carl Ollivier-Gooch
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV>
+
+<P>
+
+<P>
+<DIV ALIGN="CENTER">
+
+</DIV>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html47"
+  HREF="Contents.html">Contents</A>
+<LI><A NAME="tex2html48"
+  HREF="List_Figures.html">List of Figures</A>
+<LI><A NAME="tex2html49"
+  HREF="Getting_Installing_GRUMMP.html">Getting and Installing GRUMMP</A>
+<UL>
+<LI><A NAME="tex2html50"
+  HREF="Introduction.html">Introduction</A>
+<UL>
+<LI><A NAME="tex2html51"
+  HREF="What_is_GRUMMP.html">What is GRUMMP?</A>
+<LI><A NAME="tex2html52"
+  HREF="Goals_GRUMMP_Project.html">Goals of the GRUMMP Project</A>
+<LI><A NAME="tex2html53"
+  HREF="Current_Status_GRUMMP.html">Current Status of GRUMMP</A>
+<LI><A NAME="tex2html54"
+  HREF="Getting_Started.html">Getting Started</A>
+<LI><A NAME="tex2html55"
+  HREF="Shortcut.html">Shortcut</A>
+<LI><A NAME="tex2html56"
+  HREF="Overview.html">Overview</A>
+<UL>
+<LI><A NAME="tex2html57"
+  HREF="Overview.html#SECTION03161000000000000000">Getting GRUMMP</A>
+<LI><A NAME="tex2html58"
+  HREF="Overview.html#SECTION03162000000000000000">Building GRUMMP the easy way</A>
+<LI><A NAME="tex2html59"
+  HREF="Overview.html#SECTION03163000000000000000">Building GRUMMP under Windows</A>
+<LI><A NAME="tex2html60"
+  HREF="Overview.html#SECTION03164000000000000000">Configuring GRUMMP by hand</A>
+<LI><A NAME="tex2html61"
+  HREF="Overview.html#SECTION03165000000000000000">Setting <TT>LD_LIBRARY_PATH</TT></A>
+<LI><A NAME="tex2html62"
+  HREF="Overview.html#SECTION03166000000000000000">If Your Machine Is Not Yet Officially Supported</A>
+<LI><A NAME="tex2html63"
+  HREF="Overview.html#SECTION03167000000000000000">If Something Goes Wrong During Setup</A>
+<LI><A NAME="tex2html64"
+  HREF="Overview.html#SECTION03168000000000000000">Checking to be Sure Things Built Properly</A>
+</UL>
+<LI><A NAME="tex2html65"
+  HREF="License.html">License</A>
+<LI><A NAME="tex2html66"
+  HREF="User_Services.html">User Services</A>
+</UL>
+<LI><A NAME="tex2html67"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<UL>
+<LI><A NAME="tex2html68"
+  HREF="Common_command_line.html">Common command line options for mesh manipulation executables</A>
+<LI><A NAME="tex2html69"
+  HREF="Additional_options_2D.html">Additional options for 2D GRUMMP executables</A>
+<LI><A NAME="tex2html70"
+  HREF="Additional_options_3D.html">Additional options for 3D GRUMMP executables</A>
+<LI><A NAME="tex2html71"
+  HREF="Additional_command_line.html">Additional command line arguments for <TT>surfins2d</TT> and <TT>surfins3d</TT></A>
+<UL>
+<LI><A NAME="tex2html72"
+  HREF="Additional_command_line.html#SECTION03241000000000000000">Two dimensions</A>
+<LI><A NAME="tex2html73"
+  HREF="Additional_command_line.html#SECTION03242000000000000000">Three dimensions</A>
+</UL>
+<LI><A NAME="tex2html74"
+  HREF="scat2d_scat3d.html"><TT>scat2d</TT> and <TT>scat3d</TT></A>
+<LI><A NAME="tex2html75"
+  HREF="t2d_t3d.html"><TT>t2d</TT> and <TT>t3d</TT></A>
+</UL>
+<LI><A NAME="tex2html76"
+  HREF="File_Formats.html">File Formats</A>
+<UL>
+<LI><A NAME="tex2html77"
+  HREF="Two_dimensional_geometry_bd.html">Two-dimensional geometry (<TT>.bdry</TT>) files</A>
+<LI><A NAME="tex2html78"
+  HREF="Input_output_mesh.html">Input and output mesh file formats</A>
+<LI><A NAME="tex2html79"
+  HREF="Three_dimensional_geometry_.html">Three-dimensional geometry (<TT>.bdry</TT>) files</A>
+<LI><A NAME="tex2html80"
+  HREF="Three_dimensional_surface_m.html">Three-dimensional surface mesh (<TT>.smesh</TT>) files</A>
+<LI><A NAME="tex2html81"
+  HREF="Three_dimensional_ASCII_ste.html">Three-dimensional ASCII stereolithography (STL) files</A>
+<LI><A NAME="tex2html82"
+  HREF="Three_dimensional_volume_me.html">Three-dimensional volume mesh input and output (<TT>.vmesh</TT>)
+files </A>
+<LI><A NAME="tex2html83"
+  HREF="Mesh_quality_qual.html">Mesh quality (<TT>.qual</TT>) files</A>
+<LI><A NAME="tex2html84"
+  HREF="Status_message_msg.html">Status message (<TT>.msg</TT>) files</A>
+<LI><A NAME="tex2html85"
+  HREF="Scattered_data_interpolatio.html">Scattered data interpolation files</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html86"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the GRUMMP Libraries</A>
+<UL>
+<LI><A NAME="tex2html87"
+  HREF="Mesh_Generation.html">Mesh Generation</A>
+<UL>
+<LI><A NAME="tex2html88"
+  HREF="Two_dimensional_meshing.html">Two dimensional meshing</A>
+<UL>
+<LI><A NAME="tex2html89"
+  HREF="Two_dimensional_meshing.html#SECTION04111000000000000000">Initial discretization</A>
+<LI><A NAME="tex2html90"
+  HREF="Two_dimensional_meshing.html#SECTION04112000000000000000">Point insertion</A>
+<LI><A NAME="tex2html91"
+  HREF="Two_dimensional_meshing.html#SECTION04113000000000000000">Length scale modifications</A>
+<LI><A NAME="tex2html92"
+  HREF="Two_dimensional_meshing.html#SECTION04114000000000000000">Curved boundaries</A>
+</UL>
+<LI><A NAME="tex2html93"
+  HREF="Three_dimensional_meshing.html">Three-dimensional meshing</A>
+<UL>
+<LI><A NAME="tex2html94"
+  HREF="Three_dimensional_meshing.html#SECTION04121000000000000000">Initial tetrahedralization</A>
+<LI><A NAME="tex2html95"
+  HREF="Three_dimensional_meshing.html#SECTION04122000000000000000">Point insertion</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html96"
+  HREF="Mesh_Improvement.html">Mesh Improvement</A>
+<UL>
+<LI><A NAME="tex2html97"
+  HREF="Swapping.html">Swapping</A>
+<LI><A NAME="tex2html98"
+  HREF="Smoothing.html">Smoothing</A>
+<LI><A NAME="tex2html99"
+  HREF="Default_mesh_optimization.html">Default mesh optimization in GRUMMP</A>
+</UL>
+<LI><A NAME="tex2html100"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<UL>
+<LI><A NAME="tex2html101"
+  HREF="Selecting_Vertices_Retain.html">Selecting Vertices to Retain in the Coarse Mesh</A>
+<UL>
+<LI><A NAME="tex2html102"
+  HREF="Selecting_Vertices_Retain.html#SECTION04311000000000000000">Identification of Apexes and Folds</A>
+<LI><A NAME="tex2html103"
+  HREF="Selecting_Vertices_Retain.html#SECTION04312000000000000000">Selection of Points to Include in the Coarse Mesh</A>
+</UL>
+<LI><A NAME="tex2html104"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+<UL>
+<LI><A NAME="tex2html105"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04321000000000000000">Invoking Vertex Deletion</A>
+<LI><A NAME="tex2html106"
+  HREF="Incremental_Vertex_Deletion.html#SECTION04322000000000000000">Mesh Post-processing</A>
+</UL>
+<LI><A NAME="tex2html107"
+  HREF="Anisotropic_Mesh_Coarsening.html">Anisotropic Mesh Coarsening</A>
+<UL>
+<LI><A NAME="tex2html108"
+  HREF="Anisotropic_Mesh_Coarsening.html#SECTION04331000000000000000">Selection of Points in Pseudo-structured Anisotropic Meshes</A>
+</UL>
+<LI><A NAME="tex2html109"
+  HREF="Outcomes.html">Outcomes</A>
+</UL>
+<LI><A NAME="tex2html110"
+  HREF="Isotropic_Mesh_Adaptation.html">Isotropic Mesh Adaptation</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html111"
+  HREF="Bibliography.html">Bibliography</A>
+<UL>
+<LI><A NAME="tex2html112"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<UL>
+<LI><A NAME="tex2html113"
+  HREF="From_version_0_7_1.html">From version 0.7.1 to 0.7.2:</A>
+<LI><A NAME="tex2html114"
+  HREF="From_version_0_7.html">From version 0.7 to 0.7.1:</A>
+<LI><A NAME="tex2html115"
+  HREF="From_version_0_6_6.html">From version 0.6.6 to 0.7:</A>
+<LI><A NAME="tex2html116"
+  HREF="From_version_0_6_5.html">From version 0.6.5 to 0.6.6:</A>
+<LI><A NAME="tex2html117"
+  HREF="From_version_0_6_4.html">From version 0.6.4 to 0.6.5:</A>
+<LI><A NAME="tex2html118"
+  HREF="From_version_0_6_3.html">From version 0.6.3 to 0.6.4:</A>
+<LI><A NAME="tex2html119"
+  HREF="From_version_0_6_2.html">From version 0.6.2 to 0.6.3:</A>
+<LI><A NAME="tex2html120"
+  HREF="From_version_0_6_0.html">From version 0.6.0 to 0.6.1/0.6.2:</A>
+<LI><A NAME="tex2html121"
+  HREF="From_version_0_5_0.html">From version 0.5.0 to 0.6.0:</A>
+<LI><A NAME="tex2html122"
+  HREF="From_version_0_3_3.html">From version 0.3.3 to 0.5.0:</A>
+<LI><A NAME="tex2html123"
+  HREF="From_version_0_3_3.html#SECTION051110000000000000000">From version 0.3.3 to 0.4.0:</A>
+<LI><A NAME="tex2html124"
+  HREF="From_version_0_3_2.html">From version 0.3.2 to 0.3.3:</A>
+<LI><A NAME="tex2html125"
+  HREF="From_version_0_3_1.html">From version 0.3.1 to 0.3.2:</A>
+<LI><A NAME="tex2html126"
+  HREF="From_version_0_3_0.html">From version 0.3.0 to 0.3.1:</A>
+<LI><A NAME="tex2html127"
+  HREF="From_version_0_2_1.html">From version 0.2.1 to 0.3.0:</A>
+<LI><A NAME="tex2html128"
+  HREF="From_version_0_2_0.html">From version 0.2.0. to 0.2.1:</A>
+<LI><A NAME="tex2html129"
+  HREF="From_version_0_1_7.html">From version 0.1.7 to 0.2.0:</A>
+<LI><A NAME="tex2html130"
+  HREF="From_version_0_1_6a.html">From version 0.1.6a to 0.1.7:</A>
+<LI><A NAME="tex2html131"
+  HREF="From_version_0_1_6.html">From version 0.1.6 to 0.1.6a:</A>
+<LI><A NAME="tex2html132"
+  HREF="From_version_0_1_5.html">From version 0.1.5 to 0.1.6:</A>
+<LI><A NAME="tex2html133"
+  HREF="From_version_0_1_4.html">From version 0.1.4 to 0.1.5:</A>
+<LI><A NAME="tex2html134"
+  HREF="From_version_0_1_3.html">From version 0.1.3 to 0.1.4:</A>
+<LI><A NAME="tex2html135"
+  HREF="From_version_0_1_2.html">From version 0.1.2 to 0.1.3:</A>
+<LI><A NAME="tex2html136"
+  HREF="From_version_0_1_1.html">From version 0.1.1 to 0.1.2:</A>
+<LI><A NAME="tex2html137"
+  HREF="From_version_0_1_0.html">From version 0.1.0 to 0.1.1:</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html138"
+  HREF="About_this_document.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

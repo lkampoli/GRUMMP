@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.0 to 0.1.1:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.0 to 0.1.1:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="From_version_0_1_1.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="About_this_document.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1247"
+  HREF="About_this_document.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1243"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1239"
+  HREF="From_version_0_1_1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1245"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1248"
+  HREF="About_this_document.html">About this document ...</A>
+<B> Up:</B> <A NAME="tex2html1244"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1240"
+  HREF="From_version_0_1_1.html">From version 0.1.1 to</A>
+ &nbsp; <B>  <A NAME="tex2html1246"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051250000000000000000">
+From version 0.1.0 to 0.1.1:</A>
+</H1>
+
+<UL>
+<LI>If shared libraries can not be built, <SPAN  CLASS="textbf">static libraries</SPAN> are
+used instead, and a message is printed by <TT>configure</TT> requesting
+information to allow addition of shared library support.
+</LI>
+<LI><TT>configure</TT> is now <SPAN  CLASS="textbf">smarter about finding the</SPAN> <TT><SPAN  CLASS="textbf">flex</SPAN></TT><SPAN  CLASS="textbf">/</SPAN><TT><SPAN  CLASS="textbf">lex</SPAN></TT>
+<SPAN  CLASS="textbf">library</SPAN>. In particular, <TT>/usr/local/lib</TT> is always
+checked, and a path name can be given to <TT>configure</TT> using
+<TT>-with-flex-lib-dir=DIRNAME</TT>.
+</LI>
+<LI>If <TT>lex</TT> must be used instead of <TT>flex</TT>, <SPAN  CLASS="textbf">don't
+request a case-insensitive lexer</SPAN>. Necessary because <TT>lex -i</TT>
+fails on many systems.
+</LI>
+<LI>Fixed some <TT><SPAN  CLASS="textbf">Makefile</SPAN></TT> <SPAN  CLASS="textbf">problems</SPAN> that affected
+IRIX 6.x.
+</LI>
+<LI>Added <SPAN  CLASS="textbf">support for Solaris/gcc</SPAN> machines.
+</LI>
+<LI><SPAN  CLASS="textbf">Enabled -s option for</SPAN> <TT><SPAN  CLASS="textbf">tri</SPAN></TT>.
+</LI>
+<LI><SPAN  CLASS="textbf">Improved length scale generation</SPAN> for two-dimensional meshes.
+</LI>
+</UL>
+<BR><HR>
+
+</BODY>
+</HTML>

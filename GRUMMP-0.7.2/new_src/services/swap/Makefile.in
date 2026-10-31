@@ -1,0 +1,16 @@
+ID_STRING = GRUMMP swapping
+
+THIS_SRCDIR = new_src/services/swap
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = SwapManager2D.o SwapManager3D.o SwapDecider2D.o SwapDecider3D.o \
+EdgeCanon.o EdgeSwapInfo.o FaceSwapInfo3D.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: $(OBJECTS)
+
+include @top_srcdir@/src/conf/default-rules
+

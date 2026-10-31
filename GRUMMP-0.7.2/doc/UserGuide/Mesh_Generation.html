@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Mesh Generation</TITLE>
+<META NAME="description" CONTENT="Mesh Generation">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Mesh_Improvement.html">
+<LINK REL="previous" HREF="Algorithms_Used_in.html">
+<LINK REL="up" HREF="Algorithms_Used_in.html">
+<LINK REL="next" HREF="Two_dimensional_meshing.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html711"
+  HREF="Two_dimensional_meshing.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html707"
+  HREF="Algorithms_Used_in.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html701"
+  HREF="Algorithms_Used_in.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html709"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html712"
+  HREF="Two_dimensional_meshing.html">Two dimensional meshing</A>
+<B> Up:</B> <A NAME="tex2html708"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the</A>
+<B> Previous:</B> <A NAME="tex2html702"
+  HREF="Algorithms_Used_in.html">Algorithms Used in the</A>
+ &nbsp; <B>  <A NAME="tex2html710"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION04100000000000000000">
+Mesh Generation</A>
+</H1>
+
+<P>
+GRUMMP generates meshes by using Delaunay refinement. As a class,
+Delaunay refinement methods generate Delaunay meshes (meshes in which
+the ball defined by the vertices of a given cell contains no other
+vertices in its interior) of high quality by careful choice of new
+locations to insert vertices. The schemes in GRUMMP follow the work
+of Ruppert&nbsp;[<A
+ HREF="Bibliography.html#Ruppert1993">14</A>,<A
+ HREF="Bibliography.html#Ruppert1995">15</A>] and Shewchuk&nbsp;[<A
+ HREF="Bibliography.html#Shewchuk1997">16</A>],
+with several significant improvement of our own in the areas of cell
+size and grading control&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2001">11</A>] and meshing from
+curved boundaries&nbsp;[<A
+ HREF="Bibliography.html#Boivin2002b">1</A>].
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html713"
+  HREF="Two_dimensional_meshing.html">Two dimensional meshing</A>
+<UL>
+<LI><A NAME="tex2html714"
+  HREF="Two_dimensional_meshing.html#SECTION04111000000000000000">Initial discretization</A>
+<LI><A NAME="tex2html715"
+  HREF="Two_dimensional_meshing.html#SECTION04112000000000000000">Point insertion</A>
+<LI><A NAME="tex2html716"
+  HREF="Two_dimensional_meshing.html#SECTION04113000000000000000">Length scale modifications</A>
+<LI><A NAME="tex2html717"
+  HREF="Two_dimensional_meshing.html#SECTION04114000000000000000">Curved boundaries</A>
+<UL>
+<LI><A NAME="tex2html718"
+  HREF="Two_dimensional_meshing.html#SECTION04114100000000000000">Generic geometry framework</A>
+<LI><A NAME="tex2html719"
+  HREF="Two_dimensional_meshing.html#SECTION04114200000000000000">Measuring how curved the boundary
+is</A>
+<LI><A NAME="tex2html720"
+  HREF="Two_dimensional_meshing.html#SECTION04114300000000000000">Initial discretization with curved
+boundaries</A>
+<LI><A NAME="tex2html721"
+  HREF="Two_dimensional_meshing.html#SECTION04114400000000000000">Edge recovery</A>
+<LI><A NAME="tex2html722"
+  HREF="Two_dimensional_meshing.html#SECTION04114500000000000000">Point insertion</A>
+<LI><A NAME="tex2html723"
+  HREF="Two_dimensional_meshing.html#SECTION04114600000000000000">Length scale modifications</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html724"
+  HREF="Three_dimensional_meshing.html">Three-dimensional meshing</A>
+<UL>
+<LI><A NAME="tex2html725"
+  HREF="Three_dimensional_meshing.html#SECTION04121000000000000000">Initial tetrahedralization</A>
+<LI><A NAME="tex2html726"
+  HREF="Three_dimensional_meshing.html#SECTION04122000000000000000">Point insertion</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

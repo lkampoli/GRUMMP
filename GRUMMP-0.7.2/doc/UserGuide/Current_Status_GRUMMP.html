@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Current Status of GRUMMP</TITLE>
+<META NAME="description" CONTENT="Current Status of GRUMMP">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Getting_Started.html">
+<LINK REL="previous" HREF="Goals_GRUMMP_Project.html">
+<LINK REL="up" HREF="Introduction.html">
+<LINK REL="next" HREF="Getting_Started.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html369"
+  HREF="Getting_Started.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html365"
+  HREF="Introduction.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html359"
+  HREF="Goals_GRUMMP_Project.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html367"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html370"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Up:</B> <A NAME="tex2html366"
+  HREF="Introduction.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html360"
+  HREF="Goals_GRUMMP_Project.html">Goals of the GRUMMP</A>
+ &nbsp; <B>  <A NAME="tex2html368"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03130000000000000000"></A><A NAME="sec:status"></A>
+<BR>
+Current Status of GRUMMP
+</H1>
+
+<P>
+The current release of GRUMMP is version 0.7.0.<A NAME="tex2html1"
+  HREF="footnode.html#foot197"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A> This version consists of eight executable programs. 
+
+<UL>
+<LI><TT>tri</TT> generates two-dimensional triangular isotropic unstructured
+meshes, using a seriously enhanced version of Ruppert's algorithm.
+Recent work at UBC has extended Ruppert's scheme to allow better user
+control over cell size and grading&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2001">11</A>] and
+to allow meshing with curved boundaries&nbsp;[<A
+ HREF="Bibliography.html#Boivin2002b">1</A>].
+</LI>
+<LI><TT>meshopt2d</TT> improves existing two-dimensional triangular isotropic
+unstructured meshes, including performing adaptive refinement based
+on a user-provided length scale.
+</LI>
+<LI><TT>coarsen2d</TT> produces a triangular unstructured mesh with approximately
+twice the local length scale of the input mesh, including directional
+anisotropic coarsening of quasi-structured parts of the fine mesh.
+</LI>
+<LI><TT>tetra</TT> generates three-dimensional tetrahedral isotropic unstructured
+meshes, using Shewchuk's algorithm&nbsp;[<A
+ HREF="Bibliography.html#Shewchuk1997">16</A>] modified
+for cell size and grading control&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch2001">11</A>].
+</LI>
+<LI><TT>meshopt3d</TT> improves existing three-dimensional tetrahedral
+isotropic unstructured meshes, using techniques developed by Freitag
+and Ollivier-Gooch&nbsp;[<A
+ HREF="Bibliography.html#Freitag1997">3</A>]. Just as in 2D, this executable
+also performs adaptive refinement.
+</LI>
+<LI><TT>coarsen3d</TT> produces a tetrahedral unstructured mesh with approximately
+twice the local length scale of the input mesh, including directional
+anisotropic coarsening of quasi-structured parts of the fine mesh.
+</LI>
+<LI><TT>scat2d</TT> performs linear interpolation of two-dimensional scattered
+data.
+</LI>
+<LI><TT>scat3d</TT> performs linear interpolation of three-dimensional
+scattered data.
+</LI>
+</UL>
+For further information on invoking these programs, including a description
+of command line arguments, see Chapter&nbsp;<A HREF="GRUMMP_Programs.html#chap:exec">2</A>. For a description
+of the file formats which GRUMMP executables read and write, see Chapter&nbsp;<A HREF="File_Formats.html#chap:files">3</A>.
+
+<P>
+As of this writing, GRUMMP supports anisotropic adaptation in 2D,
+including good alignment of points in the direction of smaller lengthscale.
+Optionally, triangles can be merged into quads. (The 3D variant is
+far less advanced.)
+
+<P>
+Also, starting with version 0.7.0, GRUMMP now supports multithreaded
+isotropic mesh refinement and swapping. Work in ongoing on distributed
+memory parallelism.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html369"
+  HREF="Getting_Started.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html365"
+  HREF="Introduction.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html359"
+  HREF="Goals_GRUMMP_Project.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html367"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html370"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Up:</B> <A NAME="tex2html366"
+  HREF="Introduction.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html360"
+  HREF="Goals_GRUMMP_Project.html">Goals of the GRUMMP</A>
+ &nbsp; <B>  <A NAME="tex2html368"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

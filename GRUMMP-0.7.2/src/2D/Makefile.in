@@ -1,0 +1,18 @@
+LIBBASE = libGR_2D
+ID_STRING = GRUMMP 2D mesh
+
+THIS_SRCDIR = src/2D
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = Bdry2D.o MeshOpt2D.o Reconnect2D.o 	\
+	VertexPair.o Deprecated.o BdrySeg.o 
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+default: library
+
+include ../conf/default-rules
+
+library: .libs

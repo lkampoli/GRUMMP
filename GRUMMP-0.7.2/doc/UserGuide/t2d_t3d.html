@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>t2d and t3d</TITLE>
+<META NAME="description" CONTENT="t2d and t3d">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="previous" HREF="scat2d_scat3d.html">
+<LINK REL="up" HREF="GRUMMP_Programs.html">
+<LINK REL="next" HREF="File_Formats.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html532"
+  HREF="File_Formats.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html528"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html524"
+  HREF="scat2d_scat3d.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html530"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html533"
+  HREF="File_Formats.html">File Formats</A>
+<B> Up:</B> <A NAME="tex2html529"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html525"
+  HREF="scat2d_scat3d.html">scat2d and scat3d</A>
+ &nbsp; <B>  <A NAME="tex2html531"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03260000000000000000">
+<TT>t2d</TT> and <TT>t3d</TT></A>
+</H1>
+
+<P>
+The programs <TT>t2d</TT> and <TT>t3d</TT><A NAME="tex2html13"
+  HREF="footnode.html#foot1817"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN></SUP></A> translate two-dimensional (respectively, three-dimensional) mesh
+files from one format to another. To use these programs, enter the
+<TT>GRUMMP/src/IO_generator</TT> directory. Edit the files <TT>t[23]d_in.template</TT>
+and <TT>t[23]d_out.template</TT>; see Section&nbsp;<A HREF="Input_output_mesh.html#sec:IO-templates">3.2</A>
+for information on the format of these files. Then type <TT>make
+t[23]d</TT>.<A NAME="tex2html14"
+  HREF="footnode.html#foot1677"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">4</SPAN></SUP></A> The resulting executable will read a mesh in the format specified
+in <TT>t[23]d_in.template</TT> and write it in the format specified
+in <TT>t[23]d_out.template</TT>. The only argument to <TT>t[23]d</TT>
+is <TT>-i&nbsp;<SPAN  CLASS="textit">basefilename</SPAN></TT>, which has the same meaning
+as for the other executables. Again, output files have <TT>.out</TT>
+appended to their names to avoid filename collisions.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

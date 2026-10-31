@@ -1,0 +1,38 @@
+include @top_srcdir@/src/conf/default-rules
+include @top_srcdir@/iMesh-Defs.inc
+
+THIS_SRCDIR = apps/shock-tracker
+TOP_SRCDIR = @top_srcdir@
+
+EXECS = shock-tracker-3d
+
+default: shock-tracker-3d test
+
+CXXOBJECTS = InterfaceTracker.o \
+ShockTopo.o \
+SurfaceBridge.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+BOOSTLIB = -DBOOST_TEST_DYN_LINK @BOOST_UNIT_TEST_FRAMEWORK_LIB@ 
+
+shock-tracker-3d: shock-tracker-3d.o $(OBJECTS)
+	echo Linking shock-tracker-3d
+	-$(CXX_COMPILE) -o shock-tracker-3d shock-tracker-3d.o $(OBJECTS) $(LDFLAGS) $(IMESH_LIBS) $(IMESH_LIBS)
+	echo " "
+
+shockTests: shockTests.o $(OBJECTS)
+	echo Linking shockTests
+	-$(CXX_COMPILE) -o shockTests shockTests.o $(OBJECTS) $(LDFLAGS) $(IMESH_LIBS) $(IMESH_LIBS) $(BOOSTLIB)
+	echo " "
+	
+test: shockTests
+	./shockTests
+
+distclean: localdistclean
+
+localdistclean:
+	-rm -f $(EXECS)
+

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Anisotropic Mesh Coarsening</TITLE>
+<META NAME="description" CONTENT="Anisotropic Mesh Coarsening">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Outcomes.html">
+<LINK REL="previous" HREF="Incremental_Vertex_Deletion.html">
+<LINK REL="up" HREF="Mesh_Coarsening.html">
+<LINK REL="next" HREF="Outcomes.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html869"
+  HREF="Outcomes.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html865"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html859"
+  HREF="Incremental_Vertex_Deletion.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html867"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html870"
+  HREF="Outcomes.html">Outcomes</A>
+<B> Up:</B> <A NAME="tex2html866"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html860"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+ &nbsp; <B>  <A NAME="tex2html868"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html871"
+  HREF="Anisotropic_Mesh_Coarsening.html#SECTION04331000000000000000">Selection of Points in Pseudo-structured Anisotropic Meshes</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION04330000000000000000"></A><A NAME="sec:aniso"></A>
+<BR>
+Anisotropic Mesh Coarsening
+</H1>
+
+<P>
+For anisotropic problems -- including notably external
+viscous flow problems -- there is often a pseudo-structured
+part of the mesh to accurately resolve anisotropic physics. The pseudo-structured
+part of the mesh typically contains quadrilaterals, prisms, or hexahedra
+that have been divided into triangles or tetrahedra. Pseudo-structured
+meshes are useful in treatment of anisotropic physics, and these pseudo-structured
+regions should be preserved in coarse meshes to the extent feasible. 
+
+<P>
+These pseudo-structured mesh regions can be coarsened isotropically,
+reducing the number of vertices by a factor of <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$2^{D}$"></SPAN> in these regions
+by removing alternate planes of points in each direction. However,
+some work&nbsp;[<A
+ HREF="Bibliography.html#Mavriplis1997">5</A>,<A
+ HREF="Bibliography.html#Pierce1997">12</A>] suggests that multigrid
+methods are much more efficient if coarsening is done anisotropically,
+reducing the cell aspect ratio near the wall and the associated numerical
+stiffness. We allow several variations on anisotropic coarsening to
+accommodate different scenarios for surface and interior mesh pseudo-structure,
+as discussed in Section&nbsp;<A HREF="#sec:psm-coarsening">6.3.1</A>.
+
+<OL>
+<LI><A NAME="step:pssm"></A>Three-dimensional meshes may have a locally anisotropic,
+<SPAN  CLASS="textit">pseudo-structured surface mesh</SPAN>, as shown in Figure&nbsp;<A HREF="#fig:pssm">6.3</A>.
+Roughly speaking, in this case, all fold vertices are retained, and
+alternate vertices are retained along closely-spaced lines leaving
+the fold. This process is described in detail in Section&nbsp;<A HREF="#sec:psm-coarsening">6.3.1</A>. 
+</LI>
+<LI><A NAME="step:psim"></A>Both two- and three-dimensional meshes may have
+sections of locally anisotropic, <SPAN  CLASS="textit">pseudo-structured interior
+mesh</SPAN>, similar in two dimensions to the example in Figure&nbsp;<A HREF="#fig:pssm">6.3</A>.
+Pseudo-structured interior mesh fragments are coarsened in much the
+same way as pseudo-structured surface mesh fragments.
+</LI>
+</OL>
+
+<P>
+
+<H2><A NAME="SECTION04331000000000000000"></A><A NAME="sec:psm-coarsening"></A>
+<BR>
+Selection of Points in Pseudo-structured Anisotropic Meshes
+</H2>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:pssm"></A><A NAME="3617"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 6.3:</STRONG>
+Pseudo-structured surface mesh on a wedge.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+<IMG
+ WIDTH="274" HEIGHT="240" ALIGN="BOTTOM" BORDER="0"
+ SRC="img92.png"
+ ALT="\includegraphics[width=0.5\textwidth]{pics/surf-struct}">
+</DIV>
+<P>
+<DIV ALIGN="CENTER">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+In selecting points with pseudo-structured anisotropic mesh fragments
+(PSAMF's) to retain in coarse meshes, we consider three important
+and distinct cases:
+
+<OL>
+<LI>The fully-anisotropic case (3D).<A NAME="case:3D-full-aniso"></A> Some three
+dimensional meshes have anisotropic layers built out from <SPAN  CLASS="textit">anisotropic</SPAN>
+surface triangulations. A typical example of this is found in computational
+aerodynamics, where cells near aircraft wings for viscous simulations
+are much larger in the spanwise direction than in the streamwise direction,
+and much larger in the streamwise direction than normal to the wing
+surface. To reach unit aspect ratio in both directions during coarsening,
+we initially keep every point along the trailing edge in the spanwise
+direction, alternate lines on the wing surface, and every fourth layer
+in the interior of the mesh. This reduces the aspect ratio in both
+directions, and reduces the number of vertices by a factor of 8 in
+these mesh fragments. As the spanwise-streamwise aspect ratio approaches
+one (<SPAN  CLASS="textit">i.e.</SPAN>, as the surface mesh becomes isotropic), such a mesh
+fragment would revert to Case&nbsp;<A HREF="#case:3D-semi-aniso">2</A>.
+</LI>
+<LI>The semi-anisotropic case (3D).<A NAME="case:3D-semi-aniso"></A> Some three
+dimensional meshes have anisotropic layers built out from <SPAN  CLASS="textit">isotropic</SPAN>
+surface triangulations. In this case, we choose to coarsen the surface
+mesh as we would a two-dimensional isotropic mesh. In the interior,
+we choose to emphasize reduced cell aspect ratio near the boundary
+by selecting every fourth vertex along marching lines beginning at
+the surface vertices that will be retained. This approach reduces
+the aspect ratio of anisotropic cells near the boundary by roughly
+a factor of two at each coarsening and reduces the number of vertices
+in such mesh fragments by a factor of 16. 
+</LI>
+<LI><A NAME="case:2D-aniso"></A>In two dimensions, directional anisotropic coarsening
+should select every fourth vertex along marching lines extending from
+each point on the boundary into the domain.
+</LI>
+</OL>
+These rules are simple to describe and simple for a person to follow,
+but some care is required so that a computer can reliably identify
+a pseudo-structured anisotropic mesh fragment and coarsen it properly.
+For details, see&nbsp;[<A
+ HREF="Bibliography.html#Ollivier-Gooch1999">9</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html869"
+  HREF="Outcomes.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html865"
+  HREF="Mesh_Coarsening.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html859"
+  HREF="Incremental_Vertex_Deletion.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html867"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html870"
+  HREF="Outcomes.html">Outcomes</A>
+<B> Up:</B> <A NAME="tex2html866"
+  HREF="Mesh_Coarsening.html">Mesh Coarsening</A>
+<B> Previous:</B> <A NAME="tex2html860"
+  HREF="Incremental_Vertex_Deletion.html">Incremental Vertex Deletion</A>
+ &nbsp; <B>  <A NAME="tex2html868"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

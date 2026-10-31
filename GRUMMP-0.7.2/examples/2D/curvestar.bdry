@@ -1,0 +1,25 @@
+# Number of verts, # of boundary chunks
+10 10
+# the verts...
+1.0 0.0
+0.5 0.866025403
+-0.5 0.866025403
+-1.0 0.0
+-0.5 -0.866025403
+0.5 -0.866025403 
+1.5 2.598076211
+-3.0 0.0
+1.5 -2.598076211 
+0.0 0.0
+#The_chunks..._left_info,_right_info,_#_of_verts,_then_verts
+arc r 1 b 1 1.0 1 2
+arc r 1 b 1 1.0 3 4
+arc r 1 b 1 1.0 5 0
+arc b 1 r 1 1.0 1 6
+arc r 1 b 1 1.375 0 6
+arc b 1 r 1 1.0 3 7
+arc r 1 b 1 1.375 2 7
+arc b 1 r 1 1.0 5 8
+arc r 1 b 1 1.375 4 8
+circle b 2 r 1 0.6 9
+

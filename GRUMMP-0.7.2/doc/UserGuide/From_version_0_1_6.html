@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.1.6 to 0.1.6a:</TITLE>
+<META NAME="description" CONTENT="From version 0.1.6 to 0.1.6a:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_5.html">
+<LINK REL="previous" HREF="From_version_0_1_6a.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1177"
+  HREF="From_version_0_1_5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1173"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1167"
+  HREF="From_version_0_1_6a.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1175"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1178"
+  HREF="From_version_0_1_5.html">From version 0.1.5 to</A>
+<B> Up:</B> <A NAME="tex2html1174"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1168"
+  HREF="From_version_0_1_6a.html">From version 0.1.6a to</A>
+ &nbsp; <B>  <A NAME="tex2html1176"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051190000000000000000">
+From version 0.1.6 to 0.1.6a:</A>
+</H1>
+
+<UL>
+<LI>Support for <SPAN  CLASS="textbf">HP-UX 10.20 with native compilers</SPAN>. This required
+a large number of small changes, with three common causes. 
+
+<P>
+
+<OL>
+<LI>The HP-UX C++ compiler has a broken implementation of the <SPAN  CLASS="textbf">inline</SPAN>
+keyword: it chokes on inline functions with loops instead of implementing
+them out-of-line. 
+</LI>
+<LI>The HP-UX C++ compiler does link-time template instantiation. 
+</LI>
+<LI>A number of warning messages, for both C and C++ code, gave useful
+pointers to idioms in the code that were worth tightening up. 
+</LI>
+</OL>
+This cleanup should also improve portability to other new platforms,
+especially those with <TT>cfront</TT>-based compilers.
+
+<P>
+Thanks to Aldo Bonfiglioli in the Faculty of Engineering at the University
+of Basilicata for providing accessing to an HP-UX 10.20 test machine.
+</LI>
+<LI>Minor improvements to the <TT>lex</TT> input files for I/O generation.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

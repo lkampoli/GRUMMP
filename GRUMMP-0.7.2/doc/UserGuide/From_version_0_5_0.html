@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.5.0 to 0.6.0:</TITLE>
+<META NAME="description" CONTENT="From version 0.5.0 to 0.6.0:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_3_3.html">
+<LINK REL="previous" HREF="From_version_0_6_0.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_3_3.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1071"
+  HREF="From_version_0_3_3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1067"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1061"
+  HREF="From_version_0_6_0.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1069"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1072"
+  HREF="From_version_0_3_3.html">From version 0.3.3 to</A>
+<B> Up:</B> <A NAME="tex2html1068"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1062"
+  HREF="From_version_0_6_0.html">From version 0.6.0 to</A>
+ &nbsp; <B>  <A NAME="tex2html1070"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION05190000000000000000">
+From version 0.5.0 to 0.6.0:</A>
+</H1>
+
+<P>
+Version 0.6.0 brings another significant upgrade to GRUMMP, which
+now supports meshing from curved boundary data. Starting from the
+curved boundary representation, GRUMMP discretizes surfaces by sampling,
+then generates tetrahedral meshes from the resulting surface triangulations.
+Any boundary points that are inserted during volume refinement are
+inserted onto the curved surface, not onto a tesselation of the surface.
+Geometry is currently input via stereolithography files (see Section&nbsp;<A HREF="Three_dimensional_geometry_.html#sec:3d-geom">3.3</A>
+for more information). As a consequence of how geometry is handled
+internally, GRUMMP now requires the Argonne version of the Common
+Geometry Module (version 10.2.2) to build. The configure script automatically
+fetches and builds this if it's needed.<A NAME="tex2html41"
+  HREF="footnode.html#foot4098"><SUP>A.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<P>
+Additional changes since version 0.5.0:
+
+<UL>
+<LI>Fixed numerous errors and warnings when compiling with gcc 4.4. This
+is what we get for making a release with an older compiler.
+</LI>
+<LI>Support for reading legacy ASCII VTK files, binary UGrid, and binary
+VGrid files in 3D; these are auto-detected at read time. This is in
+addition to GRUMMP's template approach for auto-generating code for
+reading ASCII mesh files.
+</LI>
+<LI>Infrastructure changes to centralize manipulation of the mesh topology
+database. These changes aren't user-visible: the same things happen
+at almost exactly the same speed. But with this change to better encapsulate
+mesh topology changes, we expect to be able to relatively easily add
+support for edges in the 3D mesh database, so that we can generate
+curved meshes.
+</LI>
+<LI>Various other bug fixes.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1071"
+  HREF="From_version_0_3_3.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1067"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1061"
+  HREF="From_version_0_6_0.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1069"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1072"
+  HREF="From_version_0_3_3.html">From version 0.3.3 to</A>
+<B> Up:</B> <A NAME="tex2html1068"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1062"
+  HREF="From_version_0_6_0.html">From version 0.6.0 to</A>
+ &nbsp; <B>  <A NAME="tex2html1070"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

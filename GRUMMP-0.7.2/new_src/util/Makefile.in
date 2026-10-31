@@ -1,0 +1,18 @@
+LIBBASE = libGR_util
+ID_STRING = GRUMMP utilities
+
+THIS_SRCDIR = new_src/util
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = GetOpts.o Geom2D.o Geom3D.o
+
+COBJECTS = misc.o predicates.o
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: library
+
+include @top_srcdir@/src/conf/default-rules
+
+library: 
+	$(MAKE) .libs

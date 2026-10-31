@@ -1,0 +1,21 @@
+LIBBASE = libGR_io
+ID_STRING = GRUMMP I/O
+
+THIS_SRCDIR = new_src/io
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = Read2D.o ReadNative2D.o \
+WriteFEA.o WriteNative.o \
+VolRead.o ReadTecPlot.o ReadUGrid.o ReadVGrid.o ReadVTK.o ReadMEdit3D.o \
+WriteVTK.o WritePWM.o TetGen.o Surface.o VTK2D.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+default: library
+
+include @top_srcdir@/src/conf/default-rules
+
+library: 
+	$(MAKE) .libs

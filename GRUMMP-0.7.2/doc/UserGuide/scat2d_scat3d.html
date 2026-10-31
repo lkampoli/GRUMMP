@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>scat2d and scat3d</TITLE>
+<META NAME="description" CONTENT="scat2d and scat3d">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="t2d_t3d.html">
+<LINK REL="previous" HREF="Additional_command_line.html">
+<LINK REL="up" HREF="GRUMMP_Programs.html">
+<LINK REL="next" HREF="t2d_t3d.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html522"
+  HREF="t2d_t3d.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html518"
+  HREF="GRUMMP_Programs.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html512"
+  HREF="Additional_command_line.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html520"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html523"
+  HREF="t2d_t3d.html">t2d and t3d</A>
+<B> Up:</B> <A NAME="tex2html519"
+  HREF="GRUMMP_Programs.html">GRUMMP Programs</A>
+<B> Previous:</B> <A NAME="tex2html513"
+  HREF="Additional_command_line.html">Additional command line arguments</A>
+ &nbsp; <B>  <A NAME="tex2html521"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03250000000000000000"></A><A NAME="sec:scat-data"></A>
+<BR>
+<TT>scat2d</TT> and <TT>scat3d</TT>
+</H1>
+
+<P>
+<TT>scat2d</TT> and <TT>scat3d</TT> perform interpolation of scattered
+data. An input data file, containing both locations at which data
+is known and the data itself, is read. The points are triangulated
+(as part of a larger Cartesian box); swapping is performed to obtain
+reasonable connectivity. A tree structure containing the data points
+is constructed to facilitate interpolation. A second set of points
+is read in; these are the target locations for the interpolation.
+Data is interpolated to these points and written out. For file formats,
+see Section&nbsp;<A HREF="Scattered_data_interpolatio.html#sec:scat3d-files">3.9</A>.
+
+<P>
+The command line arguments for <TT>scat2d</TT> and <TT>scat3d</TT>
+are:
+
+<UL>
+<LI>[-i&nbsp;<TT><SPAN  CLASS="textit">basefilename</SPAN></TT>] <SPAN  CLASS="textit"></SPAN>
+
+<P>
+This argument is mandatory and specifies the stem for all file names
+used by the program. The input file containing the data to be interpolated
+is <TT><SPAN  CLASS="textit">basefilename</SPAN>.data</TT>; the input file containing
+locations to which to interpolate the data is <TT><SPAN  CLASS="textit">basefilename</SPAN>.points</TT>;
+the optional output volume mesh file is <TT><SPAN  CLASS="textit">basefilename</SPAN>.vmesh.out</TT>;
+the message file is <TT><SPAN  CLASS="textit">basefilename</SPAN>.msg</TT>; and
+the output file for interpolated data is <TT><SPAN  CLASS="textit">basefilename</SPAN>.out</TT>.
+</LI>
+<LI>[-m] This optional argument directs <TT>scat2d</TT>/<TT>scat3d</TT>
+to save the 2D/volume mesh it generates in <TT><SPAN  CLASS="textit">basefilename</SPAN>.mesh</TT>/<TT><SPAN  CLASS="textit">basefilename</SPAN>.vmesh</TT>.
+<SPAN  CLASS="textbf">Default: don't save mesh.</SPAN>
+</LI>
+</UL>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

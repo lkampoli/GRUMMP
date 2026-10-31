@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.2.1 to 0.3.0:</TITLE>
+<META NAME="description" CONTENT="From version 0.2.1 to 0.3.0:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_2_0.html">
+<LINK REL="previous" HREF="From_version_0_3_0.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_2_0.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1129"
+  HREF="From_version_0_2_0.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1125"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1119"
+  HREF="From_version_0_3_0.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1127"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1130"
+  HREF="From_version_0_2_0.html">From version 0.2.0. to</A>
+<B> Up:</B> <A NAME="tex2html1126"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1120"
+  HREF="From_version_0_3_0.html">From version 0.3.0 to</A>
+ &nbsp; <B>  <A NAME="tex2html1128"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051150000000000000000">
+From version 0.2.1 to 0.3.0:</A>
+</H1>
+
+<UL>
+<LI><SPAN  CLASS="textbf">Isotropic mesh adaption.</SPAN> The biggest user-visible change
+since the previous release is support for isotropic mesh adaptation.
+Internally, GRUMMP has had this functionality for a while, but by
+user request, it's now accessible through the command line interface.
+Basically, length scale information can be supplied for some or all
+vertices in a separate file, and meshopt2d / meshopt3d will modify
+the input mesh to match that length scale. If no length scale is provided,
+meshopt2d/3d behave as they always have.
+</LI>
+<LI><SPAN  CLASS="textbf">Length scale improvements.</SPAN> Fixed a problem with length scale
+calculations that sometimes caused a vertex to identify a bdry patch
+that was just -behind- the vertex (and therefore not visible) as one
+of its nearby patches. The 3D tire incinerator example was the geometry
+that showed this problem the most distinctly.
+</LI>
+<LI><SPAN  CLASS="textbf">Improved initial tetrahedralization.</SPAN> More incremental improvement
+to initial tetrahedralization, most notably in merging co-planar input
+facets and better handling of small angles between input edges. The
+latter also has the effect of reducing output mesh size noticeably
+for many input files with small angles between edges.
+
+<P>
+
+<UL>
+<LI>Added support for merging co-planar boundary patches in 3D. For input
+files that have large numbers of co-planar triangles, this boundary
+optimization can be a tremendous help in creating the initial volume
+mesh. All vertices are guaranteed to be in the volume mesh, but there
+are no guarantees about the surface triangles. (Command line option:
+-m for merge bdry patches.)
+</LI>
+<LI>Fixed a bug in handling surface recovery for multi-region bdry files
+in 3D. This bug often resulted in failures near the end of initial
+tetrahedralization.
+</LI>
+<LI>Support for free vertices in input files for 3D meshes. That is, a
+vertex can be pre-defined to have a particular location -without-
+being connected to the surface mesh. (The point must lie on or inside
+the domain, obviously.) Because of differences in the way that 2D
+and 3D input is handled, this capability is tricky to implement in
+2D. However, a currently-underway re-write of all boundary input handling
+should enable this in 2D before much longer.
+</LI>
+</UL>
+</LI>
+<LI><SPAN  CLASS="textbf">Reordering of mesh entities</SPAN> before output to improve bandwidth
+and cache performance for solvers reading these meshes. Vertices are
+reordered using the reverse Cuthill-McKee algorithm. Faces and cells
+are reordered according to the sum of the indices of their vertices.
+</LI>
+<LI><SPAN  CLASS="textbf">Support for long arcs</SPAN>: circular arcs longer than 180 degrees.
+An arc is still CCW and &lt; 180 degrees.
+A longarc is CCW and &gt; 180 degrees between
+the same two points.
+</LI>
+<LI>Fixed a <SPAN  CLASS="textbf">minor edge swapping bug</SPAN> that often resulted in a
+neglecting a few swaps.
+</LI>
+<LI>Internal changes to <SPAN  CLASS="textbf">support the Terascale Simulation Tools
+and Technologies (TSTT) mesh interface</SPAN>. This is a language- and data-structure
+neutral interface to meshing tools. For more information, including
+links to the TSTT interface definition, see http://www.tstt-scidac.org.
+</LI>
+<LI>Fixed a GNU/Linux shared library creation bug. Added support for shared
+libraries under AIX (finally!).
+</LI>
+<LI>Made changes for GCC 3.x compatibility (mostly tightening up use of
+std::) and to improve portability (mostly getting rid of uses of the
+GNU extension that allows dynamic arrays to be declared as name[run-time
+size].
+</LI>
+<LI>Removed some experimental and obsolete files from the distribution.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1129"
+  HREF="From_version_0_2_0.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1125"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1119"
+  HREF="From_version_0_3_0.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1127"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1130"
+  HREF="From_version_0_2_0.html">From version 0.2.0. to</A>
+<B> Up:</B> <A NAME="tex2html1126"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1120"
+  HREF="From_version_0_3_0.html">From version 0.3.0 to</A>
+ &nbsp; <B>  <A NAME="tex2html1128"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

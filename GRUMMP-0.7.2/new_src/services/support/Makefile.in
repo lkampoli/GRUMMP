@@ -1,0 +1,15 @@
+ID_STRING = GRUMMP service support
+
+THIS_SRCDIR = new_src/services/support
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = QualMeasures2D.o QualMeasures3D.o LengthAniso.o LengthAniso2D.o LengthAniso3D.o Length.o Length2D.o Length3D.o TMOPQual.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: $(OBJECTS)
+
+include @top_srcdir@/src/conf/default-rules
+

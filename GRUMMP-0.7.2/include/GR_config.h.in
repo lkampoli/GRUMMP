@@ -1,0 +1,374 @@
+#ifndef CONFIG_H_GRUMMP
+#define CONFIG_H_GRUMMP
+
+/* include/GR_config.h.in.  Generated from configure.in by autoheader.  */
+
+/* Define to dummy `main' function (if any) required to link to the Fortran
+   libraries. */
+#undef FC_DUMMY_MAIN
+
+/* Define if F77 and FC dummy `main' functions are identical. */
+#undef FC_DUMMY_MAIN_EQ_F77
+
+/* Define to a macro mangling the given C identifier (in lower and upper
+   case), which must not contain underscores, for linking with Fortran. */
+#undef FC_FUNC
+
+/* As FC_FUNC, but for C identifiers containing underscores. */
+#undef FC_FUNC_
+
+/* Unique, monotonically increasing serial number for this version */
+#define GRUMMP_SERIAL @GR_SERIAL@
+
+/* Version number as a string. */
+#define GRUMMP_VERSION "@GR_VERSION@"
+
+/* Define to 1 if compiling with MPI */
+#undef HAVE_MPI
+
+/* Define to 1 if compiling with OpenMP */
+#undef HAVE_OPENMP
+
+/* Define to 1 if you have the Mesquite headers available. */
+#undef HAVE_MESQUITE
+
+/* Define to 1 if you have the Mesquite library available. */
+#undef HAVE_MESQUITE_LIB
+
+/* Define to 1 if you have the Mesquite iMesh library available. */
+#undef HAVE_MSQIMESH_LIB
+
+/* Define to 1 if you have the <unordered_map> header file. */
+#undef HAVE_CXX0X
+
+/* Define to 1 if you have the `atexit' function. */
+#undef HAVE_ATEXIT
+
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
+#undef HAVE_DOPRNT
+
+/* Define to 1 if you have the `drand48' function. */
+#undef HAVE_DRAND48
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define to 1 if you have the <float.h> header file. */
+#undef HAVE_FLOAT_H
+
+/* Define to 1 if you have the `floor' function. */
+#undef HAVE_FLOOR
+
+/* Define to 1 if you have the `gettimeofday' function. */
+#undef HAVE_GETTIMEOFDAY
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `dl' library (-ldl). */
+#undef HAVE_LIBDL
+
+/* Define to 1 if you have the `fl' library (-lfl). */
+#undef HAVE_LIBFL
+
+/* Define to 1 if you have the `l' library (-ll). */
+#undef HAVE_LIBL
+
+/* Define to 1 if you have the `m' library (-lm). */
+#undef HAVE_LIBM
+
+/* Define to 1 if you have the `TKernel' library (-lTKernel). */
+#undef HAVE_LIBTKERNEL
+
+/* Define to 1 if you have the <limits.h> header file. */
+#undef HAVE_LIMITS_H
+
+/* Define to 1 if your system has a GNU libc compatible `malloc' function, and
+   to 0 otherwise. */
+#undef HAVE_MALLOC
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Is OpenCascade present? */
+#undef HAVE_OCC
+
+/* Define to 1 if you have the `on_exit' function. */
+#undef HAVE_ON_EXIT
+
+/* Define to 1 if you have the `pow' function. */
+#undef HAVE_POW
+
+/* Define to 1 if the system has the type `ptrdiff_t'. */
+#undef HAVE_PTRDIFF_T
+
+/* Define to 1 if you have the `snprintf' function. */
+#undef HAVE_SNPRINTF
+
+/* Define to 1 if you have the `sqrt' function. */
+#undef HAVE_SQRT
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strcasecmp' function. */
+#undef HAVE_STRCASECMP
+
+/* Define to 1 if you have the `strchr' function. */
+#undef HAVE_STRCHR
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strtod' function. */
+#undef HAVE_STRTOD
+
+/* Define to 1 if you have the `strtol' function. */
+#undef HAVE_STRTOL
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/timeb.h> header file. */
+#undef HAVE_SYS_TIMEB_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <tr1/unordered_map> header file. */
+#undef HAVE_TR1
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the <values.h> header file. */
+#undef HAVE_VALUES_H
+
+/* Define to 1 if you have the `vprintf' function. */
+#undef HAVE_VPRINTF
+
+/* Does the C compiler support a bool type? */
+#undef HAVE_bool_c
+
+/* What machine type is this? */
+#define HOST_OS "@host_os_short@"
+
+/* Build with support for ITAPS */
+#ifndef ITAPS
+#undef ITAPS
+#endif
+
+/* Compile without assertions and extra checks in this is set. */
+#undef NDEBUG
+
+/* Turn debugging output off in the smoothing code. */
+#undef SM_DEBUG_LEVEL
+
+/* Output statistics for smoothing results? */
+#undef SM_STATS
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
+   `char[]'. */
+#undef YYTEXT_POINTER
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
+
+/* Define to the type of a signed integer type of width exactly 32 bits if
+   such a type exists and the standard includes do not define it. */
+#undef int32_t
+
+/* Define to the type of an unsigned integer type of width exactly 32 bits if
+   such a type exists and the standard includes do not define it. */
+#undef uint32_t
+
+/* Define to rpl_malloc if the replacement function should be used. */
+#undef malloc
+
+/* Define to the equivalent of the C99 'restrict' keyword, or to
+   nothing if this is not supported.  Do not define if restrict is
+   supported directly.  */
+#undef restrict
+/* Work around a bug in Sun C++: it does not support _Restrict or
+   __restrict__, even though the corresponding Sun C compiler ends up with
+   "#define restrict _Restrict" or "#define restrict __restrict__" in the
+   previous line.  Perhaps some future version of Sun C++ will work with
+   restrict; if so, hopefully it defines __RESTRICT like Sun C does.  */
+#if defined __SUNPRO_CC && !defined __RESTRICT
+# define _Restrict
+# define __restrict__
+#endif
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef ssize_t
+
+#ifndef __cplusplus
+/* Define to empty if the const keyword is broken in the C compiler */
+#undef const
+#endif
+
+/* Define if the bool type is known to your compiler */
+#undef HAVE_bool_c
+
+/* Define if vprintf exists */
+#undef HAVE_VPRINTF
+
+#undef SUNOS4
+#undef SOLARIS2
+#undef LINUX_GNU
+#undef LINUX
+#undef HPUX10
+#undef OSF4
+
+#ifdef NDEBUG
+#define MESSAGE_LEVEL_STDOUT 1
+#define MESSAGE_LEVEL_FILE 2
+#else
+#define MESSAGE_LEVEL_STDOUT 1
+#define MESSAGE_LEVEL_FILE 3
+#endif
+
+/* The following is fine for IEEE double precision, or anything else */
+/* with at least ten bits of binary exponent. */
+#define LARGE_DBL 1.e+300
+
+#ifdef SUNOS4
+/* Sun OS 4.1.x has some missing declarations */
+#include <stdio.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+int fflush( FILE *stream);
+int fclose( FILE *stream);
+int tolower (int c);
+long int strtol(const char *nptr, char **endptr, int base);
+int printf( const char *format, ...);
+int fprintf( FILE *stream, const char *format, ...);
+#ifdef __cplusplus
+}
+#else
+#include <varargs.h>
+int vprintf(const char *format, va_list ap);
+int vfprintf(FILE *stream, const char *format, va_list ap);
+char *vsprintf(char *s, const char *format, va_list ap);
+#endif
+#endif
+
+#if ((!defined(HAVE_DRAND48)) || (defined(SUNOS)))
+#ifdef __cplusplus
+extern "C" {
+#endif
+double drand48(void);
+void srand48(long seed);
+#ifdef __cplusplus
+}
+#endif
+#endif
+
+#ifndef __cplusplus
+
+#ifndef HAVE_bool_c
+#define bool unsigned int
+#define true 1
+#define false 0
+#endif
+
+#endif
+
+#if ((!defined(HAVE_SNPRINTF)) || (defined(_AIX) && !defined(__GNUG__)))
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <stdlib.h>
+int snprintf ( char *str, size_t n, const char *format, ... );
+#ifdef __cplusplus
+}
+#endif
+#endif
+
+#if defined(HAVE_ATEXIT)
+/* atexit() is defined */
+#define GRUMMP_AT_EXIT(a) atexit(a)
+#else
+#if defined(HAVE_ON_EXIT)
+/* atexit() is not defined but on_exit() is.  Sun 4, for example, has */
+/* no prototype for atexit(), although the function appears to exist. */
+#define GRUMMP_AT_EXIT(a) on_exit(a, (void*)(0))
+#else
+/* neither atexit() nor on_exit() is defined */
+#define GRUMMP_AT_EXIT(a) 
+#endif /* HAVE_ON_EXIT */
+#endif /* HAVE_ATEXIT */
+
+#if ((defined(HPUX10)) && (!defined(__GNUG__)))
+/* HPUX10 native compiler pukes on inlines with loops instead of
+   converting them to non-inline functions. */
+#define BROKEN_INLINE 
+#endif
+
+#ifdef WIN32
+#ifdef __cplusplus
+extern "C" {
+#endif
+int getopt(int argc, char * const argv[],
+                  const char *optstring);
+#ifdef __cplusplus
+}
+#endif
+#endif
+
+#ifdef HAVE_STDINT_H
+#include <stdint.h>
+#endif
+typedef uint32_t GR_index_t;
+typedef int32_t  GR_sindex_t;
+
+#ifdef __cplusplus
+#ifdef HAVE_TR1
+#include <tr1/unordered_set>
+#include <tr1/unordered_map>
+#define GR_map std::tr1::unordered_map
+#define GR_set std::tr1::unordered_set
+#else
+#ifdef HAVE_CXX0X 
+#include <unordered_set>
+#include <unordered_map>
+#define GR_map std::unordered_map
+#define GR_set std::unordered_set
+#else
+#include <set>
+#include <map>
+#define GR_map std::map
+#define GR_set std::set
+#endif /* HAVE_CXX0X (else) */
+#endif /* HAVE_TRI */
+#endif /* __cplusplus */
+
+#define TEMPLATE_DEFS_INCLUDED 
+
+/* Be sure these two always get included along with config info. */
+#include "GR_assert.h"
+#ifdef __cplusplus
+#include "GR_Classes.h"
+#endif
+
+#endif
+ 

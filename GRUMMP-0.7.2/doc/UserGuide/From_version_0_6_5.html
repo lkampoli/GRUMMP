@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.6.5 to 0.6.6:</TITLE>
+<META NAME="description" CONTENT="From version 0.6.5 to 0.6.6:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_6_4.html">
+<LINK REL="previous" HREF="From_version_0_6_6.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_6_4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1011"
+  HREF="From_version_0_6_4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1007"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1001"
+  HREF="From_version_0_6_6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1009"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1012"
+  HREF="From_version_0_6_4.html">From version 0.6.4 to</A>
+<B> Up:</B> <A NAME="tex2html1008"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1002"
+  HREF="From_version_0_6_6.html">From version 0.6.6 to</A>
+ &nbsp; <B>  <A NAME="tex2html1010"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION05140000000000000000">
+From version 0.6.5 to 0.6.6:</A>
+</H1>
+
+<P>
+This is a bug-fix release, with no major user-visible changes.
+
+<UL>
+<LI>For those building their own executables using the GRUMMP libraries,
+there is now a make include file, GRUMMP-Defs.inc, that defines some
+helpful make variables.
+</LI>
+<LI>GRUMMP's small but growing collection of unit tests is now distributed,
+built, and run at build time. As these tests run in a fraction of
+a second, the only impact on users will be a slight increase in build
+output. Caution: these require the Boost unit test libraries; if you
+don't have those installed, use the configure option -disable-unit-test.
+</LI>
+<LI>Fixed orientation bug when reading quads in a 2D VTK file.
+</LI>
+<LI>Fixed a bug in automatic creation of boundary data from mesh data
+in 3D.
+</LI>
+<LI>Found and fixed an obscure but serious insertion bug in 3D: some additional
+topology change was needed but not done, sometimes causing insertion
+to hang.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

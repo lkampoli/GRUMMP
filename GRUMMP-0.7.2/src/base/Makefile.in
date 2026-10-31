@@ -1,0 +1,21 @@
+LIBBASE = libGR_base
+ID_STRING = GRUMMP base class
+
+THIS_SRCDIR = src/base
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = ADT.o Adapt.o CellSkel.o \
+	CellCV.o DiscreteCurvTool.o \
+	GeomComp.o GraphicsOut.o InsertionQueue.o \
+	Quality.o VertConnect.o Aniso.o CellQueue.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+default: library
+
+include ../conf/default-rules
+
+library: 
+	$(MAKE) .libs

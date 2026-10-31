@@ -1,0 +1,98 @@
+40 30
+# Outer cube
+-1 -1 -1
+ 1 -1 -1
+ 1  1 -1
+-1  1 -1
+-1 -1  1
+ 1 -1  1
+ 1  1  1
+-1  1  1
+# Inner cube
+-0.8 -0.8 -0.8
+ 0.8 -0.8 -0.8
+ 0.8  0.8 -0.8
+-0.8  0.8 -0.8
+-0.8 -0.8  0.8
+ 0.8 -0.8  0.8
+ 0.8  0.8  0.8
+-0.8  0.8  0.8
+# Square on left face (min x)
+-1  0.8 -0.8
+-1 -0.8 -0.8
+-1 -0.8  0.8
+-1  0.8  0.8
+# Square on right face (max x)
+ 1 -0.8 -0.8
+ 1  0.8 -0.8
+ 1  0.8  0.8
+ 1 -0.8  0.8
+# Square on front face (min y)
+-0.8 -1 -0.8
+ 0.8 -1 -0.8
+ 0.8 -1  0.8
+-0.8 -1  0.8
+# Square on back face (max y)
+ 0.8  1 -0.8
+-0.8  1 -0.8
+-0.8  1  0.8
+ 0.8  1  0.8
+# Square on bottom face (min z)
+-0.8  0.8 -1
+ 0.8  0.8 -1
+ 0.8 -0.8 -1
+-0.8 -0.8 -1
+# Square on top face (max z)
+-0.8 -0.8  1
+ 0.8 -0.8  1
+ 0.8  0.8  1
+-0.8  0.8  1
+# Left face (min x)
+polygon b 1 r 1 4 0 3 7 4
+subtract polygon 4 19 18 17 16
+# Right face (max x)
+polygon b 1 r 1 4 2 1 5 6
+subtract polygon 4 23 22 21 20
+# Front face (min y)
+polygon b 1 r 1 4 0 4 5 1
+subtract polygon 4 27 26 25 24
+# Back face (max y)
+polygon b 1 r 1 4 3 2 6 7
+subtract polygon 4 31 30 29 28
+# Bottom face (min z)
+polygon b 1 r 1 4 0 1 2 3
+subtract polygon 4 35 34 33 32
+# Top face (max z)
+polygon b 1 r 1 4 7 6 5 4
+subtract polygon 4 39 38 37 36
+# Rectangles for left face (min x)
+polygon b 1 r 1 4 17 16 11 8
+polygon b 1 r 1 4 16 19 15 11
+polygon b 1 r 1 4 19 18 12 15
+polygon b 1 r 1 4 18 17 8 12
+# Rectangles for right face (max x)
+polygon b 1 r 1 4 21 20 9 10
+polygon b 1 r 1 4 20 23 13 9
+polygon b 1 r 1 4 23 22 14 13
+polygon b 1 r 1 4 22 21 10 14
+# Rectangles for front face (min y)
+polygon b 1 r 1 4 25 24 8 9
+polygon b 1 r 1 4 24 27 12 8
+polygon b 1 r 1 4 27 26 13 12
+polygon b 1 r 1 4 26 25 9 13
+# Rectangles for back face (max y)
+polygon b 1 r 1 4 29 28 10 11
+polygon b 1 r 1 4 28 31 14 10
+polygon b 1 r 1 4 31 30 15 14
+polygon b 1 r 1 4 30 29 11 15
+# Rectangles for bottom face (min z)
+polygon b 1 r 1 4 33 32 11 10
+polygon b 1 r 1 4 32 35 8 11
+polygon b 1 r 1 4 35 34 9 8
+polygon b 1 r 1 4 34 33 10 9
+# Rectangles for top face (max z)
+polygon b 1 r 1 4 37 36 12 13
+polygon b 1 r 1 4 36 39 15 12
+polygon b 1 r 1 4 39 38 14 15
+polygon b 1 r 1 4 38 37 13 14
+

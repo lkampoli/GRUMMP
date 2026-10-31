@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Goals of the GRUMMP Project</TITLE>
+<META NAME="description" CONTENT="Goals of the GRUMMP Project">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Current_Status_GRUMMP.html">
+<LINK REL="previous" HREF="What_is_GRUMMP.html">
+<LINK REL="up" HREF="Introduction.html">
+<LINK REL="next" HREF="Current_Status_GRUMMP.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html357"
+  HREF="Current_Status_GRUMMP.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html353"
+  HREF="Introduction.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html347"
+  HREF="What_is_GRUMMP.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html355"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html358"
+  HREF="Current_Status_GRUMMP.html">Current Status of GRUMMP</A>
+<B> Up:</B> <A NAME="tex2html354"
+  HREF="Introduction.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html348"
+  HREF="What_is_GRUMMP.html">What is GRUMMP?</A>
+ &nbsp; <B>  <A NAME="tex2html356"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03120000000000000000"></A><A NAME="sec:manifesto"></A>
+<BR>
+Goals of the GRUMMP Project
+</H1>
+
+<P>
+The goal of the GRUMMP project is to develop automatic mesh generation
+software for unstructured meshes with mixed element types. The software
+should produce high-quality meshes that meet user-defined mesh density
+requirements, using elements appropriate for the geometry and physics
+of a particular problem. 
+
+<P>
+Automatic mesh generation for complex two and three dimensional domains
+is a topic of intensive research. It is imperative that automatic
+mesh generation tools be capable of generating quality finite element
+and finite volume meshes. There must be a balance between resolution
+of the boundary and surface features and complexity of the problem.
+In addition, for problems with isotropic physics, element aspect ratio
+must be small to minimize linear system condition number and interpolation
+error. On the other hand, problems with anisotropic physics (for example,
+a shear layer in viscous fluid flow) require highly anisotropic elements
+for efficient solution. A further level of complication is that for
+some physical problems and applications, quadrilateral (2D) or hexahedral
+(3D) elements are preferred, even though filling space with high quality
+elements is easier using triangular (2D) or tetrahedral (3D) elements. 
+
+<P>
+A general-purpose automatic mesh generator should address all of these
+issues without excessive user intervention. We envision a system in
+which common types of physical problems have predefined mesh sizing
+and element aspect ratio functions, allowing easy generation of meshes
+for these applications areas. For flexibility and generality, the
+user will also be able to prescribe these functions (for totally different
+applications) or modify the predefined behaviors (to provide a quality
+mesh in the wake of an airplane wing, for example). 
+
+<P>
+GRUMMP addresses these issues by implementing mesh manipulation primitives
+to generate of modify existing meshes so that criteria for element
+size and quality are met. In addition, automatic computation of local
+length scale is performed to provide a default in cases where solution-based
+adaptive length scales are not available. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html357"
+  HREF="Current_Status_GRUMMP.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html353"
+  HREF="Introduction.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html347"
+  HREF="What_is_GRUMMP.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html355"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html358"
+  HREF="Current_Status_GRUMMP.html">Current Status of GRUMMP</A>
+<B> Up:</B> <A NAME="tex2html354"
+  HREF="Introduction.html">Introduction</A>
+<B> Previous:</B> <A NAME="tex2html348"
+  HREF="What_is_GRUMMP.html">What is GRUMMP?</A>
+ &nbsp; <B>  <A NAME="tex2html356"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

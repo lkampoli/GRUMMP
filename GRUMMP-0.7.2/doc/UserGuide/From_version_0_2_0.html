@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>From version 0.2.0. to 0.2.1:</TITLE>
+<META NAME="description" CONTENT="From version 0.2.0. to 0.2.1:">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="From_version_0_1_7.html">
+<LINK REL="previous" HREF="From_version_0_2_1.html">
+<LINK REL="up" HREF="Changes_Between_Versions.html">
+<LINK REL="next" HREF="From_version_0_1_7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html1141"
+  HREF="From_version_0_1_7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1137"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1131"
+  HREF="From_version_0_2_1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1139"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1142"
+  HREF="From_version_0_1_7.html">From version 0.1.7 to</A>
+<B> Up:</B> <A NAME="tex2html1138"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1132"
+  HREF="From_version_0_2_1.html">From version 0.2.1 to</A>
+ &nbsp; <B>  <A NAME="tex2html1140"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION051160000000000000000">
+From version 0.2.0. to 0.2.1:</A>
+</H1>
+
+<UL>
+<LI><SPAN  CLASS="textbf">Improved mesh coarsening</SPAN>. This is by far the biggest change
+between versions. Both 2D and 3D coarsening are affected. Coarse mesh
+quality for isotropic meshes has improved significantly, as a result
+of changing the way coarse mesh vertices are selected. Vertex removal
+efficiency is now better in 3D, with typically fewer than one vertex
+in a thousand <SPAN  CLASS="textit">not</SPAN> removed as requested. Anisotropic coarsening
+in 2D working very well; in 3D, anisotropic coarsening is miserably
+poor because of challenges with mesh connectivity.
+</LI>
+<LI><SPAN  CLASS="textbf">Corrected a series of small errors in mesh quality assessment</SPAN>.
+Minimum solid angle and the aspect ratio measures now work in 3D.
+Also, ratio of incircle to circumcircle radius is now normalized properly
+in 2D.
+</LI>
+<LI><SPAN  CLASS="textbf">Internal changes in how smoothing is handled.</SPAN> These changes
+were made to allow solvers to call GRUMMP meshing routines, including
+smoothing, without needing to know how GRUMMP handles things internally.
+</LI>
+<LI><SPAN  CLASS="textbf">Re-introduced the &ldquo;precious boundary&rdquo; flag.</SPAN> By popular
+demand, the flag that tells <TT>tetra</TT> not to modify the mesh
+boundary has been added back to the code. Use this flag only in duress,
+because:
+
+<P>
+
+<UL>
+<LI>Initial tetrahedralization still adds points to the boundary when
+it needs to.
+</LI>
+<LI>There are no mesh quality guarantees, or even practical expectations,
+unless points can be inserted on the boundary. Things may work out
+for you, and they may not.
+</LI>
+</UL>
+</LI>
+<LI><SPAN  CLASS="textbf">Slightly improved diagnostics and on-the-fly repair for bad
+input files</SPAN>. Some 3D input files with mis-oriented triangles can
+now be fixed. Others are identified as bad input files. Unfortunately,
+some can still escape detection and cause code crashes after surface
+recovery.
+</LI>
+<LI>Documentation now includes overview of algorithms used in GRUMMP.
+</LI>
+<LI>Fixed a couple of egregious bugs in the rarely-exercised code for
+reading 3D meshes in cell-vertex (FEM) data structure.
+</LI>
+<LI>Fixed a small but annoying bug that made new <TT>gcc</TT> versions
+fail to compile.
+</LI>
+</UL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1141"
+  HREF="From_version_0_1_7.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1137"
+  HREF="Changes_Between_Versions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1131"
+  HREF="From_version_0_2_1.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1139"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1142"
+  HREF="From_version_0_1_7.html">From version 0.1.7 to</A>
+<B> Up:</B> <A NAME="tex2html1138"
+  HREF="Changes_Between_Versions.html">Changes Between Versions</A>
+<B> Previous:</B> <A NAME="tex2html1132"
+  HREF="From_version_0_2_1.html">From version 0.2.1 to</A>
+ &nbsp; <B>  <A NAME="tex2html1140"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

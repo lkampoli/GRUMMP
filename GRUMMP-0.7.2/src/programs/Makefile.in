@@ -1,0 +1,74 @@
+include @top_srcdir@/src/conf/default-rules
+include @top_srcdir@/iMesh-Defs.inc
+
+THIS_SRCDIR = src/programs
+TOP_SRCDIR = @top_srcdir@
+
+EXECS = tri meshopt2d coarsen2d heal2d scat2d surfins2d aniso_adapt2d \
+	tetra meshopt3d coarsen3d scat3d trans3d testAni surfins3d \
+	tmop_adapt2d
+
+default: $(BINDIR)
+	echo "Making sure executables ($(EXECS)) are up to date..."
+	echo " "
+	$(MAKE) maybeclean
+	$(MAKE) $(EXECS)
+	echo " "
+	echo "Done updating all executables"
+	echo " "
+	$(MAKE) -C @top_srcdir@ post-build
+
+DEP = $(LIBDIR)/libGR_3D.@libsuf@ \
+	$(LIBDIR)/libGR_surf.@libsuf@ \
+	$(LIBDIR)/libGR_2D.@libsuf@ \
+	$(LIBDIR)/libGR_base.@libsuf@ 
+
+tri: tri.o
+	$(MAKE) "TARGET=tri" exec	
+
+testAni: testAni.o
+	$(MAKE) "TARGET=testAni" exec
+
+
+meshopt2d coarsen2d heal2d surfins2d aniso_adapt2d tmop_adapt2d: tri
+	$(MAKE) "TARGET=$@" "SOURCE=tri" link
+
+scat2d: scat2d.o
+	$(MAKE) "TARGET=$@" exec
+
+tetra: tetra.o
+	$(MAKE) "TARGET=$@" exec
+
+#stl_mesher: stl_mesher.o
+#	$(MAKE) "TARGET=$@" exec
+
+#occ_test: occ_test.o
+#	$(MAKE) "TARGET=$@" exec
+
+# show-tets: show-tets.o
+# 	$(MAKE) "TARGET=$@" exec	
+
+meshopt3d coarsen3d trans3d surfins3d: tetra
+	$(MAKE) "TARGET=$@" "SOURCE=tetra" link
+
+scat3d: scat3d.o
+	$(MAKE) "TARGET=$@" exec
+
+surf: surf.o 
+	$(MAKE) "TARGET=surf" exec
+
+link:
+	echo Creating symbolic links for $(TARGET)...
+	-rm -f $(BINDIR)/$(TARGET) $(TARGET)
+	@LN_S@ $(BINDIR)/$(SOURCE) $(BINDIR)/$(TARGET)
+	@LN_S@ $(BINDIR)/$(SOURCE) $(TARGET)
+	echo Done building $(TARGET) for host @host_os@ at optimization level @opt@.
+
+distclean: localdistclean
+
+localdistclean:
+	-rm -f $(EXECS)
+
+$(LIBDIR)/libGR_3D.@libsuf@ $(LIBDIR)/libGR_geom.@libsuf@ $(LIBDIR)/libGR_surf.@libsuf@ $(LIBDIR)/libGR_2D.@libsuf@ $(LIBDIR)/libGR_base.@libsuf@ $(LIBDIR)/libSUMAAlog_lite.@libsuf@:
+	echo 'Need to make library $@'
+

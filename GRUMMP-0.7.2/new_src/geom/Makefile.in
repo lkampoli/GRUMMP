@@ -1,0 +1,20 @@
+LIBBASE = libGR_geom
+ID_STRING = GRUMMP geometry class
+
+THIS_SRCDIR = new_src/geom
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = GRArc.o GRAttrib.o GRAttribSet.o GRPoint.o GRCurve.o \
+	GRLine.o GRCubic.o GRSpline.o GRBezier.o GRInterp.o \
+	GRCoEdge.o GRLoop.o GRGeom2D.o GR_ParseStl.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS)
+
+default: library
+
+include @top_srcdir@/src/conf/default-rules
+
+library: 
+	$(MAKE) .libs

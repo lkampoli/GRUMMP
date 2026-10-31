@@ -1,0 +1,710 @@
+0.1 From version 0.7.1 to 0.7.2:
+
+• Significant improvements to the entire-domain advancing layer 
+  meshing scheme. It's still very much at the alpha stage, but 
+  it's getting there. (If you'd like to support moving this work 
+  along, contact Carl Ollivier-Gooch at cfog@mech.ubc.ca.)
+
+  – 2D: reasonably robust, including some ability to specify 
+    initial marching distance
+
+  – 3D: definitely alpha. Complex corners are a serious problem. 
+    Also, requires some external software for many cases. These 
+    dependencies will be removed in later versions.
+
+  – Surface: under development.
+
+• Now compatible with gcc 7.
+
+• Lots more internal code cleanup.
+
+• Fixed (again, but this time more cleanly and permanently) 
+  problems with isotropic mesh adaptation.
+
+0.2 From version 0.7 to 0.7.1:
+
+• Preliminary version of a new advancing layer meshing scheme 
+  designed to fill the whole domain (for either closed or open 
+  domains).
+
+• New 2D point insertion options, including one that mimics 
+  advancing layer mesh generation.
+
+• Lots of internal code cleanup, especially for lengthscale and 
+  quality calculations; these changes are mostly not visible to 
+  users.
+
+0.3 From version 0.6.6 to 0.7:
+
+• Factored insert-and-swap out of the mesh classes. All calls to 
+  insert-and-swap functions in those classes are now obsolete and 
+  have been removed.
+
+• Can now specify a curve (2D) or surface (3D) to insert into an 
+  existing mesh. The mesh is changed only near the curve / 
+  surface, and mesh quality (including length scale) is 
+  maintained.
+
+• Multithreaded parallel implementations of swapping and 
+  isotropic refinement.
+
+• Better mesh alignment for 2D anisotropic adaptation.
+
+0.4 From version 0.6.5 to 0.6.6:
+
+This is a bug-fix release, with no major user-visible changes.
+
+• For those building their own executables using the GRUMMP 
+  libraries, there is now a make include file, GRUMMP-Defs.inc, 
+  that defines some helpful make variables.
+
+• GRUMMP's small but growing collection of unit tests is now 
+  distributed, built, and run at build time. As these tests run 
+  in a fraction of a second, the only impact on users will be a 
+  slight increase in build output. Caution: these require the 
+  Boost unit test libraries; if you don't have those installed, 
+  use the configure option –disable-unit-test.
+
+• Fixed orientation bug when reading quads in a 2D VTK file.
+
+• Fixed a bug in automatic creation of boundary data from mesh 
+  data in 3D.
+
+• Found and fixed an obscure but serious insertion bug in 3D: 
+  some additional topology change was needed but not done, 
+  sometimes causing insertion to hang.
+
+0.5 From version 0.6.4 to 0.6.5:
+
+• Continuing Observer-based factoring of services. Both swapping 
+  and smoothing are 95% done at this point. There remain a few 
+  references to old swapping or smoothing calls that will require 
+  non-trivial changes to remove.
+
+• Bug fixes in 3D adaptation, 2D spline arc length calculation, 
+  2D anisotropic refinement, and 3D meshing from curved boundary 
+  data. The latter two operations will soon be ready for 
+  documented, supported release.
+
+• Updates to the CGM build process; now using CGM version 12.2.
+
+• Now compatible with version 1.4 of the iMesh API.
+
+• Formalizing unit testing internally; this will cause no user 
+  visible changes.
+
+0.6 From version 0.6.3 to 0.6.4:
+
+• Version 0.6.3 is an ITAPS maintainence release, for 
+  compatibility with version 1.3 of the iMesh API.
+
+0.7 From version 0.6.2 to 0.6.3:
+
+• Significant improvements in surface recovery for polyhedral 
+  boundary data. Not only is recovery more robust, but it also 
+  now leaves the surface triangulation untouched. That is, the 
+  surface triangles of the initial volume mesh now match those of 
+  the input boundary. Polygons in the input data are triangulated 
+  as usual.
+
+• Added support for the Observer paradigm in mesh classes. These 
+  classes now publish changes made to the mesh database to an 
+  observers that request them. This is done in batch (blocks of 
+  100, currently) to reduce message overhead. This will allow us 
+  — in time — to fully unwind the interactions between various 
+  mesh modification algorithms that are currently mediated 
+  through flags on entities in the mesh database.
+
+• Begun the process of factoring algorithms (swapping, smoothing, 
+  insertion, etc) out of the mesh database classes. At this 
+  point, swapping has made the most progress, with a fully 
+  functional external swap manager, which uses the Observer 
+  capabilities to keep track of which faces and edges should be 
+  considered for swapping. There are still a handful of places 
+  where swapping is still done the “old way”, using mesh member 
+  functions, so that code, though deprecated, still exists.
+
+• Upgraded to CGM 10.2.3.
+
+• Release 0.6.3 is compatible with version 1.2 of the ITAPS mesh 
+  API (iMesh).
+
+0.8 From version 0.6.0 to 0.6.1/0.6.2:
+
+Minor ITAPS-related cleanup; no other changes.
+
+0.9 From version 0.5.0 to 0.6.0:
+
+Version 0.6.0 brings another significant upgrade to GRUMMP, which 
+now supports meshing from curved boundary data. Starting from the 
+curved boundary representation, GRUMMP discretizes surfaces by 
+sampling, then generates tetrahedral meshes from the resulting 
+surface triangulations. Any boundary points that are inserted 
+during volume refinement are inserted onto the curved surface, 
+not onto a tesselation of the surface. Geometry is currently 
+input via stereolithography files (see Section [sec:3d-geom] for 
+more information). As a consequence of how geometry is handled 
+internally, GRUMMP now requires the Argonne version of the Common 
+Geometry Module (version 10.2.2) to build. The configure script 
+automatically fetches and builds this if it's needed.[footnote:
+As of version 0.6.0beta1, meshing from STL files is temporarily 
+disabled, as parts of its internals are incompatible with the 
+infrastructure changes below; the final 0.6.0 release will 
+address this.
+]
+
+Additional changes since version 0.5.0:
+
+• Fixed numerous errors and warnings when compiling with gcc 4.4. 
+  This is what we get for making a release with an older 
+  compiler.
+
+• Support for reading legacy ASCII VTK files, binary UGrid, and 
+  binary VGrid files in 3D; these are auto-detected at read time. 
+  This is in addition to GRUMMP's template approach for 
+  auto-generating code for reading ASCII mesh files.
+
+• Infrastructure changes to centralize manipulation of the mesh 
+  topology database. These changes aren't user-visible: the same 
+  things happen at almost exactly the same speed. But with this 
+  change to better encapsulate mesh topology changes, we expect 
+  to be able to relatively easily add support for edges in the 3D 
+  mesh database, so that we can generate curved meshes.
+
+• Various other bug fixes.
+
+0.10 From version 0.3.3 to 0.5.0:
+
+Version 0.5.0 brings a significant upgrade to GRUMMP, with the 
+addition of support for the [http://itaps-scidac.org||ITAPS] mesh 
+interface. This interface provides mesh query and basic 
+modification functionality in a data-structure neutral way, as 
+well as supporting collections of mesh entities (sets) and 
+arbitrary application-defined data on mesh entities and sets 
+(tags). Of particular interest to Fortran users who might be 
+interested in using the GRUMMP mesh database but reluctant to 
+switch to C++, the API can be accessed from Fortran (77 through 
+2003).
+
+Additional changes since version 0.3.3:
+
+• Fixed an egregious error in 3D initial tetrahedralization, 
+  which had the unfortunate result that many input files failed 
+  to generate meshes at all. (Should have been a 0.3.4 at some 
+  point to fix this, but somehow that never got done...)
+
+• Improved treatment of curved boundaries in 2D; these changes 
+  have little user-visible effect other than producing somewhat 
+  smaller meshes for some inputs.
+
+• Began migration towards having specific reader/writer routines 
+  for common file formats. Presently, this is in addition to the 
+  current custom ASCII format capability; the latter may 
+  eventually be replaced by some form of plug-in architecture, 
+  although there are currently no definite plans on this point.
+
+
+  – Support for reading 3D meshes generated with AFLR3D and 
+    VGRID. Also, support for reading standard FEA 
+    (element-vertex) mesh connectivity in 3D. 
+
+  – Direct support for writing 2D meshes in FEA format, including 
+    high-order curved boundary information.
+
+  – Input now checks to see whether a file extension is present 
+    rather than automatically adding one. A long-standing 
+    annoyance with a five-minute fix…
+
+• Internal modifications to the queueing system used to 
+  prioritize mesh entities for point insertion; not user visible.
+
+0.11 From version 0.3.3 to 0.4.0:
+
+Version 0.4.0 is a special-purpose, limited release for a UBC 
+user needing periodic meshing in 2D.
+
+• Added partial support for periodic meshing in 2D. Any two 
+  linear boundary patches can be identified as being periodic 
+  with each other. A geometric mapping between the two is 
+  automatically determined, and when a vertex is inserted on one 
+  periodic boundary, it is automatically created on the other as 
+  well. This capability is not likely, at this point, to be 
+  robust in the presence of small input angles or input points 
+  near (i.e., encroaching on) the periodic boundary.
+
+0.12 From version 0.3.2 to 0.3.3:
+
+Version 0.3.3 is a bugfix release, including fixes for:
+
+• Fixed a number of minor bugs, including
+
+
+  – 3D patch optimization (thanks to Nigel Nunn for finding the 
+    bug and providing a patch).
+
+  – Pointer arithmetic in the variable-sized array 
+    pseudo-template. This bug caused problems only with gcc4, 
+    because other compilers generate incorrect code that still 
+    miraculously ran correctly; gcc4 removed this serendipitous 
+    fix.
+
+  – A string problem in termination of GRUMMP executables.
+
+  – A crash in scat3d when extrapolating data.
+
+  – Can now use index in boundary face and internal boundary face 
+    descriptors in the I/O generator.
+
+  – Orientation fix for certain multiregion input files in 3D.
+
+  – Supply a default BC properly in 2D when reading a mesh 
+    without BC's.
+
+• Replaced MAX and MIN macros with std::max and std::min, because 
+  gcc4 complains that the macros are deprecated, even though the 
+  GRUMMP headers defined them explicitly.
+
+0.13 From version 0.3.1 to 0.3.2:
+
+Version 0.3.2 is a bugfix release.
+
+• More minor updates for TSTT. Added VTK input files to 
+  distribution tarball. Recognize a TSTT configure option 
+  (–enable-tsttm) as a sign that this build is intended for use 
+  with TSTT, to auto-disable logging. Added a 'make all' target 
+  in the top-level Makefile.
+
+0.14 From version 0.3.0 to 0.3.1:
+
+Version 0.3.1 is a bugfix release.
+
+• Scattered data interpolation. In both 2D and 3D, fixed bugs 
+  that caused seg faults when trying to do scattered data 
+  interpolation.
+
+• Minor updates for TSTT. Added a configure option for VTK-format 
+  input into GRUMMP. Fixed several compile errors when logging is 
+  disabled. Also tweaked a couple of things in the main Makefile.
+
+• Length scale reporting. A bug in 0.3.0 made it so that the edge 
+  length scale info reported after mesh re-ordering was 
+  incorrect; this has been fixed.
+
+0.15 From version 0.2.1 to 0.3.0:
+
+• Isotropic mesh adaption. The biggest user-visible change since 
+  the previous release is support for isotropic mesh adaptation. 
+  Internally, GRUMMP has had this functionality for a while, but 
+  by user request, it's now accessible through the command line 
+  interface. Basically, length scale information can be supplied 
+  for some or all vertices in a separate file, and meshopt2d / 
+  meshopt3d will modify the input mesh to match that length 
+  scale. If no length scale is provided, meshopt2d/3d behave as 
+  they always have.
+
+• Length scale improvements. Fixed a problem with length scale 
+  calculations that sometimes caused a vertex to identify a bdry 
+  patch that was just -behind- the vertex (and therefore not 
+  visible) as one of its nearby patches. The 3D tire incinerator 
+  example was the geometry that showed this problem the most 
+  distinctly.
+
+• Improved initial tetrahedralization. More incremental 
+  improvement to initial tetrahedralization, most notably in 
+  merging co-planar input facets and better handling of small 
+  angles between input edges. The latter also has the effect of 
+  reducing output mesh size noticeably for many input files with 
+  small angles between edges.
+
+
+  – Added support for merging co-planar boundary patches in 3D. 
+    For input files that have large numbers of co-planar 
+    triangles, this boundary optimization can be a tremendous 
+    help in creating the initial volume mesh. All vertices are 
+    guaranteed to be in the volume mesh, but there are no 
+    guarantees about the surface triangles. (Command line option: 
+    -m for merge bdry patches.)
+
+  – Fixed a bug in handling surface recovery for multi-region 
+    bdry files in 3D. This bug often resulted in failures near 
+    the end of initial tetrahedralization.
+
+  – Support for free vertices in input files for 3D meshes. That 
+    is, a vertex can be pre-defined to have a particular location 
+    -without- being connected to the surface mesh. (The point 
+    must lie on or inside the domain, obviously.) Because of 
+    differences in the way that 2D and 3D input is handled, this 
+    capability is tricky to implement in 2D. However, a 
+    currently-underway re-write of all boundary input handling 
+    should enable this in 2D before much longer.
+
+• Reordering of mesh entities before output to improve bandwidth 
+  and cache performance for solvers reading these meshes. 
+  Vertices are reordered using the reverse Cuthill-McKee 
+  algorithm. Faces and cells are reordered according to the sum 
+  of the indices of their vertices.
+
+• Support for long arcs: circular arcs longer than 180 degrees. 
+  An "arc" is still CCW and < 180 degrees. A "longarc" is CCW and 
+  > 180 degrees between the same two points.
+
+• Fixed a minor edge swapping bug that often resulted in a 
+  neglecting a few swaps.
+
+• Internal changes to support the Terascale Simulation Tools and 
+  Technologies (TSTT) mesh interface. This is a language- and 
+  data-structure neutral interface to meshing tools. For more 
+  information, including links to the TSTT interface definition, 
+  see http://www.tstt-scidac.org.
+
+• Fixed a GNU/Linux shared library creation bug. Added support 
+  for shared libraries under AIX (finally!).
+
+• Made changes for GCC 3.x compatibility (mostly tightening up 
+  use of std::) and to improve portability (mostly getting rid of 
+  uses of the GNU extension that allows dynamic arrays to be 
+  declared as name[run-time size].
+
+• Removed some experimental and obsolete files from the 
+  distribution.
+
+0.16 From version 0.2.0. to 0.2.1:
+
+• Improved mesh coarsening. This is by far the biggest change 
+  between versions. Both 2D and 3D coarsening are affected. 
+  Coarse mesh quality for isotropic meshes has improved 
+  significantly, as a result of changing the way coarse mesh 
+  vertices are selected. Vertex removal efficiency is now better 
+  in 3D, with typically fewer than one vertex in a thousand not 
+  removed as requested. Anisotropic coarsening in 2D working very 
+  well; in 3D, anisotropic coarsening is miserably poor because 
+  of challenges with mesh connectivity.
+
+• Corrected a series of small errors in mesh quality assessment. 
+  Minimum solid angle and the aspect ratio measures now work in 
+  3D. Also, ratio of incircle to circumcircle radius is now 
+  normalized properly in 2D.
+
+• Internal changes in how smoothing is handled. These changes 
+  were made to allow solvers to call GRUMMP meshing routines, 
+  including smoothing, without needing to know how GRUMMP handles 
+  things internally.
+
+• Re-introduced the “precious boundary” flag. By popular demand, 
+  the flag that tells tetra not to modify the mesh boundary has 
+  been added back to the code. Use this flag only in duress, 
+  because:
+
+
+  – Initial tetrahedralization still adds points to the boundary 
+    when it needs to.
+
+  – There are no mesh quality guarantees, or even practical 
+    expectations, unless points can be inserted on the boundary. 
+    Things may work out for you, and they may not.
+
+• Slightly improved diagnostics and on-the-fly repair for bad 
+  input files. Some 3D input files with mis-oriented triangles 
+  can now be fixed. Others are identified as bad input files. 
+  Unfortunately, some can still escape detection and cause code 
+  crashes after surface recovery.
+
+• Documentation now includes overview of algorithms used in 
+  GRUMMP.
+
+• Fixed a couple of egregious bugs in the rarely-exercised code 
+  for reading 3D meshes in cell-vertex (FEM) data structure.
+
+• Fixed a small but annoying bug that made new gcc versions fail 
+  to compile.
+
+0.17 From version 0.1.7 to 0.2.0:
+
+• Improved robustness in initial tetrahedralization. A few cases 
+  still fail, but changes to the heuristics used in surface 
+  recovery break other cases. An area of vast improvement over 
+  version 0.1.7, but more work is still needed.
+
+• Support for curved boundaries in two dimensions. Circles, 
+  circular arcs, and splines are supported, as well as straight 
+  line segments. See the documentation for tri for details about 
+  file format.
+
+• Guaranteed-quality meshing. In 2D, GRUMMP now generates meshes 
+  with all angles greater than 30°, except near input angles 
+  smaller than about 60°. In 3D, the theoretical guarantee is on 
+  the ratio of edge length to circumradius; in practice, with 
+  smoothing GRUMMP produces 3D meshes for “thick” domains with 
+  dihedral angles in excess of 18°-20° (except, again, near small 
+  angles in the input). A bonus with these new algorithms is that 
+  mesh generation is actually faster than in version 0.1.7. (It 
+  hardly seems fair that such a massive change in the internals 
+  of the code lead to only one item in the change list...)
+
+• Improved length scale calculation. GRUMMP now uses, in both 2D 
+  and 3D, a much better approximation to the true local geometric 
+  feature size. 
+
+• Global control of cell size relative to feature size and of the 
+  rate of change of cell size (grading). Both of these accompany 
+  the improved length scale calculation.
+
+• Change in output format for multi-domain meshes. Because of 
+  internal changes in data representation, output file format has 
+  been changed for multi-domain meshes. As a result, two default 
+  file format templates now exist, one each for single- and 
+  multi-domain cases.
+
+• Internal cleanup continues. Quite a bit of obsolete code has 
+  been deprecated, and many of these pieces have been removed 
+  from the distribution.
+
+0.18 From version 0.1.6a to 0.1.7:
+
+• Support for multi-domain meshing. That is, it is now possible 
+  to specify a problem domain that must be meshed as two or more 
+  (max: 31) adjacent regions, with the boundaries between them 
+  meshed consistently. This is the biggest addition to this 
+  version of GRUMMP.
+
+• Improved boundary data input format. This was necessary to 
+  support multi-domain meshing, and the new format was designed 
+  to be extensible, with an eye towards meshing from 
+  non-polygonal/polyhedral data.
+
+• Improved geometric calculations. GRUMMP often needs to know the 
+  orientation of N+1 points in N dimensions or whether a given 
+  point is inside the ball formed by N+1 other points. Earlier 
+  versions used simple floating point arithmetic to determine 
+  these things, and sometimes ran into trouble as a result. This 
+  version incorporates adaptive-precision versions of these 
+  predicates that were developed by Jonathon Shewchuk of U 
+  California, Berkeley, while he was a PhD student at Carnegie 
+  Mellon University.
+
+• File name changes. All GRUMMP include files[footnote:
+Except those for the logging and smoothing libraries, which have 
+their own name space.
+] are now prefixed with GR_ to avoid naming conflicts. Also, in 
+  deference to non-case-sensitive operating systems, all C++ 
+  files now have a .cxx suffix instead of .C.
+
+• Minor bug fixes. All but a couple of the problem input files 
+  sent to me after version 0.1.6 now work.
+
+• Changes to quote handling for I/O generation. The old way of 
+  handling non-keyword text in I/O template files made it 
+  impossible to have
+
+x 0.5 y 0.7
+
+as a vertex coordinate line; the ‘x’ and ‘y’ were not handled 
+  properly. These changes affect all cases where quotes are used 
+  in template files, so check any template files you have created 
+  to make sure they are compatible with the new form of quote 
+  handling.
+
+• Unified lex input files for I/O generation. All input 
+  generation is now done from a single lex file, and all output 
+  generation is done from a (different) single lex file. This 
+  removed inconsistencies between the 2D and 3D versions of the 
+  I/O generation code.
+
+0.19 From version 0.1.6 to 0.1.6a:
+
+• Support for HP-UX 10.20 with native compilers. This required a 
+  large number of small changes, with three common causes. 
+
+
+  1. The HP-UX C++ compiler has a broken implementation of the 
+    inline keyword: it chokes on inline functions with loops 
+    instead of implementing them out-of-line. 
+
+  2. The HP-UX C++ compiler does link-time template 
+    instantiation. 
+
+  3. A number of warning messages, for both C and C++ code, gave 
+    useful pointers to idioms in the code that were worth 
+    tightening up. 
+
+  This cleanup should also improve portability to other new 
+  platforms, especially those with cfront-based compilers.
+
+  Thanks to Aldo Bonfiglioli in the Faculty of Engineering at the 
+  University of Basilicata for providing accessing to an HP-UX 
+  10.20 test machine.
+
+• Minor improvements to the lex input files for I/O generation.
+
+0.20 From version 0.1.5 to 0.1.6:
+
+• Three-dimensional coarse mesh generation for multigrid. In 
+  principle, this could be done by running meshopt3d -s 2. In 
+  practice, there is a useful optimization that allows rapid 
+  removal of nearly all of the extra vertices from the coarse 
+  mesh. coarsen3d does this, and then behaves just like 
+  meshopt3d.
+
+• Two-dimensional scattered data interpolation. A new executable, 
+  scat2d, has been added for this.
+
+• Default optimization parameter in 3D is now to swap and smooth, 
+  rather than using the much more expensive refine-to-length 
+  scale.
+
+• Improved quality of initially-generated meshes in 3D.
+
+• Improved speed for refine-to-length in 3D.
+
+• HTML documentation added, both on the GRUMMP web page and in 
+  the doc/html directory in the distribution.
+
+• Two new quality measures in 2D. These are actually measures 
+  that were already advertised — ratio of incircle to 
+  circumcircle radius, and ratio of area to perimeter squared. 
+  However, in version 0.1.5 and previously, these measures were 
+  not implemented properly.
+
+• Surface vertex removal in 3D. There are a number of special 
+  cases that had to be implemented before this was safe.
+
+• Unified smoothing calls in 3D. In version 0.1.5, surface 
+  smoothing was enabled only when smoothing all vertices in the 
+  mesh. With the consolidation of some duplicate code, this 
+  problem has been fixed.
+
+• Internal code cleanup and optimization. 
+
+• Made logging more systematic.
+
+0.21 From version 0.1.4 to 0.1.5:
+
+• Surface smoothing implemented for points on flat surfaces (2D 
+  and 3D). 
+
+• Reconfiguration of non-planar surface edges allowed in 3D up to 
+  a user-specified tolerance on non-planarity.
+
+• Length-scale calculation in 3D now much improved. Previously, 
+  this calculation was quite poor in some circumstances. More 
+  work still needs to be done here.
+
+• Unified source for tri/meshopt2d and tetra/meshopt3d. 
+
+• Internal code clean up, including some additional state info 
+  that will soon improve point deletion, especially in 3D. 
+
+• Streamlined general mesh improvement algorithm via better 
+  decision-making about which points to try to smooth and which 
+  faces to try to swap in mesh improvement. Some speed 
+  improvement as a result, but intrinsically slow.
+
+• Mesh improvement with approximately constant total mesh size. 
+
+• Better documentation for shared library use with sh-type 
+  shells.
+
+• Documentation of command-line mesh optimization strings.
+
+• Attempt to improve compatibility with HP-UX 10.x. There have 
+  been reports of some difficulties with building GRUMMP on this 
+  platform. This is not a well-tested attempt at fixing the 
+  problem, given my lack of an HP-UX 10.x test platform; if you 
+  try GRUMMP on HP-UX 10.x with the native compilers, let me know 
+  the results, good or bad.
+
+0.22 From version 0.1.3 to 0.1.4:
+
+• Fixed major but subtle bug in internal List handling that 
+  caused segmentation faults (bug introduced during cleanup for 
+  0.1.3).
+
+• Fixed crash when specifying -e [01] in tetra and meshopt3d.
+
+• Minor cosmetic fix in configure.
+
+0.23 From version 0.1.2 to 0.1.3:
+
+• Fixed bug in which input boundary conditions were not 
+  transmitted to the output volume mesh in three dimensions.
+
+• Fixed bug in which some input polygons were triangulated 
+  incorrectly due to a sorting ambiguity on some machines 
+  (including IRIX and Solaris). 
+
+• Corrected several erroneous input test files.
+
+• Modified interface for scat3d. Also, scat3d will now optionally 
+  output the mesh generated from data point locations as a 
+  tetrahedral volume mesh.
+
+• Modified the Makefile in src/IO_generator. Previously, 
+  (undocumented) user intervention was required to rebuild the 
+  mesh generation libraries with custom I/O formats. Now this is 
+  done when one would expect; specifically, running make in the 
+  directory src or in the GRUMMP root directory is sufficient to 
+  rebuild the I/O routines and add them to the GRUMMP libraries, 
+  then rebuild the executables. 
+
+• Minor code cleanup, fixing some (but not all) small complaints 
+  that HP-UX 10.20 CC and cc compilers had.
+
+• configure is now even smarter about finding the flex/lex 
+  library. Since some versions of flex/lex define main() as a 
+  macro and some define yywrap() as a macro, neither is certain 
+  to be in the library. No known cases exist where both main() 
+  and yywrap() are macros, so checking for both ensures that the 
+  library will be correctly identified if it exists.
+
+• configure now accepts the options --with-c-compiler=NAME and 
+  --with-cxx-compiler=NAME to allow specification of a native C 
+  or C++ compiler to be used if present in preference over 
+  gcc/g++. On most machines this means checking for cc and CC; 
+  for AIX and OSF systems, the correct local names are used. 
+  Also, configure is smarter about paths when checking for native 
+  compilers by full path name.
+
+0.24 From version 0.1.1 to 0.1.2:
+
+• Fixed problem with internal snprintf not null-terminating 
+  strings (caused bad file names).
+
+• Cleaned up lex input file syntax so that stricter versions of 
+  lex can parse them correctly.
+
+• Added I/O files that were generated with lex to source 
+  distribution for systems without a working lex.
+
+• Added (at least partial) support for DEC/OSF1 machines using 
+  native compilers.
+
+• Added native compiler check for IRIX, OSF1, and AIX machines so 
+  that the native compilers will be used rather than gcc/g++ when 
+  the native compilers exist. This check is being added on a 
+  machine-by-machine basis, because some (including SunOS 4.1.x) 
+  have broken native compilers.
+
+• Added shared library support for OSF and FreeBSD machines.
+
+0.25 From version 0.1.0 to 0.1.1:
+
+• If shared libraries can not be built, static libraries are used 
+  instead, and a message is printed by configure requesting 
+  information to allow addition of shared library support.
+
+• configure is now smarter about finding the flex/lex library. In 
+  particular, /usr/local/lib is always checked, and a path name 
+  can be given to configure using --with-flex-lib-dir=DIRNAME.
+
+• If lex must be used instead of flex, don't request a 
+  case-insensitive lexer. Necessary because lex -i fails on many 
+  systems.
+
+• Fixed some Makefile problems that affected IRIX 6.x.
+
+• Added support for Solaris/gcc machines.
+
+• Enabled -s option for tri.
+
+• Improved length scale generation for two-dimensional meshes.
+

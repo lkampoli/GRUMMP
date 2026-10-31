@@ -1,0 +1,13 @@
+# Geometry for CSM calculation of stress in a plate with a round hole.
+# BC 2 is free (no stress), 1 is symmetry, 3 is imposed stress
+5 5
+0 4
+0 0.1
+0.1 0
+4 0
+4 4
+arc b 2 r 1 0.1 2 1
+polyline r 1 b 1 2 2 3
+polyline r 1 b 3 2 3 4
+polyline r 1 b 2 2 4 0
+polyline r 1 b 1 2 0 1

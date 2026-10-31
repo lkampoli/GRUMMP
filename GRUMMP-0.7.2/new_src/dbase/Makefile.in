@@ -1,0 +1,23 @@
+LIBBASE = libGR_dbase
+ID_STRING = GRUMMP database
+
+THIS_SRCDIR = new_src/dbase
+TOP_SRCDIR = @top_srcdir@
+
+CXXOBJECTS = MeshMod3D.o Reorder3D.o VolMesh.o Observable.o \
+Mesh2D.o Reorder2D.o MeshMod2D.o BFace2D.o Face2D.o \
+SurfMesh.o MultiEdge.o MeshModSurf.o Partition.o Ghost.o \
+BFace.o Cell.o Face.o Vertex.o Mesh.o MeshMod.o \
+TetCell.o PyrCell.o PrismCell.o HexCell.o FlakeCell.o \
+TriCell.o QuadCell.o Face3D.o BFace3D.o
+
+COBJECTS = 
+
+OBJECTS = $(CXXOBJECTS) $(COBJECTS) 
+
+default: library
+
+include @top_srcdir@/src/conf/default-rules
+
+library: 
+	$(MAKE) .libs

@@ -1,0 +1,37 @@
+SHELL=/bin/sh
+
+THIS_SRCDIR = apps
+TOP_SRCDIR = @top_srcdir@
+
+.SILENT:
+
+SUBDIRS=shock-tracker edam/2D edam/3D
+
+default all:
+	for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) ) ; \
+	done
+
+depend:
+	for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) depend) ; \
+	done
+
+init:
+	for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) init) ; \
+	done
+
+clean:
+	for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) clean) ; \
+	done
+
+distclean:
+	-for i in $(SUBDIRS) ; do \
+	  (cd $$i && $(MAKE) distclean) ; \
+	done
+	-rm -f *~ Makefile.bak *.rej *.orig \#* config.* Makefile
+
+Makefile: Makefile.in
+	CONFIG_FILES=$(THIS_SRCDIR)/Makefile /bin/sh -c "cd $(TOP_SRCDIR) && ./config.status"

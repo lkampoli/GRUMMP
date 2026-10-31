@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>Three-dimensional surface mesh (.smesh) files</TITLE>
+<META NAME="description" CONTENT="Three-dimensional surface mesh (.smesh) files">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="Three_dimensional_ASCII_ste.html">
+<LINK REL="previous" HREF="Three_dimensional_geometry_.html">
+<LINK REL="up" HREF="File_Formats.html">
+<LINK REL="next" HREF="Three_dimensional_ASCII_ste.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html599"
+  HREF="Three_dimensional_ASCII_ste.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html595"
+  HREF="File_Formats.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html589"
+  HREF="Three_dimensional_geometry_.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html597"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html600"
+  HREF="Three_dimensional_ASCII_ste.html">Three-dimensional ASCII stereolithography (STL)</A>
+<B> Up:</B> <A NAME="tex2html596"
+  HREF="File_Formats.html">File Formats</A>
+<B> Previous:</B> <A NAME="tex2html590"
+  HREF="Three_dimensional_geometry_.html">Three-dimensional geometry (.bdry) files</A>
+ &nbsp; <B>  <A NAME="tex2html598"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03340000000000000000"></A><A NAME="sec:smesh-files"></A>
+<BR>
+Three-dimensional surface mesh (<TT>.smesh</TT>) files
+</H1>
+
+<P>
+Surface mesh files may also be specified in the form of a surface
+triangulation. This is particularly convenient when the surface mesh
+is created by some other piece of software.<A NAME="tex2html21"
+  HREF="footnode.html#foot1457"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A> File format for surface triangulation input can be summarized using
+a pseudo-template file (see Section&nbsp;<A HREF="Input_output_mesh.html#sec:IO-templates">3.2</A>), where
+<TT>nsurfs</TT> is the number of disconnected closed surfaces. 
+
+<P>
+
+<DL COMPACT>
+<DT>
+<DD>face-based&nbsp;ncells&nbsp;nfaces&nbsp;nsurfs&nbsp;nverts
+
+<P>
+verts:&nbsp;coords
+
+<P>
+faces:&nbsp;cells&nbsp;verts&nbsp;bc
+</DD>
+</DL>Note that this format is hard-coded, and not a true template. Also,
+multi-domain geometries can not be input using <TT>.smesh</TT> files,
+because the file format is not expressive enough to allow non-manifold
+surface meshes. Geometry input will be rewritten at some point in
+the future to allow easier extensibility to new geometry types; when
+this happens, support for the <TT>.smesh</TT> file format may vanish,
+so new input files should use the <TT>.bdry</TT> format.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

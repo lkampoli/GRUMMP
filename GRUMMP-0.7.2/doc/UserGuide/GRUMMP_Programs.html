@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2018 (Released Feb 1, 2018) -->
+<HTML>
+<HEAD>
+<TITLE>GRUMMP Programs</TITLE>
+<META NAME="description" CONTENT="GRUMMP Programs">
+<META NAME="keywords" CONTENT="UserGuide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2018">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="UserGuide.css">
+
+<LINK REL="next" HREF="File_Formats.html">
+<LINK REL="previous" HREF="Introduction.html">
+<LINK REL="up" HREF="Getting_Installing_GRUMMP.html">
+<LINK REL="next" HREF="Common_command_line.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A NAME="tex2html452"
+  HREF="Common_command_line.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html448"
+  HREF="Getting_Installing_GRUMMP.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html442"
+  HREF="User_Services.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html450"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html453"
+  HREF="Common_command_line.html">Common command line options</A>
+<B> Up:</B> <A NAME="tex2html449"
+  HREF="Getting_Installing_GRUMMP.html">Getting and Installing GRUMMP</A>
+<B> Previous:</B> <A NAME="tex2html443"
+  HREF="User_Services.html">User Services</A>
+ &nbsp; <B>  <A NAME="tex2html451"
+  HREF="Contents.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION03200000000000000000"></A><A NAME="chap:exec"></A>
+<BR>
+GRUMMP Programs
+</H1>
+
+<P>
+GRUMMP includes executables for two- and three-dimensional mesh generation
+(<TT>tri</TT> and <TT>tetra</TT>), mesh improvement (<TT>meshopt2d</TT>
+and <TT>meshopt3d</TT>), mesh coarsening (<TT>coarsen2d</TT> and <TT>coarsen3d</TT>),
+and interpolation of scattered data (<TT>scat2d</TT> and <TT>scat3d</TT>)
+(see Section&nbsp;<A HREF="scat2d_scat3d.html#sec:scat-data">2.5</A>). The only major difference among
+the meshing executables is their starting data:
+
+<UL>
+<LI><TT>tri</TT> and <TT>tetra</TT> begin by creating a valid initial
+mesh based on the boundary geometry. 
+</LI>
+<LI><TT>meshopt2d</TT> and <TT>meshopt3d</TT> read a valid mesh.
+</LI>
+<LI><TT>coarsen2d</TT> and coarsen3d read a valid mesh and initially coarsen
+the mesh by reducing the number of vertices by a factor of approximately
+<SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$2^{D}$"></SPAN>.
+</LI>
+<LI><TT>surfins2d</TT> and <TT>surfins3d</TT> read a valid mesh and a
+discrete curve / surface, splines that discrete geometry, and inserts
+it into the mesh.
+</LI>
+</UL>
+From this point, all these executables combine point insertion, point
+deletion, local mesh reconnection, and local smoothing algorithms
+to generate high-quality meshes. Not surprisingly, these executables
+share a number of command-line options. These common options are described
+in Section&nbsp;<A HREF="Common_command_line.html#sec:common-options">2.1</A>; additional options are described
+in Sections&nbsp;<A HREF="Additional_options_2D.html#sec:2D-exec">2.2</A> and&nbsp;<A HREF="Additional_options_3D.html#sec:3D-exec">2.3</A>. All of these
+executables generate mesh quality files (see Section&nbsp;<A HREF="Mesh_quality_qual.html#sec:qual-files">3.7</A>).
+In addition to the progress and status messages displayed on the screen,
+each executable also saves a more copious set of messages in a file
+(see Section&nbsp;<A HREF="Status_message_msg.html#sec:msg-files">3.8</A>).
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html454"
+  HREF="Common_command_line.html">Common command line options for mesh manipulation executables</A>
+<LI><A NAME="tex2html455"
+  HREF="Additional_options_2D.html">Additional options for 2D GRUMMP executables</A>
+<LI><A NAME="tex2html456"
+  HREF="Additional_options_3D.html">Additional options for 3D GRUMMP executables</A>
+<LI><A NAME="tex2html457"
+  HREF="Additional_command_line.html">Additional command line arguments for <TT>surfins2d</TT> and <TT>surfins3d</TT></A>
+<UL>
+<LI><A NAME="tex2html458"
+  HREF="Additional_command_line.html#SECTION03241000000000000000">Two dimensions</A>
+<LI><A NAME="tex2html459"
+  HREF="Additional_command_line.html#SECTION03242000000000000000">Three dimensions</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html460"
+  HREF="scat2d_scat3d.html"><TT>scat2d</TT> and <TT>scat3d</TT></A>
+<LI><A NAME="tex2html461"
+  HREF="t2d_t3d.html"><TT>t2d</TT> and <TT>t3d</TT></A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html452"
+  HREF="Common_command_line.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html448"
+  HREF="Getting_Installing_GRUMMP.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html442"
+  HREF="User_Services.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html450"
+  HREF="Contents.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html453"
+  HREF="Common_command_line.html">Common command line options</A>
+<B> Up:</B> <A NAME="tex2html449"
+  HREF="Getting_Installing_GRUMMP.html">Getting and Installing GRUMMP</A>
+<B> Previous:</B> <A NAME="tex2html443"
+  HREF="User_Services.html">User Services</A>
+ &nbsp; <B>  <A NAME="tex2html451"
+  HREF="Contents.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

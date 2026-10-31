@@ -1,0 +1,14 @@
+o There are still valid input files for which tetra can not produce a
+valid mesh.  If you come across one of these, please send it to
+cfog@mech.ubc.ca so that we can continue to make the code more
+robust.
+
+o When reading files for mesh improvement, not all complete topology
+specifications are properly supported.  Fixing this will require a major
+overhaul of mesh file input.
+
+o The automatic I/O generation lex files do not work properly with some
+ancient versions of lex (especially AT&T compatible lex's).  I can't
+isolate what the problem is precisely.  However, other versions of lex
+which are POSIX-compliant or nearly so, including in particular gnu
+flex, have no complaints about the input.
